@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html id="R-html" lang="fr-ca" dir="ltr" itemscope itemtype="http://schema.org/Article" data-r-output-format="html">
+  <head><script src="/420512/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=420512/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.148.2">
+    <meta name="generator" content="Relearn 9.0.3+36307e4ed23582638ab689240ac7b427217803ee">
+    <meta name="description" content="React Navigation est la bibliothèque standard pour gérer le changement d’écrans et la navigation dans une application React Native.
+1. Les Concepts Clés de React Navigation Avant d’utiliser le Drawer, il faut comprendre les 3 piliers de la navigation :
+Le Navigator (Navigateur) : Le composant parent qui contrôle l’historique et les transitions d’écrans (ex: Drawer, Stack, Tabs). Les Screens (Écrans) : Les composants React représentant chaque page de votre application. Les Options (screenOptions &amp; options) : La configuration visuelle de l’en-tête (Header), des icônes, des titres et des gestes. Dans Expo Router, la structure des dossiers définit automatiquement les routes de l’application (File-based Routing).">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Navigation :: Développement d&#39;applications mobiles">
+    <meta name="twitter:description" content="React Navigation est la bibliothèque standard pour gérer le changement d’écrans et la navigation dans une application React Native.
+1. Les Concepts Clés de React Navigation Avant d’utiliser le Drawer, il faut comprendre les 3 piliers de la navigation :
+Le Navigator (Navigateur) : Le composant parent qui contrôle l’historique et les transitions d’écrans (ex: Drawer, Stack, Tabs). Les Screens (Écrans) : Les composants React représentant chaque page de votre application. Les Options (screenOptions &amp; options) : La configuration visuelle de l’en-tête (Header), des icônes, des titres et des gestes. Dans Expo Router, la structure des dossiers définit automatiquement les routes de l’application (File-based Routing).">
+    <meta property="og:url" content="http://localhost:1313/420512/7-navigation/index.html">
+    <meta property="og:site_name" content="Développement d&#39;applications mobiles">
+    <meta property="og:title" content="Navigation :: Développement d&#39;applications mobiles">
+    <meta property="og:description" content="React Navigation est la bibliothèque standard pour gérer le changement d’écrans et la navigation dans une application React Native.
+1. Les Concepts Clés de React Navigation Avant d’utiliser le Drawer, il faut comprendre les 3 piliers de la navigation :
+Le Navigator (Navigateur) : Le composant parent qui contrôle l’historique et les transitions d’écrans (ex: Drawer, Stack, Tabs). Les Screens (Écrans) : Les composants React représentant chaque page de votre application. Les Options (screenOptions &amp; options) : La configuration visuelle de l’en-tête (Header), des icônes, des titres et des gestes. Dans Expo Router, la structure des dossiers définit automatiquement les routes de l’application (File-based Routing).">
+    <meta property="og:locale" content="fr_ca">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Développement d&#39;applications mobiles">
+    <meta property="article:published_time" content="2026-06-25T15:22:35-04:00">
+    <meta property="article:modified_time" content="2026-06-25T15:22:35-04:00">
+    <meta itemprop="name" content="Navigation :: Développement d&#39;applications mobiles">
+    <meta itemprop="description" content="React Navigation est la bibliothèque standard pour gérer le changement d’écrans et la navigation dans une application React Native.
+1. Les Concepts Clés de React Navigation Avant d’utiliser le Drawer, il faut comprendre les 3 piliers de la navigation :
+Le Navigator (Navigateur) : Le composant parent qui contrôle l’historique et les transitions d’écrans (ex: Drawer, Stack, Tabs). Les Screens (Écrans) : Les composants React représentant chaque page de votre application. Les Options (screenOptions &amp; options) : La configuration visuelle de l’en-tête (Header), des icônes, des titres et des gestes. Dans Expo Router, la structure des dossiers définit automatiquement les routes de l’application (File-based Routing).">
+    <meta itemprop="datePublished" content="2026-06-25T15:22:35-04:00">
+    <meta itemprop="dateModified" content="2026-06-25T15:22:35-04:00">
+    <meta itemprop="wordCount" content="590">
+    <title>Navigation :: Développement d&#39;applications mobiles</title><link rel="icon" href="/420512/images/logo.png" type="image/png">
+
+    <link href="/420512/css/auto-complete/auto-complete.min.css?1786719020" rel="stylesheet">
+    <script src="/420512/js/auto-complete/auto-complete.min.js?1786719020" defer></script>
+    <script src="/420512/js/search-lunr.js?1786719020" defer></script>
+    <script src="/420512/js/search.js?1786719020" defer></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.index_js_url="/420512/searchindex.en.js?1786719020";
+    </script>
+    <script src="/420512/js/lunr/lunr.min.js?1786719020" defer></script>
+    <script src="/420512/js/lunr/lunr.stemmer.support.min.js?1786719020" defer></script>
+    <script src="/420512/js/lunr/lunr.multi.min.js?1786719020" defer></script>
+    <script src="/420512/js/lunr/lunr.fr.min.js?1786719020" defer></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.contentLangs=['fr'];
+    </script>
+    <link href="/420512/fonts/fontawesome/css/all.min.css?1786719020" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/420512/fonts/fontawesome/css/all.min.css?1786719020" rel="stylesheet"></noscript>
+    <link href="/420512/css/perfect-scrollbar/perfect-scrollbar.min.css?1786719020" rel="stylesheet">
+    <link href="/420512/css/theme.css?1786719020" rel="stylesheet">
+    <link href="/420512/css/format-html.css?1786719020" rel="stylesheet" id="R-format-style">
+    <script>
+      window.relearn = window.relearn || {};
+      // configuration
+      window.relearn.min = ``;
+      window.relearn.path='\/7-navigation\/index.html';
+      window.relearn.relBasePath='..';
+      window.relearn.relBaseUri='..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313\/420512';
+      window.relearn.disableInlineCopyToClipboard=true;
+      window.relearn.enableBlockCodeWrap=true;
+      // translations
+      window.T_Copy_to_clipboard = `Copy text to clipboard`;
+      window.T_Copied_to_clipboard = `Text copied to clipboard!`;
+      window.T_Link_copied_to_clipboard = `Link copied to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+      window.T_Browser_unsupported_feature = `This browser doesn't support this feature`;
+      // variant stuff
+      window.relearn.themevariants = [ 'learn', 'relearn-dark', 'relearn-light', 'neon' ];
+      window.relearn.customvariantprefix = "my-custom-";
+      window.relearn.changeVariant = function(variant) {
+        var oldVariant = document.documentElement.dataset.rThemeVariant;
+        window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        document.documentElement.dataset.rThemeVariant = variant;
+        if (oldVariant != variant) {
+          document.dispatchEvent( new CustomEvent('themeVariantLoaded', { detail: { variant, oldVariant } }) );
+          window.relearn.markVariant();
+        }
+      }
+      window.relearn.markVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant");
+        document.querySelectorAll(".R-variantswitcher select").forEach((select) => {select.value = variant;});
+      }
+      window.relearn.initVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant") ?? "";
+        if( !variant ||
+            (!variant.startsWith(window.relearn.customvariantprefix) && !window.relearn.themevariants.includes(variant)) ||
+            (variant.startsWith(window.relearn.customvariantprefix) && !window.localStorage.getItem(window.relearn.absBaseUri + "/variantstylesheet-" + variant)) ){
+          variant = window.relearn.themevariants[0];
+          window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        }
+        document.documentElement.dataset.rThemeVariant = variant;
+      }
+      window.relearn.initVariant();
+      window.relearn.markVariant();
+    </script>
+    <link href="/420512/css/custom.css?1786719020" rel="stylesheet">
+  </head>
+  <body class="mobile-support html" data-origin="/420512/7-navigation/index.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar" class="default-animation">
+        <div class="topbar-wrapper default-animation">
+          <div class="topbar-sidebar-divider default-animation"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar default-animation" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide">
+<span class="btn cstyle button link noborder notitle interactive"><button onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button></span>
+            </div>
+          </div>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><a itemprop="item" href="/420512/index.html"><span itemprop="name">Développement d&#39;applications mobiles</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><span itemprop="name">Navigation</span><meta itemprop="position" content="2"></li>
+          </ol>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-more default-animation" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show">
+<span class="btn cstyle button link noborder notitle interactive"><button onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button></span>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable page" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+
+<h1 id="navigation">Navigation</h1>
+
+<p>React Navigation est la bibliothèque standard pour gérer le changement d&rsquo;écrans et la navigation dans une application React Native.</p>
+<hr>
+<h2 id="1-les-concepts-clés-de-react-navigation">1. Les Concepts Clés de React Navigation<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type="button" title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2>
+<p>Avant d&rsquo;utiliser le Drawer, il faut comprendre les 3 piliers de la navigation :</p>
+<ul>
+<li><strong>Le Navigator (Navigateur) :</strong> Le composant parent qui contrôle l&rsquo;historique et les transitions d&rsquo;écrans (ex: <code>Drawer</code>, <code>Stack</code>, <code>Tabs</code>).</li>
+<li><strong>Les Screens (Écrans) :</strong> Les composants React représentant chaque page de votre application.</li>
+<li><strong>Les Options (<code>screenOptions</code> &amp; <code>options</code>) :</strong> La configuration visuelle de l&rsquo;en-tête (Header), des icônes, des titres et des gestes.</li>
+</ul>
+<p>Dans <strong>Expo Router</strong>, la structure des dossiers définit automatiquement les routes de l&rsquo;application (File-based Routing).</p>
+<hr>
+<h2 id="2-le-fonctionnement-du-drawer-navigator">2. Le fonctionnement du Drawer Navigator<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type="button" title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2>
+<p>Le <strong>Drawer</strong> (ou menu coulissant) est un panneau caché sur le côté de l&rsquo;écran qui s&rsquo;ouvre par un glissement (swipe) ou en appuyant sur l&rsquo;icône « hamburger » (☰).</p>
+<h3 id="composants-principaux-du-drawer-">Composants principaux du Drawer :<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type="button" title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3>
+<ol>
+<li><strong><code>GestureHandlerRootView</code></strong> : Requis par <code>react-native-gesture-handler</code> pour intercepter les gestes de glissement.</li>
+<li><strong><code>Drawer</code></strong> : Le conteneur principal configuré dans <code>_layout.js</code>.</li>
+<li><strong><code>Drawer.Screen</code></strong> : Définit la présence d&rsquo;un écran dans le menu coulissant.</li>
+</ol>
+<hr>
+<h2 id="3-structure-minimale-dun-drawer">3. Structure minimale d&rsquo;un Drawer<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type="button" title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2>
+<p>Voici comment s&rsquo;articule le fichier layout principal (<code>app/_layout.js</code>) :</p>
+<div class="highlight actionbar-wrapper wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Drawer</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;expo-router/drawer&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">GestureHandlerRootView</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-native-gesture-handler&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">RootLayout</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 1. Envelopper l&#39;application pour gérer les gestes
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    &lt;<span style="color:#f92672">GestureHandlerRootView</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{{ <span style="color:#a6e22e">flex</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span> }}&gt;
+</span></span><span style="display:flex;"><span>      
+</span></span><span style="display:flex;"><span>      {<span style="color:#75715e">/* 2. Initialiser le Drawer avec des options globales */</span>}
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">Drawer</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">screenOptions</span><span style="color:#f92672">=</span>{{
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">headerStyle</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">backgroundColor</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;#6200ee&#39;</span> },
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">headerTintColor</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;#fff&#39;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">drawerActiveTintColor</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;#6200ee&#39;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">drawerType</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;front&#39;</span>, <span style="color:#75715e">// &#39;front&#39;, &#39;back&#39;, ou &#39;slide&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }}
+</span></span><span style="display:flex;"><span>      &gt;
+</span></span><span style="display:flex;"><span>        {<span style="color:#75715e">/* 3. Déclarer chaque écran */</span>}
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">Drawer.Screen</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;index&#34;</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">options</span><span style="color:#f92672">=</span>{{
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">drawerLabel</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Accueil&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">title</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Bienvenue&#39;</span>,
+</span></span><span style="display:flex;"><span>          }}
+</span></span><span style="display:flex;"><span>        /&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">Drawer.Screen</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;profile&#34;</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">options</span><span style="color:#f92672">=</span>{{
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">drawerLabel</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Profil&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">title</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Mon Profil&#39;</span>,
+</span></span><span style="display:flex;"><span>          }}
+</span></span><span style="display:flex;"><span>        /&gt;
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#f92672">Drawer</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">GestureHandlerRootView</span>&gt;
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<hr>
+<h2 id="4-options-de-personnalisation-essentielles">4. Options de personnalisation essentielles<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type="button" title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2>
+<p>Tu peux modifier l&rsquo;apparence du Drawer à deux niveaux :</p>
+<h3 id="a-options-globales-screenoptions-sur-drawer">A. Options globales (<code>screenOptions</code> sur <code>&lt;Drawer&gt;</code>)<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type="button" title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3>
+<p>Applique le style à tous les écrans du Drawer :</p>
+<ul>
+<li><code>drawerType</code>: Définit comment le tiroir s&rsquo;ouvre (<code>front</code> repasse par-dessus, <code>slide</code> pousse l&rsquo;écran, <code>permanent</code> reste fixe).</li>
+<li><code>drawerPosition</code>: <code>'left'</code> (par défaut) ou <code>'right'</code>.</li>
+<li><code>headerShown</code>: <code>true</code> ou <code>false</code> pour afficher ou masquer la barre supérieure.</li>
+</ul>
+<h3 id="b-options-par-écran-options-sur-drawerscreen">B. Options par écran (<code>options</code> sur <code>&lt;Drawer.Screen&gt;</code>)<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type="button" title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3>
+<p>Applique la configuration à un écran spécifique :</p>
+<ul>
+<li><code>drawerLabel</code>: Le texte affiché dans le menu déroulant (s&rsquo;il est différent du <code>title</code>).</li>
+<li><code>title</code>: Le titre affiché dans la barre supérieure (Header).</li>
+<li><code>drawerIcon</code>: Une fonction qui retourne une icône (ex: Vector Icons).</li>
+</ul>
+<p>Exemple avec icône :</p>
+<div class="highlight actionbar-wrapper wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Ionicons</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;@expo/vector-icons&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">Drawer.Screen</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;settings&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">options</span><span style="color:#f92672">=</span>{{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">drawerLabel</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Paramètres&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">title</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Configuration&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">drawerIcon</span><span style="color:#f92672">:</span> ({ <span style="color:#a6e22e">color</span>, <span style="color:#a6e22e">size</span> }) =&gt; (
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">Ionicons</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;settings-outline&#34;</span> <span style="color:#a6e22e">size</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">size</span>} <span style="color:#a6e22e">color</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">color</span>} /&gt;
+</span></span><span style="display:flex;"><span>    ),
+</span></span><span style="display:flex;"><span>  }}
+</span></span><span style="display:flex;"><span>/&gt;</span></span></code></pre></div>
+<hr>
+<h2 id="5-contrôler-le-drawer-par-le-code">5. Contrôler le Drawer par le code<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type="button" title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2>
+<p>Bien que le bouton &ldquo;hamburger&rdquo; soit créé automatiquement, tu peux ouvrir ou fermer le Drawer manuellement dans n&rsquo;importe quel écran à l&rsquo;aide du hook <code>useNavigation</code> ou de l&rsquo;objet <code>navigation</code>.</p>
+<p>Exemple dans un composant d&rsquo;écran :</p>
+<div class="highlight actionbar-wrapper wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">View</span>, <span style="color:#a6e22e">Button</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-native&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">useNavigation</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;expo-router&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">DrawerActions</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;@react-navigation/native&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">HomeScreen</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">navigation</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">useNavigation</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">openMenu</span> <span style="color:#f92672">=</span> () =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Ouvre le tiroir par le code
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">navigation</span>.<span style="color:#a6e22e">dispatch</span>(<span style="color:#a6e22e">DrawerActions</span>.<span style="color:#a6e22e">openDrawer</span>());
+</span></span><span style="display:flex;"><span>  };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">View</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{{ <span style="color:#a6e22e">flex</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">justifyContent</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;center&#39;</span>, <span style="color:#a6e22e">alignItems</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;center&#39;</span> }}&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">Button</span> <span style="color:#a6e22e">title</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Ouvrir le Drawer&#34;</span> <span style="color:#a6e22e">onPress</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">openMenu</span>} /&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">View</span>&gt;
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<hr>
+<h2 id="6-résumé-des-étapes-dimplémentation">6. Résumé des étapes d&rsquo;implémentation<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type="button" title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2>
+<ol>
+<li>Installe les dépendances : <code>@react-navigation/drawer</code>, <code>react-native-gesture-handler</code>, <code>react-native-reanimated</code>.</li>
+<li>Ajoute <code>'react-native-reanimated/plugin'</code> dans <code>babel.config.js</code>.</li>
+<li>Englobe ton composant racine dans <code>&lt;GestureHandlerRootView&gt;</code>.</li>
+<li>Configure <code>&lt;Drawer&gt;</code> et ses <code>&lt;Drawer.Screen&gt;</code> dans <code>_layout.js</code>.</li>
+<li>Ajuste le design via <code>screenOptions</code> ou les <code>options</code> individuelles.</li>
+</ol>
+
+<details open class="box cstyle notices exo">
+  <summary class="box-label" tabindex="-1">
+    <i class="fa-fw fas fa-dumbbell"></i> 
+    Exercice
+  </summary>
+  <div class="box-content">
+<p>Avec l&rsquo;aide de la <a href="https://docs.expo.dev/router/advanced/native-tabs/">documentation</a>. Créez un drawer contenant la calculatrice et le gestionnaire de tâche. Le rendu final doit ressembler à ceci :</p>
+  </div>
+</details>
+
+  <footer class="footline">
+  </footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation"><a id="R-logo" href="/420512/">
+  <img src="/420512/images/logo.png" alt="logo" class="custom-logo">
+  <div class="brand-subtitle">Développement d'applications mobiles</div>
+</a>
+        <search><form action="/420512/search/index.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-fw fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-fw fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <div class="R-menu-divider default-animation">
+          <hr class="padding default-animation">
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-homelinks default-animation">
+          <ul class="space collapsible-menu">
+          </ul>
+        </div>
+        <div class="R-menu-divider default-animation">
+          <hr class="padding default-animation">
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-headercontrols default-animation">
+          <ul class="">
+          </ul>
+        </div>
+        <div class="R-menu-divider default-animation">
+          <hr class="padding default-animation">
+        </div>
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div class="R-sidebarmenu R-shortcutmenu-main default-animation">
+          <ul class="enlarge morespace collapsible-menu">
+            <li class="" data-nav-id="/420512/1-preparation/index.html"><a class="padding" href="/420512/1-preparation/index.html">1. Mise en place</a></li>
+            <li class="" data-nav-id="/420512/2-basic-components/index.html"><a class="padding" href="/420512/2-basic-components/index.html">2. Composants de bases</a></li>
+            <li class="" data-nav-id="/420512/3-props/index.html"><a class="padding" href="/420512/3-props/index.html">3. Map &amp; Props</a></li>
+            <li class="" data-nav-id="/420512/4-orientation/index.html"><a class="padding" href="/420512/4-orientation/index.html">4. Orientation</a></li>
+            <li class="" data-nav-id="/420512/5-hooks/index.html"><a class="padding" href="/420512/5-hooks/index.html">5. Hooks</a></li>
+            <li class="" data-nav-id="/420512/6-animation/index.html"><a class="padding" href="/420512/6-animation/index.html">6. Animations</a></li>
+            <li class="active " data-nav-id="/420512/7-navigation/index.html"><a class="padding" href="/420512/7-navigation/index.html">7. Navigation</a></li>
+            <li class="" data-nav-id="/420512/8-context/index.html"><a class="padding" href="/420512/8-context/index.html">8. Context</a></li>
+            <li class="" data-nav-id="/420512/9-api/index.html"><a class="padding" href="/420512/9-api/index.html">9. API</a></li>
+            <li class="" data-nav-id="/420512/10-bd/index.html"><a class="padding" href="/420512/10-bd/index.html">10. Base de données locales</a></li>
+          </ul>
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-shortcuts default-animation">
+          <ul class="space collapsible-menu">
+          </ul>
+        </div>
+        <div id="R-footer-margin" class="default-animation"></div>
+        <div class="R-menu-divider default-animation">
+          <hr class="padding default-animation">
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation">
+          <ul class="">
+            <li class="R-variantswitcher">
+              <div class="padding menu-control">
+                <i class="fa-fw fas fa-paint-brush"></i>
+                <span>&nbsp;</span>
+                <div class="control-style">
+                  <label class="a11y-only" for="R-select-variant">Theme</label>
+                  <select id="R-select-variant">
+                    <option id="R-select-variant-learn" value="learn" selected>Learn</option>
+                    <option id="R-select-variant-relearn-dark" value="relearn-dark">Relearn Dark</option>
+                    <option id="R-select-variant-relearn-light" value="relearn-light">Relearn Light</option>
+                    <option id="R-select-variant-neon" value="neon">Neon</option>
+                  </select>
+                </div>
+                <div class="clear"></div>
+              </div>
+              <script>window.relearn.markVariant();</script>
+            </li>
+          </ul>
+        </div>
+<div id="R-footer" class="default-animation"><p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p></div>
+      </div>
+    </aside>
+    <script src="/420512/js/perfect-scrollbar/perfect-scrollbar.min.js?1786719020" defer></script>
+    <script src="/420512/js/theme.js?1786719020" defer></script>
+    <div id="toast-container" role="status" aria-live="polite" aria-atomic="false"></div>
+  </body>
+</html>

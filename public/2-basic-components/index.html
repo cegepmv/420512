@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html id="R-html" lang="fr-ca" dir="ltr" itemscope itemtype="http://schema.org/Article" data-r-output-format="html">
+  <head><script src="/420512/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=420512/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.148.2">
+    <meta name="generator" content="Relearn 9.0.3+36307e4ed23582638ab689240ac7b427217803ee">
+    <meta name="description" content="Style Vous pouvez écrire des styles directement comme ceci :
+import { StyleSheet, Text, View } from &#39;react-native&#39; import React from &#39;react&#39; const RootLayout = () =&gt; { return ( &lt;View style={{flex: 1,justifyContent:&#39;center&#39;}}&gt; &lt;Text&gt;RootLayout&lt;/Text&gt; &lt;/View&gt; ) } export default RootLayout const styles = StyleSheet.create({}) import { StyleSheet, Text, View } from &#39;react-native&#39; import React from &#39;react&#39; const RootLayout = () =&gt; { return ( &lt;View style={styles.container}&gt; &lt;Text&gt;RootLayout&lt;/Text&gt; &lt;/View&gt; ) } export default RootLayout const styles = StyleSheet.create({ container:{ display: &#39;flex&#39;, flex: 1, alignItems:&#39;center&#39;, justifyContent: &#39;center&#39; } }) const styles = StyleSheet.create({ ... }) Cette ligne crée un objet de styles à l’aide de la méthode create de StyleSheet. Cela permet de définir des styles que vous pouvez appliquer à vos composants React Native.">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Composants de bases :: Développement d&#39;applications mobiles">
+    <meta name="twitter:description" content="Style Vous pouvez écrire des styles directement comme ceci :
+import { StyleSheet, Text, View } from &#39;react-native&#39; import React from &#39;react&#39; const RootLayout = () =&gt; { return ( &lt;View style={{flex: 1,justifyContent:&#39;center&#39;}}&gt; &lt;Text&gt;RootLayout&lt;/Text&gt; &lt;/View&gt; ) } export default RootLayout const styles = StyleSheet.create({}) import { StyleSheet, Text, View } from &#39;react-native&#39; import React from &#39;react&#39; const RootLayout = () =&gt; { return ( &lt;View style={styles.container}&gt; &lt;Text&gt;RootLayout&lt;/Text&gt; &lt;/View&gt; ) } export default RootLayout const styles = StyleSheet.create({ container:{ display: &#39;flex&#39;, flex: 1, alignItems:&#39;center&#39;, justifyContent: &#39;center&#39; } }) const styles = StyleSheet.create({ ... }) Cette ligne crée un objet de styles à l’aide de la méthode create de StyleSheet. Cela permet de définir des styles que vous pouvez appliquer à vos composants React Native.">
+    <meta property="og:url" content="http://localhost:1313/420512/2-basic-components/index.html">
+    <meta property="og:site_name" content="Développement d&#39;applications mobiles">
+    <meta property="og:title" content="Composants de bases :: Développement d&#39;applications mobiles">
+    <meta property="og:description" content="Style Vous pouvez écrire des styles directement comme ceci :
+import { StyleSheet, Text, View } from &#39;react-native&#39; import React from &#39;react&#39; const RootLayout = () =&gt; { return ( &lt;View style={{flex: 1,justifyContent:&#39;center&#39;}}&gt; &lt;Text&gt;RootLayout&lt;/Text&gt; &lt;/View&gt; ) } export default RootLayout const styles = StyleSheet.create({}) import { StyleSheet, Text, View } from &#39;react-native&#39; import React from &#39;react&#39; const RootLayout = () =&gt; { return ( &lt;View style={styles.container}&gt; &lt;Text&gt;RootLayout&lt;/Text&gt; &lt;/View&gt; ) } export default RootLayout const styles = StyleSheet.create({ container:{ display: &#39;flex&#39;, flex: 1, alignItems:&#39;center&#39;, justifyContent: &#39;center&#39; } }) const styles = StyleSheet.create({ ... }) Cette ligne crée un objet de styles à l’aide de la méthode create de StyleSheet. Cela permet de définir des styles que vous pouvez appliquer à vos composants React Native.">
+    <meta property="og:locale" content="fr_ca">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Développement d&#39;applications mobiles">
+    <meta property="article:published_time" content="2026-06-25T14:43:31-04:00">
+    <meta property="article:modified_time" content="2026-06-25T14:43:31-04:00">
+    <meta itemprop="name" content="Composants de bases :: Développement d&#39;applications mobiles">
+    <meta itemprop="description" content="Style Vous pouvez écrire des styles directement comme ceci :
+import { StyleSheet, Text, View } from &#39;react-native&#39; import React from &#39;react&#39; const RootLayout = () =&gt; { return ( &lt;View style={{flex: 1,justifyContent:&#39;center&#39;}}&gt; &lt;Text&gt;RootLayout&lt;/Text&gt; &lt;/View&gt; ) } export default RootLayout const styles = StyleSheet.create({}) import { StyleSheet, Text, View } from &#39;react-native&#39; import React from &#39;react&#39; const RootLayout = () =&gt; { return ( &lt;View style={styles.container}&gt; &lt;Text&gt;RootLayout&lt;/Text&gt; &lt;/View&gt; ) } export default RootLayout const styles = StyleSheet.create({ container:{ display: &#39;flex&#39;, flex: 1, alignItems:&#39;center&#39;, justifyContent: &#39;center&#39; } }) const styles = StyleSheet.create({ ... }) Cette ligne crée un objet de styles à l’aide de la méthode create de StyleSheet. Cela permet de définir des styles que vous pouvez appliquer à vos composants React Native.">
+    <meta itemprop="datePublished" content="2026-06-25T14:43:31-04:00">
+    <meta itemprop="dateModified" content="2026-06-25T14:43:31-04:00">
+    <meta itemprop="wordCount" content="855">
+    <title>Composants de bases :: Développement d&#39;applications mobiles</title><link rel="icon" href="/420512/images/logo.png" type="image/png">
+
+    <link href="/420512/css/auto-complete/auto-complete.min.css?1786719020" rel="stylesheet">
+    <script src="/420512/js/auto-complete/auto-complete.min.js?1786719020" defer></script>
+    <script src="/420512/js/search-lunr.js?1786719020" defer></script>
+    <script src="/420512/js/search.js?1786719020" defer></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.index_js_url="/420512/searchindex.en.js?1786719020";
+    </script>
+    <script src="/420512/js/lunr/lunr.min.js?1786719020" defer></script>
+    <script src="/420512/js/lunr/lunr.stemmer.support.min.js?1786719020" defer></script>
+    <script src="/420512/js/lunr/lunr.multi.min.js?1786719020" defer></script>
+    <script src="/420512/js/lunr/lunr.fr.min.js?1786719020" defer></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.contentLangs=['fr'];
+    </script>
+    <link href="/420512/fonts/fontawesome/css/all.min.css?1786719020" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/420512/fonts/fontawesome/css/all.min.css?1786719020" rel="stylesheet"></noscript>
+    <link href="/420512/css/perfect-scrollbar/perfect-scrollbar.min.css?1786719020" rel="stylesheet">
+    <link href="/420512/css/theme.css?1786719020" rel="stylesheet">
+    <link href="/420512/css/format-html.css?1786719020" rel="stylesheet" id="R-format-style">
+    <script>
+      window.relearn = window.relearn || {};
+      // configuration
+      window.relearn.min = ``;
+      window.relearn.path='\/2-basic-components\/index.html';
+      window.relearn.relBasePath='..';
+      window.relearn.relBaseUri='..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313\/420512';
+      window.relearn.disableInlineCopyToClipboard=true;
+      window.relearn.enableBlockCodeWrap=true;
+      // translations
+      window.T_Copy_to_clipboard = `Copy text to clipboard`;
+      window.T_Copied_to_clipboard = `Text copied to clipboard!`;
+      window.T_Link_copied_to_clipboard = `Link copied to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+      window.T_Browser_unsupported_feature = `This browser doesn't support this feature`;
+      // variant stuff
+      window.relearn.themevariants = [ 'learn', 'relearn-dark', 'relearn-light', 'neon' ];
+      window.relearn.customvariantprefix = "my-custom-";
+      window.relearn.changeVariant = function(variant) {
+        var oldVariant = document.documentElement.dataset.rThemeVariant;
+        window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        document.documentElement.dataset.rThemeVariant = variant;
+        if (oldVariant != variant) {
+          document.dispatchEvent( new CustomEvent('themeVariantLoaded', { detail: { variant, oldVariant } }) );
+          window.relearn.markVariant();
+        }
+      }
+      window.relearn.markVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant");
+        document.querySelectorAll(".R-variantswitcher select").forEach((select) => {select.value = variant;});
+      }
+      window.relearn.initVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant") ?? "";
+        if( !variant ||
+            (!variant.startsWith(window.relearn.customvariantprefix) && !window.relearn.themevariants.includes(variant)) ||
+            (variant.startsWith(window.relearn.customvariantprefix) && !window.localStorage.getItem(window.relearn.absBaseUri + "/variantstylesheet-" + variant)) ){
+          variant = window.relearn.themevariants[0];
+          window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        }
+        document.documentElement.dataset.rThemeVariant = variant;
+      }
+      window.relearn.initVariant();
+      window.relearn.markVariant();
+    </script>
+    <link href="/420512/css/custom.css?1786719020" rel="stylesheet">
+  </head>
+  <body class="mobile-support html" data-origin="/420512/2-basic-components/index.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar" class="default-animation">
+        <div class="topbar-wrapper default-animation">
+          <div class="topbar-sidebar-divider default-animation"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar default-animation" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide">
+<span class="btn cstyle button link noborder notitle interactive"><button onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button></span>
+            </div>
+          </div>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><a itemprop="item" href="/420512/index.html"><span itemprop="name">Développement d&#39;applications mobiles</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><span itemprop="name">Composants de bases</span><meta itemprop="position" content="2"></li>
+          </ol>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-more default-animation" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show">
+<span class="btn cstyle button link noborder notitle interactive"><button onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button></span>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable page" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+
+<h1 id="composants-de-bases">Composants de bases</h1>
+
+<h2 id="style">Style<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type="button" title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2>
+<p>Vous pouvez écrire des styles directement comme ceci :</p>
+<div class="highlight actionbar-wrapper wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">StyleSheet</span>, <span style="color:#a6e22e">Text</span>, <span style="color:#a6e22e">View</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-native&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">RootLayout</span> <span style="color:#f92672">=</span> () =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">View</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{{<span style="color:#a6e22e">flex</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>,<span style="color:#a6e22e">justifyContent</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;center&#39;</span>}}&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">Text</span>&gt;<span style="color:#a6e22e">RootLayout</span>&lt;/<span style="color:#f92672">Text</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">View</span>&gt;
+</span></span><span style="display:flex;"><span>  )
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">RootLayout</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">styles</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">StyleSheet</span>.<span style="color:#a6e22e">create</span>({})</span></span></code></pre></div>
+<div class="highlight actionbar-wrapper wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">StyleSheet</span>, <span style="color:#a6e22e">Text</span>, <span style="color:#a6e22e">View</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-native&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">RootLayout</span> <span style="color:#f92672">=</span> () =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">View</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">styles</span>.<span style="color:#a6e22e">container</span>}&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">Text</span>&gt;<span style="color:#a6e22e">RootLayout</span>&lt;/<span style="color:#f92672">Text</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">View</span>&gt;
+</span></span><span style="display:flex;"><span>  )
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">RootLayout</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">styles</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">StyleSheet</span>.<span style="color:#a6e22e">create</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">container</span><span style="color:#f92672">:</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">display</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;flex&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">flex</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">alignItems</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;center&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">justifyContent</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;center&#39;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>})</span></span></code></pre></div>
+<h3 id="const-styles--stylesheetcreate--"><code>const styles = StyleSheet.create({ ... })</code><span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type="button" title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3>
+<p>Cette ligne crée un objet de styles à l&rsquo;aide de la méthode <code>create</code> de <code>StyleSheet</code>. Cela permet de définir des styles que vous pouvez appliquer à vos composants React Native.</p>
+<ul>
+<li><strong><code>container: { ... }</code></strong> : Ici, <code>container</code> est un nom de style que vous pouvez utiliser pour styliser un composant. Le nom est choisi librement et peut être utilisé comme une clé pour accéder à ces styles.</li>
+<li><strong><code>display: 'flex'</code></strong> : La propriété <code>display: 'flex'</code> est utilisée pour spécifier que le conteneur utilise le modèle de mise en page Flexbox. En Flexbox, les éléments enfants sont disposés de manière flexible selon les propriétés de style définies.</li>
+<li><strong><code>flex: 1</code></strong> : La propriété <code>flex: 1</code> indique que le conteneur doit occuper tout l&rsquo;espace disponible dans son parent. Cela signifie que le conteneur se dilatera pour remplir l&rsquo;espace restant.</li>
+<li><strong><code>alignItems: 'center'</code></strong> : La propriété <code>alignItems: 'center'</code> aligne les éléments enfants du conteneur au centre de l&rsquo;axe transversal (l&rsquo;axe perpendiculaire à la direction principale du Flexbox). Pour un conteneur en colonne (axe principal vertical), cela aligne les éléments horizontalement au centre.</li>
+<li><strong><code>justifyContent: 'center'</code></strong> : La propriété <code>justifyContent: 'center'</code> aligne les éléments enfants du conteneur au centre de l&rsquo;axe principal (l&rsquo;axe dans la direction de la flexibilité). Pour un conteneur en colonne, cela aligne les éléments verticalement au centre.</li>
+</ul>
+<p>Pour plus de style, fiez-vous à la <a href="https://docs.expo.dev/develop/user-interface/color-themes/" rel="external">documentation d&rsquo;Expo</a>, la <a href="https://reactnative.dev/docs/style" rel="external">documentation de React Native</a>, mais aussi à <a href="https://gemini.google.com/app?hl=fr" rel="external">Gemeni</a>.</p>
+<!-- ::: note
+*Note pour plus tard : parler de Nativewind un jour.*
+::: -->
+<hr>
+<h2 id="stack">Stack<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type="button" title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2>
+<p>En ce moment, c&rsquo;est uniquement <code>_layout.jsx</code> qui est affiché. Nous voulons incorporer à cette page <code>index.js</code>. Nous allons utiliser les <code>Stack</code> de <code>expo-router</code>.</p>
+<div class="highlight actionbar-wrapper wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">StyleSheet</span>, <span style="color:#a6e22e">Text</span>, <span style="color:#a6e22e">View</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-native&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Stack</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;expo-router&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">RootLayout</span> <span style="color:#f92672">=</span> () =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Il doit y avoir 1 seul élément retourné, 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// on peut mettre des balises vides qui entourent le reste du code.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    &lt;&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">Text</span>&gt;<span style="color:#a6e22e">Hello</span> <span style="color:#a6e22e">from</span> <span style="color:#a6e22e">layout</span>&lt;/<span style="color:#f92672">Text</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">Stack</span>&gt;
+</span></span><span style="display:flex;"><span>            &lt;<span style="color:#f92672">Stack.Screen</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;index&#34;</span> <span style="color:#a6e22e">options</span><span style="color:#f92672">=</span>{{<span style="color:#a6e22e">headerShown</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>}} &gt;
+</span></span><span style="display:flex;"><span>        &lt;/<span style="color:#f92672">Stack</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/&gt;
+</span></span><span style="display:flex;"><span>  )
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">RootLayout</span></span></span></code></pre></div>
+<hr>
+<h2 id="safeareaview">SafeAreaView<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type="button" title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2>
+<p>Nous allons régler le fait que le layout sort possiblement de votre écran tout dépendant de votre téléphone.</p>
+<p>Il va falloir utiliser <code>SafeAreaView</code> en installant le paquet suivant :</p>
+<div class="highlight actionbar-wrapper wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>npx expo install react-native-safe-area-context </span></span></code></pre></div>
+<p>Dans <code>_layout.jsx</code>, remplacez <code>View</code> par <code>SafeAreaView</code> et observez la différence en haut de l&rsquo;écran :</p>
+<div class="highlight actionbar-wrapper wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">StyleSheet</span>, <span style="color:#a6e22e">Text</span>, <span style="color:#a6e22e">View</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-native&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Stack</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;expo-router&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">SafeAreaView</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;react-native-safe-area-context&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">RootLayout</span> <span style="color:#f92672">=</span> () =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>    &lt;&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">SafeAreaView</span>&gt;
+</span></span><span style="display:flex;"><span>            &lt;<span style="color:#f92672">Text</span>&gt;<span style="color:#a6e22e">Hello</span> <span style="color:#a6e22e">from</span> <span style="color:#a6e22e">layout</span>&lt;/<span style="color:#f92672">Text</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;/<span style="color:#f92672">SafeAreaView</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">Stack</span>&gt;
+</span></span><span style="display:flex;"><span>            &lt;<span style="color:#f92672">Stack.Screen</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;index&#34;</span> <span style="color:#a6e22e">options</span><span style="color:#f92672">=</span>{{<span style="color:#a6e22e">headerShown</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>}} <span style="color:#960050;background-color:#1e0010">/&amp;</span><span style="color:#a6e22e">gt</span><span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">&lt;/</span><span style="color:#a6e22e">Stack</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/&gt;
+</span></span><span style="display:flex;"><span>  )
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">RootLayout</span></span></span></code></pre></div>
+<hr>
+<h2 id="core-components"><a href="https://reactnative.dev/docs/components-and-apis" rel="external">Core Components</a><span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type="button" title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2>
+<ul>
+<li><strong>View</strong> : Conteneur principal pour le layout et le style. Utilisé pour organiser et envelopper d&rsquo;autres composants. Crée des mises en page flexibles et gère les dispositions des éléments enfants.</li>
+<li><strong>Text</strong> : Affiche du texte à l&rsquo;écran. Permet de personnaliser le texte avec différentes propriétés de style.</li>
+<li><strong>Image</strong> : Affiche des images dans l&rsquo;application. Supporte différents formats d&rsquo;images et peut gérer les images locales ou distantes. Peut être redimensionnée et stylisée.</li>
+<li><strong>ScrollView</strong> : Permet le défilement du contenu lorsque celui-ci dépasse la taille visible de l&rsquo;écran. Utile pour les longues listes ou contenus volumineux.</li>
+<li><strong>TextInput</strong> : Permet à l&rsquo;utilisateur de saisir du texte. Supporte différents types de clavier et comportements de saisie. Utilisé pour les champs de formulaire, les barres de recherche, ou tout autre endroit nécessitant une entrée de texte.</li>
+</ul>
+<hr>
+<h2 id="structure-de-projet">Structure de projet<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type="button" title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2>
+<p>Une bonne structure et hiérarchie dans un projet permet d&rsquo;améliorer la qualité, la maintenabilité, et l&rsquo;évolutivité du code, tout en facilitant la collaboration et en rendant le débogage et les tests plus simples.</p>
+<p>Voici les quelques règles que je vous demande de suivre pour l&rsquo;instant :</p>
+<div class="row pb-30">
+    <div class="col-sm-4 col-12 pt-30">
+        <img src="/420512/images/hierarchie.png" alt="exemple hierarchie">
+    </div>
+    <div class="col-sm-8 col-12 pt-30">
+<ul>
+<li>
+<p><strong>app :</strong> pages(screen) et _layout</p>
+</li>
+<li>
+<p><strong>assets :</strong> Les images sans exceptions se trouvent ici. Si vous avez des données en format json elles seront enregistrées ici. Si vous avez n&rsquo;importe quoi qui n&rsquo;est pas du code et qui n&rsquo;est pas un fichier de configuration alors il trouvera ça place ici.</p>
+</li>
+<li>
+<p><strong>components :</strong> Tous les composants qui seront exportés ailleurs</p>
+  </div>
+</li>
+</ul>
+</div>
+<hr>
+
+<details open class="box cstyle notices exo">
+  <summary class="box-label" tabindex="-1">
+    <i class="fa-fw fas fa-dumbbell"></i> 
+    Exercice
+  </summary>
+  <div class="box-content">
+<p>Reproduisez une application selon le UI suivant :</p>
+<div class="row">
+    <div class="col-12 col-sm-4 image-container">
+        <img src="/420512/images/golden.jpg">
+    </div>
+    <div class="col-12 col-sm-4 image-container">
+        <img src="/420512/images/corgie.jpg">
+    </div>
+    <div class="col-12 col-sm-4 image-container">
+        <img src="/420512/images/rottweiler.jpg">
+    </div>
+</div>
+<p>Les images proviennents du site <a href="https://unsplash.com/fr/licence" rel="external">unsplash</a></p>
+<details class="box cstyle notices transparent expand">
+  <summary class="box-label">
+    <i class="expander-icon fa-fw fas fa-chevron-right"></i> 
+    Découvrir la Solution
+  </summary>
+  <div class="box-content">
+<div class="highlight actionbar-wrapper wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">StatusBar</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;expo-status-bar&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">StyleSheet</span>, <span style="color:#a6e22e">Text</span>, <span style="color:#a6e22e">View</span>, <span style="color:#a6e22e">Image</span>, <span style="color:#a6e22e">ScrollView</span>} <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-native&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">App</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">ScrollView</span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">horizontal</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">contentContainerStyle</span><span style="color:#f92672">=</span>{{<span style="color:#a6e22e">flexDirection</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;row&#39;</span>}}
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">styles</span>.<span style="color:#a6e22e">scroll</span>}
+</span></span><span style="display:flex;"><span>    &gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">View</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">styles</span>.<span style="color:#a6e22e">container</span>}&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#f92672">Image</span> 
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">styles</span>.<span style="color:#a6e22e">image</span>}
+</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">source</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;../assets/chiot1.jpg&#39;</span>)} /&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#f92672">Text</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">styles</span>.<span style="color:#a6e22e">text</span>}&gt;<span style="color:#a6e22e">Golden</span>&lt;/<span style="color:#f92672">Text</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;/<span style="color:#f92672">View</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">View</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">styles</span>.<span style="color:#a6e22e">container</span>}&gt;
+</span></span><span style="display:flex;"><span>              &lt;<span style="color:#f92672">Image</span> 
+</span></span><span style="display:flex;"><span>                  <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">styles</span>.<span style="color:#a6e22e">image</span>}
+</span></span><span style="display:flex;"><span>                  <span style="color:#a6e22e">source</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;../assets/chiot2.jpg&#39;</span>)} /&gt;
+</span></span><span style="display:flex;"><span>              &lt;<span style="color:#f92672">Text</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">styles</span>.<span style="color:#a6e22e">text</span>}&gt;<span style="color:#a6e22e">Corgie</span><span style="color:#f92672">?</span>&lt;/<span style="color:#f92672">Text</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;/<span style="color:#f92672">View</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">View</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">styles</span>.<span style="color:#a6e22e">container</span>}&gt;
+</span></span><span style="display:flex;"><span>              &lt;<span style="color:#f92672">Image</span> 
+</span></span><span style="display:flex;"><span>                  <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">styles</span>.<span style="color:#a6e22e">image</span>}
+</span></span><span style="display:flex;"><span>                  <span style="color:#a6e22e">source</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;../assets/chiot3.jpg&#39;</span>)} /&gt;
+</span></span><span style="display:flex;"><span>              &lt;<span style="color:#f92672">Text</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">styles</span>.<span style="color:#a6e22e">text</span>}&gt;<span style="color:#a6e22e">Rottweiler</span>&lt;/<span style="color:#f92672">Text</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;/<span style="color:#f92672">View</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">ScrollView</span>&gt;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">styles</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">StyleSheet</span>.<span style="color:#a6e22e">create</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">container</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">alignItems</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;center&#39;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">justifyContent</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;center&#39;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">padding</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10</span>,
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">image</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">height</span><span style="color:#f92672">:</span><span style="color:#ae81ff">400</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">width</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">300</span>, 
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">resizeMode</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;contain&#39;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">scroll</span><span style="color:#f92672">:</span>{
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">flex</span><span style="color:#f92672">:</span><span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">backgroundColor</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;#fff&#39;</span>,
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">text</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">fontSize</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">18</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">textAlign</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;center&#39;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">marginTop</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">10</span>,
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>});</span></span></code></pre></div>
+  </div>
+</details>
+  </div>
+</details>
+
+  <footer class="footline">
+  </footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation"><a id="R-logo" href="/420512/">
+  <img src="/420512/images/logo.png" alt="logo" class="custom-logo">
+  <div class="brand-subtitle">Développement d'applications mobiles</div>
+</a>
+        <search><form action="/420512/search/index.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-fw fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-fw fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <div class="R-menu-divider default-animation">
+          <hr class="padding default-animation">
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-homelinks default-animation">
+          <ul class="space collapsible-menu">
+          </ul>
+        </div>
+        <div class="R-menu-divider default-animation">
+          <hr class="padding default-animation">
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-headercontrols default-animation">
+          <ul class="">
+          </ul>
+        </div>
+        <div class="R-menu-divider default-animation">
+          <hr class="padding default-animation">
+        </div>
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div class="R-sidebarmenu R-shortcutmenu-main default-animation">
+          <ul class="enlarge morespace collapsible-menu">
+            <li class="" data-nav-id="/420512/1-preparation/index.html"><a class="padding" href="/420512/1-preparation/index.html">1. Mise en place</a></li>
+            <li class="active " data-nav-id="/420512/2-basic-components/index.html"><a class="padding" href="/420512/2-basic-components/index.html">2. Composants de bases</a></li>
+            <li class="" data-nav-id="/420512/3-props/index.html"><a class="padding" href="/420512/3-props/index.html">3. Map &amp; Props</a></li>
+            <li class="" data-nav-id="/420512/4-orientation/index.html"><a class="padding" href="/420512/4-orientation/index.html">4. Orientation</a></li>
+            <li class="" data-nav-id="/420512/5-hooks/index.html"><a class="padding" href="/420512/5-hooks/index.html">5. Hooks</a></li>
+            <li class="" data-nav-id="/420512/6-animation/index.html"><a class="padding" href="/420512/6-animation/index.html">6. Animations</a></li>
+            <li class="" data-nav-id="/420512/7-navigation/index.html"><a class="padding" href="/420512/7-navigation/index.html">7. Navigation</a></li>
+            <li class="" data-nav-id="/420512/8-context/index.html"><a class="padding" href="/420512/8-context/index.html">8. Context</a></li>
+            <li class="" data-nav-id="/420512/9-api/index.html"><a class="padding" href="/420512/9-api/index.html">9. API</a></li>
+            <li class="" data-nav-id="/420512/10-bd/index.html"><a class="padding" href="/420512/10-bd/index.html">10. Base de données locales</a></li>
+          </ul>
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-shortcuts default-animation">
+          <ul class="space collapsible-menu">
+          </ul>
+        </div>
+        <div id="R-footer-margin" class="default-animation"></div>
+        <div class="R-menu-divider default-animation">
+          <hr class="padding default-animation">
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation">
+          <ul class="">
+            <li class="R-variantswitcher">
+              <div class="padding menu-control">
+                <i class="fa-fw fas fa-paint-brush"></i>
+                <span>&nbsp;</span>
+                <div class="control-style">
+                  <label class="a11y-only" for="R-select-variant">Theme</label>
+                  <select id="R-select-variant">
+                    <option id="R-select-variant-learn" value="learn" selected>Learn</option>
+                    <option id="R-select-variant-relearn-dark" value="relearn-dark">Relearn Dark</option>
+                    <option id="R-select-variant-relearn-light" value="relearn-light">Relearn Light</option>
+                    <option id="R-select-variant-neon" value="neon">Neon</option>
+                  </select>
+                </div>
+                <div class="clear"></div>
+              </div>
+              <script>window.relearn.markVariant();</script>
+            </li>
+          </ul>
+        </div>
+<div id="R-footer" class="default-animation"><p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p></div>
+      </div>
+    </aside>
+    <script src="/420512/js/perfect-scrollbar/perfect-scrollbar.min.js?1786719020" defer></script>
+    <script src="/420512/js/theme.js?1786719020" defer></script>
+    <div id="toast-container" role="status" aria-live="polite" aria-atomic="false"></div>
+  </body>
+</html>

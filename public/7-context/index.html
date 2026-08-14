@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html id="R-html" lang="fr-ca" dir="ltr" itemscope itemtype="http://schema.org/Article" data-r-output-format="html">
+  <head><script src="/420512/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=420512/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.148.2">
+    <meta name="generator" content="Relearn 9.0.3+36307e4ed23582638ab689240ac7b427217803ee">
+    <meta name="description" content="Le Context API, c’est comme installer un réseau Wi-Fi dans votre application 📶. Au lieu de faire passer des données manuellement de composant en composant (le props drilling 😵), vous créez une zone de partage où n’importe quel composant peut se connecter instantanément pour récupérer ou modifier des informations !
+🗂️ Problématique : La navigation imbriquée Imaginez la structure suivante : votre racine est un Drawer (menu latéral), et l’une de ses sections contient des Tabs (onglets en bas de l’écran pour SignIn et SignUp). Vous désactivez le header des onglets pour éviter d’avoir deux barres en haut.">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Context :: Développement d&#39;applications mobiles">
+    <meta name="twitter:description" content="Le Context API, c’est comme installer un réseau Wi-Fi dans votre application 📶. Au lieu de faire passer des données manuellement de composant en composant (le props drilling 😵), vous créez une zone de partage où n’importe quel composant peut se connecter instantanément pour récupérer ou modifier des informations !
+🗂️ Problématique : La navigation imbriquée Imaginez la structure suivante : votre racine est un Drawer (menu latéral), et l’une de ses sections contient des Tabs (onglets en bas de l’écran pour SignIn et SignUp). Vous désactivez le header des onglets pour éviter d’avoir deux barres en haut.">
+    <meta property="og:url" content="http://localhost:1313/420512/7-context/index.html">
+    <meta property="og:site_name" content="Développement d&#39;applications mobiles">
+    <meta property="og:title" content="Context :: Développement d&#39;applications mobiles">
+    <meta property="og:description" content="Le Context API, c’est comme installer un réseau Wi-Fi dans votre application 📶. Au lieu de faire passer des données manuellement de composant en composant (le props drilling 😵), vous créez une zone de partage où n’importe quel composant peut se connecter instantanément pour récupérer ou modifier des informations !
+🗂️ Problématique : La navigation imbriquée Imaginez la structure suivante : votre racine est un Drawer (menu latéral), et l’une de ses sections contient des Tabs (onglets en bas de l’écran pour SignIn et SignUp). Vous désactivez le header des onglets pour éviter d’avoir deux barres en haut.">
+    <meta property="og:locale" content="fr_ca">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Développement d&#39;applications mobiles">
+    <meta property="article:published_time" content="2026-06-25T16:02:29-04:00">
+    <meta property="article:modified_time" content="2026-06-25T16:02:29-04:00">
+    <meta itemprop="name" content="Context :: Développement d&#39;applications mobiles">
+    <meta itemprop="description" content="Le Context API, c’est comme installer un réseau Wi-Fi dans votre application 📶. Au lieu de faire passer des données manuellement de composant en composant (le props drilling 😵), vous créez une zone de partage où n’importe quel composant peut se connecter instantanément pour récupérer ou modifier des informations !
+🗂️ Problématique : La navigation imbriquée Imaginez la structure suivante : votre racine est un Drawer (menu latéral), et l’une de ses sections contient des Tabs (onglets en bas de l’écran pour SignIn et SignUp). Vous désactivez le header des onglets pour éviter d’avoir deux barres en haut.">
+    <meta itemprop="datePublished" content="2026-06-25T16:02:29-04:00">
+    <meta itemprop="dateModified" content="2026-06-25T16:02:29-04:00">
+    <meta itemprop="wordCount" content="854">
+    <title>Context :: Développement d&#39;applications mobiles</title><link rel="icon" href="/420512/images/logo.png" type="image/png">
+
+    <link href="/420512/css/auto-complete/auto-complete.min.css?1784735239" rel="stylesheet">
+    <script src="/420512/js/auto-complete/auto-complete.min.js?1784735239" defer></script>
+    <script src="/420512/js/search-lunr.js?1784735239" defer></script>
+    <script src="/420512/js/search.js?1784735239" defer></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.index_js_url="/420512/searchindex.en.js?1784735239";
+    </script>
+    <script src="/420512/js/lunr/lunr.min.js?1784735239" defer></script>
+    <script src="/420512/js/lunr/lunr.stemmer.support.min.js?1784735239" defer></script>
+    <script src="/420512/js/lunr/lunr.multi.min.js?1784735239" defer></script>
+    <script src="/420512/js/lunr/lunr.fr.min.js?1784735239" defer></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.contentLangs=['fr'];
+    </script>
+    <link href="/420512/fonts/fontawesome/css/all.min.css?1784735239" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/420512/fonts/fontawesome/css/all.min.css?1784735239" rel="stylesheet"></noscript>
+    <link href="/420512/css/perfect-scrollbar/perfect-scrollbar.min.css?1784735239" rel="stylesheet">
+    <link href="/420512/css/theme.css?1784735239" rel="stylesheet">
+    <link href="/420512/css/format-html.css?1784735239" rel="stylesheet" id="R-format-style">
+    <script>
+      window.relearn = window.relearn || {};
+      // configuration
+      window.relearn.min = ``;
+      window.relearn.path='\/7-context\/index.html';
+      window.relearn.relBasePath='..';
+      window.relearn.relBaseUri='..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313\/420512';
+      window.relearn.disableInlineCopyToClipboard=true;
+      window.relearn.enableBlockCodeWrap=true;
+      // translations
+      window.T_Copy_to_clipboard = `Copy text to clipboard`;
+      window.T_Copied_to_clipboard = `Text copied to clipboard!`;
+      window.T_Link_copied_to_clipboard = `Link copied to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+      window.T_Browser_unsupported_feature = `This browser doesn't support this feature`;
+      // variant stuff
+      window.relearn.themevariants = [ 'learn', 'relearn-dark', 'relearn-light', 'neon' ];
+      window.relearn.customvariantprefix = "my-custom-";
+      window.relearn.changeVariant = function(variant) {
+        var oldVariant = document.documentElement.dataset.rThemeVariant;
+        window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        document.documentElement.dataset.rThemeVariant = variant;
+        if (oldVariant != variant) {
+          document.dispatchEvent( new CustomEvent('themeVariantLoaded', { detail: { variant, oldVariant } }) );
+          window.relearn.markVariant();
+        }
+      }
+      window.relearn.markVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant");
+        document.querySelectorAll(".R-variantswitcher select").forEach((select) => {select.value = variant;});
+      }
+      window.relearn.initVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant") ?? "";
+        if( !variant ||
+            (!variant.startsWith(window.relearn.customvariantprefix) && !window.relearn.themevariants.includes(variant)) ||
+            (variant.startsWith(window.relearn.customvariantprefix) && !window.localStorage.getItem(window.relearn.absBaseUri + "/variantstylesheet-" + variant)) ){
+          variant = window.relearn.themevariants[0];
+          window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        }
+        document.documentElement.dataset.rThemeVariant = variant;
+      }
+      window.relearn.initVariant();
+      window.relearn.markVariant();
+    </script>
+    <link href="/420512/css/custom.css?1784735239" rel="stylesheet">
+  </head>
+  <body class="mobile-support html" data-origin="/420512/7-context/index.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar" class="default-animation">
+        <div class="topbar-wrapper default-animation">
+          <div class="topbar-sidebar-divider default-animation"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar default-animation" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide">
+<span class="btn cstyle button link noborder notitle interactive"><button onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button></span>
+            </div>
+          </div>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><a itemprop="item" href="/420512/index.html"><span itemprop="name">Développement d&#39;applications mobiles</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><span itemprop="name">Context</span><meta itemprop="position" content="2"></li>
+          </ol>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-more default-animation" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show">
+<span class="btn cstyle button link noborder notitle interactive"><button onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button></span>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable page" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+
+<h1 id="context">Context</h1>
+
+<p>Le <strong>Context API</strong>, c&rsquo;est comme installer un réseau Wi-Fi dans votre application 📶. Au lieu de faire passer des données manuellement de composant en composant (le <em>props drilling</em> 😵), vous créez une zone de partage où n&rsquo;importe quel composant peut se connecter instantanément pour récupérer ou modifier des informations !</p>
+<hr>
+<h2 id="-problématique--la-navigation-imbriquée">🗂️ Problématique : La navigation imbriquée<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type="button" title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2>
+<p>Imaginez la structure suivante : votre racine est un <strong>Drawer</strong> (menu latéral), et l&rsquo;une de ses sections contient des <strong>Tabs</strong> (onglets en bas de l&rsquo;écran pour <em>SignIn</em> et <em>SignUp</em>). Vous désactivez le header des onglets pour éviter d&rsquo;avoir deux barres en haut.</p>
+<p><strong>Le problème ?</strong> Le titre du header principal (celui du Drawer) reste figé et ne sait pas sur quel onglet l&rsquo;utilisateur se trouve.</p>
+<p>💡 <strong>La solution :</strong> Utiliser un Context pour mettre à jour le titre du Drawer en temps réel depuis les onglets !</p>
+<hr>
+<h2 id="-étape-par-étape--le-tabnamecontext">🛠️ Étape par étape : Le TabNameContext<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type="button" title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2>
+<h3 id="-étape-1--créer-le-réseau-le-fichier-context">📁 Étape 1 : Créer le réseau (Le fichier Context)<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type="button" title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3>
+<p>Créez un fichier nommé <code>tabNameContext.js</code> dans votre dossier <code>components/</code> (ou <code>contexts/</code>).</p>
+<div class="highlight actionbar-wrapper wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span>, { <span style="color:#a6e22e">createContext</span>, <span style="color:#a6e22e">useContext</span>, <span style="color:#a6e22e">useState</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 1. On crée notre boîte de contexte
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">TabNameContext</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createContext</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 2. On crée le Provider qui va distribuer les données
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">TabNameProvider</span> <span style="color:#f92672">=</span> ({ <span style="color:#a6e22e">children</span> }) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">tabName</span>, <span style="color:#a6e22e">setTabName</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">useState</span>(<span style="color:#e6db74">&#39;Nested Tabs&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">TabNameContext.Provider</span> <span style="color:#a6e22e">setTabName</span> <span style="color:#a6e22e">tabName</span><span style="color:#960050;background-color:#1e0010">,</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{&#34;</span> }}&gt;
+</span></span><span style="display:flex;"><span>            {<span style="color:#a6e22e">children</span>}
+</span></span><span style="display:flex;"><span>        &lt;/<span style="color:#f92672">TabNameContext.Provider</span>&gt;
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 3. Un petit hook personnalisé pour se connecter super facilement !
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">useTabNameContext</span> <span style="color:#f92672">=</span> () =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">useContext</span>(<span style="color:#a6e22e">TabNameContext</span>);
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
+<h3 id="-étape-2--brancher-le-provider-à-la-racine">🔌 Étape 2 : Brancher le Provider à la racine<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type="button" title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3>
+<p>Il faut envelopper (<em>wrap</em>) les écrans qui ont besoin de ces données avec notre <code>TabNameProvider</code>. Modifiez votre <code>_layout.jsx</code> racine :</p>
+<div class="highlight actionbar-wrapper wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Drawer</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;expo-router/drawer&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">TabNameProvider</span>, <span style="color:#a6e22e">useTabNameContext</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;../components/tabNameContext&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">RootLayout</span> <span style="color:#f92672">=</span> () =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">TabNameProvider</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">Layout</span>/&gt;
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#f92672">TabNameProvider</span>&gt;
+</span></span><span style="display:flex;"><span>  )
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">Layout</span> <span style="color:#f92672">=</span> () =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// On récupère la variable globale contenant le titre
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">tabName</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">useTabNameContext</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">Drawer</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#a6e22e">lightblue</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#a6e22e">backgroundColor</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#a6e22e">headerStyle</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#a6e22e">screenOptions</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{&#34;</span> { } }}&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">Drawer.Screen</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;index&#34;</span>/&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">Drawer.Screen</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;speedTest&#34;</span>/&gt;
+</span></span><span style="display:flex;"><span>        {<span style="color:#75715e">/* Le titre de cette section s&#39;adaptera dynamiquement ! */</span>}
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">Drawer.Screen</span> <span style="color:#960050;background-color:#1e0010">&#34;</span><span style="color:#a6e22e">tabs</span><span style="color:#960050;background-color:#1e0010">&#34;,</span> <span style="color:#a6e22e">drawerLabel</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;(tabs)&#34;</span> <span style="color:#a6e22e">options</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{&#34;</span> <span style="color:#a6e22e">tabName</span> <span style="color:#a6e22e">title</span><span style="color:#960050;background-color:#1e0010">:</span> }}/&gt;
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#f92672">Drawer</span>&gt;
+</span></span><span style="display:flex;"><span>  )
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">RootLayout</span>;</span></span></code></pre></div>
+<h3 id="-étape-3--mettre-à-jour-le-titre-depuis-les-onglets">⚡ Étape 3 : Mettre à jour le titre depuis les onglets<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type="button" title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3>
+<p>Ajoutez ce code dans <strong>chacun de vos écrans d&rsquo;onglets</strong> (ex: <em>signin.jsx</em> et <em>signup.jsx</em>). On utilise <code>useFocusEffect</code> pour changer le titre dès que l&rsquo;étudiant clique sur l&rsquo;onglet !</p>
+<div class="highlight actionbar-wrapper wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">useFocusEffect</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;expo-router&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">useTabNameContext</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;../components/tabNameContext&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// À mettre à l&#39;intérieur de votre composant de page :
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">setTabName</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">useTabNameContext</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">useFocusEffect</span>(
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">useCallback</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 1. On change le nom dès que l&#39;écran devient actif 🎯
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">setTabName</span>(<span style="color:#e6db74">&#39;Nom personnalisé de la Tab&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 2. Optionnel : Nettoyage quand on quitte l&#39;onglet
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> () =&gt; {};
+</span></span><span style="display:flex;"><span>  }, [<span style="color:#a6e22e">setTabName</span>])
+</span></span><span style="display:flex;"><span>);</span></span></code></pre></div>
+<hr>
+<h2 id="-mission-mode-sombre--un-header-customisé">🌗 Mission Mode Sombre : Un Header Customisé<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type="button" title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2>
+<p>Allons plus loin ! Créons un bouton magique dans notre barre supérieure pour basculer entre le <strong>Light Mode</strong> et le <strong>Dark Mode</strong>. Pour cela, on va remplacer le header par défaut par un composant personnalisé.</p>
+<h3 id="-1-le-dictionnaire-de-couleurs-assetscolorspalettejs">🎨 1. Le dictionnaire de couleurs (<code>assets/colorsPalette.js</code>)<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type="button" title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3>
+<p>Préparez vos thèmes graphiques à un seul endroit :</p>
+<div class="highlight actionbar-wrapper wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// assets/colorsPalette.js
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">colorsPalette</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">light</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">primary</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;#3498db&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">secondary</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;#2ecc71&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">accent</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;#e74c3c&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">background</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;#ecf0f1&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">text</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;#2c3e50&#39;</span>,
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">dark</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">primary</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;#C69749&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">secondary</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;#735F32&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">accent</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;#282A3A&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">background</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;black&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">text</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;white&#39;</span>,
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
+<h3 id="-2-création-du-composant-customdrawerheaderjs">🧱 2. Création du composant <code>CustomDrawerHeader.js</code><span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type="button" title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3>
+<p>Ce composant va afficher le bouton menu (hamburger), le titre de l&rsquo;application et la petite lune/soleil cliquable !</p>
+<div class="highlight actionbar-wrapper wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">View</span>, <span style="color:#a6e22e">Text</span>, <span style="color:#a6e22e">StyleSheet</span>, <span style="color:#a6e22e">TouchableOpacity</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-native&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">useTheme</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./contexts/ThemeContext&#39;</span>; <span style="color:#75715e">// Supposons que votre ThemeContext existe déjà
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">SafeAreaView</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-native-safe-area-context&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">colorsPalette</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;../assets/colorsPalette&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Icon</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-native-vector-icons/FontAwesome&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">CustomDrawerHeader</span> <span style="color:#f92672">=</span> ({ <span style="color:#a6e22e">navigation</span> }) =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">theme</span>, <span style="color:#a6e22e">toggleTheme</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">useTheme</span>();
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">colors</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">colorsPalette</span>[<span style="color:#a6e22e">theme</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">SafeAreaView</span> <span style="color:#a6e22e">backgroundColor</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#a6e22e">colors.background</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{[styles.header,&#34;</span> { }<span style="color:#960050;background-color:#1e0010">]</span>}&gt;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>      {<span style="color:#75715e">/* Bouton pour ouvrir le menu latéral */</span>}
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">TouchableOpacity</span> <span style="color:#a6e22e">onPress</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{()&#34;</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{styles.content}&#34;</span>&gt; <span style="color:#a6e22e">navigation</span>.<span style="color:#a6e22e">openDrawer</span>()}<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">Icon</span> <span style="color:#a6e22e">color</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{colors.text}&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;bars&#34;</span> <span style="color:#a6e22e">size</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{30}&#34;</span>/&gt;
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#f92672">TouchableOpacity</span>&gt;
+</span></span><span style="display:flex;"><span>      
+</span></span><span style="display:flex;"><span>      {<span style="color:#75715e">/* Titre central */</span>}
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">Text</span> <span style="color:#a6e22e">color</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#a6e22e">colors.text</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{[styles.title,&#34;</span> { }<span style="color:#960050;background-color:#1e0010">]</span>}&gt;<span style="color:#a6e22e">Mon</span> <span style="color:#a6e22e">App</span> <span style="color:#a6e22e">Cute</span> <span style="color:#960050;background-color:#1e0010">✨</span>&lt;/<span style="color:#f92672">Text</span>&gt;
+</span></span><span style="display:flex;"><span>      
+</span></span><span style="display:flex;"><span>      {<span style="color:#75715e">/* Bouton pour changer de thème (Lune / Soleil) */</span>}
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">TouchableOpacity</span> <span style="color:#a6e22e">onPress</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{()&#34;</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{styles.content}&#34;</span>&gt; <span style="color:#a6e22e">toggleTheme</span>()}<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">Icon</span> <span style="color:#960050;background-color:#1e0010">&#34;</span><span style="color:#a6e22e">moon</span><span style="color:#960050;background-color:#1e0010">-</span><span style="color:#a6e22e">o</span><span style="color:#960050;background-color:#1e0010">&#34;</span> <span style="color:#960050;background-color:#1e0010">&#34;</span><span style="color:#a6e22e">sun</span><span style="color:#960050;background-color:#1e0010">-</span><span style="color:#a6e22e">o</span><span style="color:#960050;background-color:#1e0010">&#34;</span>} <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#a6e22e">light</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#960050;background-color:#1e0010">?</span> <span style="color:#a6e22e">color</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{colors.text}&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{theme&#34;</span> <span style="color:#a6e22e">size</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{30}&#34;</span>/&gt;
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#f92672">TouchableOpacity</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">SafeAreaView</span>&gt;
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">styles</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">StyleSheet</span>.<span style="color:#a6e22e">create</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">header</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">flexDirection</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;row&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">alignItems</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;center&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">width</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;100%&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">justifyContent</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;space-between&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">paddingHorizontal</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">10</span>,
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">title</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fontSize</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">22</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fontWeight</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;bold&#39;</span>,
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">content</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">height</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">56</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">width</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">56</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">justifyContent</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;center&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">alignItems</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;center&#34;</span>,
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">CustomDrawerHeader</span>;</span></span></code></pre></div>
+<h3 id="-3-injection-du-header-dans-votre-drawer">🔌 3. Injection du Header dans votre Drawer<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type="button" title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3>
+<p>Pour appliquer ce superbe en-tête à votre application, modifiez l&rsquo;option <code>header</code> dans les <code>screenOptions</code> de votre composant <code>&lt;Drawer&gt;</code> :</p>
+<div class="highlight actionbar-wrapper wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>&lt;<span style="color:#f92672">Drawer</span> <span style="color:#960050;background-color:#1e0010">(</span>{ <span style="color:#a6e22e">header</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#a6e22e">navigation</span> <span style="color:#a6e22e">screenOptions</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{&#34;</span>&gt; &lt;<span style="color:#f92672">CustomDrawerHeader</span> <span style="color:#a6e22e">navigation</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{navigation}&#34;</span>/&gt;
+</span></span><span style="display:flex;"><span>  }}
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>  {<span style="color:#75715e">/* Vos Drawer.Screen ici */</span>}
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">Drawer</span>&gt;</span></span></code></pre></div>
+<p>::: info 🚀 Défi Étudiant !
+C&rsquo;est à vous de jouer ! Assurez-vous d&rsquo;implémenter correctement votre <code>ThemeContext</code> pour stocker la valeur <code>'light'</code> ou <code>'dark'</code>, et lisez les couleurs de votre fichier <code>colorsPalette.js</code> dans le reste de vos écrans pour que toute l&rsquo;application change de look d&rsquo;un seul coup ! 🎨✨
+:::</p>
+
+  <footer class="footline">
+  </footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation"><a id="R-logo" href="/420512/">
+  <img src="/420512/images/logo.png" alt="logo" class="custom-logo">
+  <div class="brand-subtitle">Développement d'applications mobiles</div>
+</a>
+        <search><form action="/420512/search/index.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-fw fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-fw fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <div class="R-menu-divider default-animation">
+          <hr class="padding default-animation">
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-homelinks default-animation">
+          <ul class="space collapsible-menu">
+          </ul>
+        </div>
+        <div class="R-menu-divider default-animation">
+          <hr class="padding default-animation">
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-headercontrols default-animation">
+          <ul class="">
+          </ul>
+        </div>
+        <div class="R-menu-divider default-animation">
+          <hr class="padding default-animation">
+        </div>
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div class="R-sidebarmenu R-shortcutmenu-main default-animation">
+          <ul class="enlarge morespace collapsible-menu">
+            <li class="" data-nav-id="/420512/1-preparation/index.html"><a class="padding" href="/420512/1-preparation/index.html">1. Mise en place</a></li>
+            <li class="" data-nav-id="/420512/2-basic-components/index.html"><a class="padding" href="/420512/2-basic-components/index.html">2. Composants de bases</a></li>
+            <li class="" data-nav-id="/420512/3-props/index.html"><a class="padding" href="/420512/3-props/index.html">3. Map &amp; Props</a></li>
+            <li class="" data-nav-id="/420512/4-orientation/index.html"><a class="padding" href="/420512/4-orientation/index.html">4. Orientation</a></li>
+            <li class="" data-nav-id="/420512/5-hooks/index.html"><a class="padding" href="/420512/5-hooks/index.html">5. Hooks</a></li>
+            <li class="" data-nav-id="/420512/6-animation/index.html"><a class="padding" href="/420512/6-animation/index.html">6. Animations</a></li>
+            <li class="" data-nav-id="/420512/7-navigation/index.html"><a class="padding" href="/420512/7-navigation/index.html">6. Animations</a></li>
+            <li class="active " data-nav-id="/420512/7-context/index.html"><a class="padding" href="/420512/7-context/index.html">7. Context</a></li>
+            <li class="" data-nav-id="/420512/8-api/index.html"><a class="padding" href="/420512/8-api/index.html">8. API</a></li>
+            <li class="" data-nav-id="/420512/9-bd/index.html"><a class="padding" href="/420512/9-bd/index.html">9. Base de données locales</a></li>
+          </ul>
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-shortcuts default-animation">
+          <ul class="space collapsible-menu">
+          </ul>
+        </div>
+        <div id="R-footer-margin" class="default-animation"></div>
+        <div class="R-menu-divider default-animation">
+          <hr class="padding default-animation">
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation">
+          <ul class="">
+            <li class="R-variantswitcher">
+              <div class="padding menu-control">
+                <i class="fa-fw fas fa-paint-brush"></i>
+                <span>&nbsp;</span>
+                <div class="control-style">
+                  <label class="a11y-only" for="R-select-variant">Theme</label>
+                  <select id="R-select-variant">
+                    <option id="R-select-variant-learn" value="learn" selected>Learn</option>
+                    <option id="R-select-variant-relearn-dark" value="relearn-dark">Relearn Dark</option>
+                    <option id="R-select-variant-relearn-light" value="relearn-light">Relearn Light</option>
+                    <option id="R-select-variant-neon" value="neon">Neon</option>
+                  </select>
+                </div>
+                <div class="clear"></div>
+              </div>
+              <script>window.relearn.markVariant();</script>
+            </li>
+          </ul>
+        </div>
+<div id="R-footer" class="default-animation"><p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p></div>
+      </div>
+    </aside>
+    <script src="/420512/js/perfect-scrollbar/perfect-scrollbar.min.js?1784735239" defer></script>
+    <script src="/420512/js/theme.js?1784735239" defer></script>
+    <div id="toast-container" role="status" aria-live="polite" aria-atomic="false"></div>
+  </body>
+</html>

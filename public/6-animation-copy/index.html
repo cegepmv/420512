@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html id="R-html" lang="fr-ca" dir="ltr" itemscope itemtype="http://schema.org/Article" data-r-output-format="html">
+  <head><script src="/420512/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=420512/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.148.2">
+    <meta name="generator" content="Relearn 9.0.3+36307e4ed23582638ab689240ac7b427217803ee">
+    <meta name="description" content="Dans cette section, nous verrons comment dynamiser l’interface utilisateur grâce aux animations. En React Native, la gestion des animations repose sur une combinaison entre la gestion des états (state) pour contrôler les données à afficher, et la bibliothèque react-native-reanimated qui permet d’exécuter des transitions fluides et performantes directement sur le thread natif.
+Flatlist
+Animation
+Tableau dans un state en React En React, il ne faut jamais modifier directement un tableau existant dans l’état (comme faire data.push(nouvelleTache)), car React ne détectera pas le changement et ne rafraîchira pas l’écran.">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Animations :: Développement d&#39;applications mobiles">
+    <meta name="twitter:description" content="Dans cette section, nous verrons comment dynamiser l’interface utilisateur grâce aux animations. En React Native, la gestion des animations repose sur une combinaison entre la gestion des états (state) pour contrôler les données à afficher, et la bibliothèque react-native-reanimated qui permet d’exécuter des transitions fluides et performantes directement sur le thread natif.
+Flatlist
+Animation
+Tableau dans un state en React En React, il ne faut jamais modifier directement un tableau existant dans l’état (comme faire data.push(nouvelleTache)), car React ne détectera pas le changement et ne rafraîchira pas l’écran.">
+    <meta property="og:url" content="http://localhost:1313/420512/6-animation-copy/index.html">
+    <meta property="og:site_name" content="Développement d&#39;applications mobiles">
+    <meta property="og:title" content="Animations :: Développement d&#39;applications mobiles">
+    <meta property="og:description" content="Dans cette section, nous verrons comment dynamiser l’interface utilisateur grâce aux animations. En React Native, la gestion des animations repose sur une combinaison entre la gestion des états (state) pour contrôler les données à afficher, et la bibliothèque react-native-reanimated qui permet d’exécuter des transitions fluides et performantes directement sur le thread natif.
+Flatlist
+Animation
+Tableau dans un state en React En React, il ne faut jamais modifier directement un tableau existant dans l’état (comme faire data.push(nouvelleTache)), car React ne détectera pas le changement et ne rafraîchira pas l’écran.">
+    <meta property="og:locale" content="fr_ca">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Développement d&#39;applications mobiles">
+    <meta property="article:published_time" content="2026-06-25T15:22:35-04:00">
+    <meta property="article:modified_time" content="2026-06-25T15:22:35-04:00">
+    <meta itemprop="name" content="Animations :: Développement d&#39;applications mobiles">
+    <meta itemprop="description" content="Dans cette section, nous verrons comment dynamiser l’interface utilisateur grâce aux animations. En React Native, la gestion des animations repose sur une combinaison entre la gestion des états (state) pour contrôler les données à afficher, et la bibliothèque react-native-reanimated qui permet d’exécuter des transitions fluides et performantes directement sur le thread natif.
+Flatlist
+Animation
+Tableau dans un state en React En React, il ne faut jamais modifier directement un tableau existant dans l’état (comme faire data.push(nouvelleTache)), car React ne détectera pas le changement et ne rafraîchira pas l’écran.">
+    <meta itemprop="datePublished" content="2026-06-25T15:22:35-04:00">
+    <meta itemprop="dateModified" content="2026-06-25T15:22:35-04:00">
+    <meta itemprop="wordCount" content="552">
+    <title>Animations :: Développement d&#39;applications mobiles</title><link rel="icon" href="/420512/images/logo.png" type="image/png">
+
+    <link href="/420512/css/auto-complete/auto-complete.min.css?1784735226" rel="stylesheet">
+    <script src="/420512/js/auto-complete/auto-complete.min.js?1784735226" defer></script>
+    <script src="/420512/js/search-lunr.js?1784735226" defer></script>
+    <script src="/420512/js/search.js?1784735226" defer></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.index_js_url="/420512/searchindex.en.js?1784735226";
+    </script>
+    <script src="/420512/js/lunr/lunr.min.js?1784735226" defer></script>
+    <script src="/420512/js/lunr/lunr.stemmer.support.min.js?1784735226" defer></script>
+    <script src="/420512/js/lunr/lunr.multi.min.js?1784735226" defer></script>
+    <script src="/420512/js/lunr/lunr.fr.min.js?1784735226" defer></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.contentLangs=['fr'];
+    </script>
+    <link href="/420512/fonts/fontawesome/css/all.min.css?1784735226" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/420512/fonts/fontawesome/css/all.min.css?1784735226" rel="stylesheet"></noscript>
+    <link href="/420512/css/perfect-scrollbar/perfect-scrollbar.min.css?1784735226" rel="stylesheet">
+    <link href="/420512/css/theme.css?1784735226" rel="stylesheet">
+    <link href="/420512/css/format-html.css?1784735226" rel="stylesheet" id="R-format-style">
+    <script>
+      window.relearn = window.relearn || {};
+      // configuration
+      window.relearn.min = ``;
+      window.relearn.path='\/6-animation-copy\/index.html';
+      window.relearn.relBasePath='..';
+      window.relearn.relBaseUri='..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313\/420512';
+      window.relearn.disableInlineCopyToClipboard=true;
+      window.relearn.enableBlockCodeWrap=true;
+      // translations
+      window.T_Copy_to_clipboard = `Copy text to clipboard`;
+      window.T_Copied_to_clipboard = `Text copied to clipboard!`;
+      window.T_Link_copied_to_clipboard = `Link copied to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+      window.T_Browser_unsupported_feature = `This browser doesn't support this feature`;
+      // variant stuff
+      window.relearn.themevariants = [ 'learn', 'relearn-dark', 'relearn-light', 'neon' ];
+      window.relearn.customvariantprefix = "my-custom-";
+      window.relearn.changeVariant = function(variant) {
+        var oldVariant = document.documentElement.dataset.rThemeVariant;
+        window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        document.documentElement.dataset.rThemeVariant = variant;
+        if (oldVariant != variant) {
+          document.dispatchEvent( new CustomEvent('themeVariantLoaded', { detail: { variant, oldVariant } }) );
+          window.relearn.markVariant();
+        }
+      }
+      window.relearn.markVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant");
+        document.querySelectorAll(".R-variantswitcher select").forEach((select) => {select.value = variant;});
+      }
+      window.relearn.initVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant") ?? "";
+        if( !variant ||
+            (!variant.startsWith(window.relearn.customvariantprefix) && !window.relearn.themevariants.includes(variant)) ||
+            (variant.startsWith(window.relearn.customvariantprefix) && !window.localStorage.getItem(window.relearn.absBaseUri + "/variantstylesheet-" + variant)) ){
+          variant = window.relearn.themevariants[0];
+          window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        }
+        document.documentElement.dataset.rThemeVariant = variant;
+      }
+      window.relearn.initVariant();
+      window.relearn.markVariant();
+    </script>
+    <link href="/420512/css/custom.css?1784735226" rel="stylesheet">
+  </head>
+  <body class="mobile-support html" data-origin="/420512/6-animation-copy/index.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar" class="default-animation">
+        <div class="topbar-wrapper default-animation">
+          <div class="topbar-sidebar-divider default-animation"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar default-animation" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide">
+<span class="btn cstyle button link noborder notitle interactive"><button onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button></span>
+            </div>
+          </div>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><a itemprop="item" href="/420512/index.html"><span itemprop="name">Développement d&#39;applications mobiles</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><span itemprop="name">Animations</span><meta itemprop="position" content="2"></li>
+          </ol>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-more default-animation" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show">
+<span class="btn cstyle button link noborder notitle interactive"><button onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button></span>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable page" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+
+<h1 id="animations">Animations</h1>
+
+<p>Dans cette section, nous verrons comment dynamiser l&rsquo;interface utilisateur grâce aux animations. En React Native, la gestion des animations repose sur une combinaison entre la <strong>gestion des états (<code>state</code>)</strong> pour contrôler les données à afficher, et la bibliothèque <strong><code>react-native-reanimated</code></strong> qui permet d&rsquo;exécuter des transitions fluides et performantes directement sur le thread natif.</p>
+<hr>
+<p><a href="https://reactnative.dev/docs/flatlist" rel="external">Flatlist</a><br>
+<a href="https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/glossary/#shared-value" rel="external">Animation</a></p>
+
+<details open class="box cstyle notices tip">
+  <summary class="box-label" tabindex="-1">
+    <i class="fa-fw fas fa-lightbulb"></i> 
+    Tableau dans un state en React
+  </summary>
+  <div class="box-content">
+<p>En React, il ne faut jamais modifier directement un tableau existant dans l&rsquo;état (comme faire data.push(nouvelleTache)), car React ne détectera pas le changement et ne rafraîchira pas l&rsquo;écran.</p>
+<p>On utilise l&rsquo;opérateur de décomposition (&hellip;) pour créer une nouvelle copie du tableau avec l&rsquo;élément ajouté :</p>
+<div class="highlight actionbar-wrapper wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-JavaScript" data-lang="JavaScript"><span style="display:flex;"><span><span style="color:#75715e">// ❌ À NE PAS FAIRE (Mutation directe)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">nouvelleTache</span>);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">setData</span>(<span style="color:#a6e22e">data</span>); <span style="color:#75715e">// React ne détecte pas la modification !
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// ✅ BONNE PRATIQUE (Immutabilité avec Spread)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">nouveauTableau</span> <span style="color:#f92672">=</span> [...<span style="color:#a6e22e">data</span>, <span style="color:#a6e22e">nouvelleTache</span>]; <span style="color:#75715e">// Copie l&#39;ancien tableau et ajoute le nouvel élément à la fin
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">setData</span>(<span style="color:#a6e22e">nouveauTableau</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// ✅ ENCORE MIEUX : Mise à jour fonctionnelle
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">setData</span>((<span style="color:#a6e22e">prevData</span>) =&gt; [...<span style="color:#a6e22e">prevData</span>, <span style="color:#a6e22e">nouvelleTache</span>]);</span></span></code></pre></div>
+  </div>
+</details>
+
+<details open class="box cstyle notices exo">
+  <summary class="box-label" tabindex="-1">
+    <i class="fa-fw fas fa-dumbbell"></i> 
+    Exercice
+  </summary>
+  <div class="box-content">
+<h2 id="exercice">Exercice<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type="button" title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h2>
+<p>À l&rsquo;aide des valeurs de couleur ci-dessous :</p>
+<div class="highlight actionbar-wrapper wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">color1</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;#000000&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">color2</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;#282A3A&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">color3</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;#735F32&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">color4</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;#C69749&#39;</span>;</span></span></code></pre></div>
+<p>Recréez l&rsquo;affichage suivant :</p>
+<p><img alt="Exo_anim" class="lazy figure-image" loading="lazy" src="/420512/images/animation.png" style="height: auto;width: auto;"></p>
+<p><em>(Indice : J&rsquo;utilise <code>Dimensions.get('window').width</code> pour déterminer la largeur des rectangles.)</em></p>
+<ol>
+<li>Faites en sorte que le bouton <strong>+</strong> ajoute une tâche. <em>Indice : utiliser le spread operator <code>...</code> et une mise à jour fonctionnelle d&rsquo;état (Ex : <code>setCount((prev) =&gt; prev + 1)</code>)</em>.</li>
+<li>Ajouter un bouton supprimer à droite de chaque tâche et faites en sorte qu&rsquo;il fonctionne. <strong>Indice : <code>filter</code></strong>.</li>
+<li>Faites en sorte qu&rsquo;un swipe à droite sur une tâche entraîne sa suppression. <strong>Indice : <code>Swipeable</code></strong>.</li>
+</ol>
+<hr>
+<details class="box cstyle notices transparent expand">
+  <summary class="box-label">
+    <i class="expander-icon fa-fw fas fa-chevron-right"></i> 
+    Afficher la Solution
+  </summary>
+  <div class="box-content">
+<h3 id="layout">Layout<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type="button" title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3>
+<div class="highlight actionbar-wrapper wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">View</span>, <span style="color:#a6e22e">Text</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-native&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> {<span style="color:#a6e22e">Stack</span>} <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;expo-router&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">GestureHandlerRootView</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-native-gesture-handler&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">RootLayout</span> <span style="color:#f92672">=</span> () =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">GestureHandlerRootView</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">Stack</span>&gt;
+</span></span><span style="display:flex;"><span>            &lt;<span style="color:#f92672">Stack.Screen</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;index&#34;</span> <span style="color:#a6e22e">options</span><span style="color:#f92672">=</span>{{<span style="color:#a6e22e">headerShown</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>}}/&gt;
+</span></span><span style="display:flex;"><span>        &lt;/<span style="color:#f92672">Stack</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">GestureHandlerRootView</span>&gt;
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">RootLayout</span></span></span></code></pre></div>
+<h3 id="index">Index<span class="btn cstyle anchor copyanchor scrollanchor link noborder notitle interactive"><button type="button" title="Copy link to clipboard"><i class="fa-fw fas fa-link fa-lg"></i></button></span></h3>
+<div class="highlight actionbar-wrapper wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">StyleSheet</span>, <span style="color:#a6e22e">Text</span>, <span style="color:#a6e22e">View</span>, <span style="color:#a6e22e">TextInput</span>, <span style="color:#a6e22e">TouchableOpacity</span>, <span style="color:#a6e22e">Dimensions</span>, <span style="color:#a6e22e">FlatList</span>, <span style="color:#a6e22e">Keyboard</span>} <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-native&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span>, {<span style="color:#a6e22e">useState</span>} <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">SafeAreaView</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-native-safe-area-context&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span>  { <span style="color:#a6e22e">Swipeable</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-native-gesture-handler&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Animated</span>, {<span style="color:#a6e22e">LinearTransition</span> , <span style="color:#a6e22e">Easing</span>} <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-native-reanimated&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">color1</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;#000000&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">color2</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;#282A3A&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">color3</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;#735F32&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">color4</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;#C69749&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">index</span> <span style="color:#f92672">=</span> () =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">textInput</span>,<span style="color:#a6e22e">setTextInput</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">useState</span>(<span style="color:#e6db74">&#39;&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">data</span>,<span style="color:#a6e22e">setData</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">useState</span>([<span style="color:#e6db74">&#34;Pratiquer mon lancer de frisbee&#34;</span>, <span style="color:#e6db74">&#34;Me questionner sur la vie&#34;</span>, <span style="color:#e6db74">&#34;Corriger les examens&#34;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">handlePressPlus</span> <span style="color:#f92672">=</span> () =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">setData</span>((<span style="color:#a6e22e">prev</span>) =&gt; [...<span style="color:#a6e22e">prev</span>,<span style="color:#a6e22e">textInput</span>])
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">setTextInput</span>(<span style="color:#e6db74">&#39;&#39;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Keyboard</span>.<span style="color:#a6e22e">dismiss</span>()
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">handleDelete</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">index</span>) =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">setData</span>((<span style="color:#a6e22e">prev</span>) =&gt; <span style="color:#a6e22e">prev</span>.<span style="color:#a6e22e">filter</span>((<span style="color:#a6e22e">_</span>,<span style="color:#a6e22e">id</span>) =&gt; <span style="color:#a6e22e">id</span> <span style="color:#f92672">!==</span> <span style="color:#a6e22e">index</span>))
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">RenderItem</span> <span style="color:#f92672">=</span> ({<span style="color:#a6e22e">index</span>, <span style="color:#a6e22e">item</span>}) =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">afficheText</span> <span style="color:#f92672">=</span> () =&gt;(
+</span></span><span style="display:flex;"><span>                &lt;<span style="color:#f92672">View</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{{<span style="color:#a6e22e">width</span><span style="color:#f92672">:</span><span style="color:#ae81ff">150</span>,<span style="color:#a6e22e">height</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10</span>}}&gt;&lt;/<span style="color:#f92672">View</span>&gt;
+</span></span><span style="display:flex;"><span>            );
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>(
+</span></span><span style="display:flex;"><span>            &lt;<span style="color:#f92672">Swipeable</span> <span style="color:#a6e22e">renderLeftActions</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">afficheText</span>} <span style="color:#a6e22e">onSwipeableWillOpen</span><span style="color:#f92672">=</span>{() =&gt; <span style="color:#a6e22e">handleDelete</span>(<span style="color:#a6e22e">index</span>)}&gt;
+</span></span><span style="display:flex;"><span>                &lt;<span style="color:#f92672">View</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{[<span style="color:#a6e22e">styles</span>.<span style="color:#a6e22e">task</span>, { <span style="color:#a6e22e">width</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Dimensions</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;window&#39;</span>).<span style="color:#a6e22e">width</span> }]}&gt;
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#f92672">Text</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">styles</span>.<span style="color:#a6e22e">taskText</span>}&gt;{<span style="color:#a6e22e">item</span>}&lt;/<span style="color:#f92672">Text</span>&gt;
+</span></span><span style="display:flex;"><span>                &lt;/<span style="color:#f92672">View</span>&gt;
+</span></span><span style="display:flex;"><span>            &lt;/<span style="color:#f92672">Swipeable</span>&gt;
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">SafeAreaView</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">styles</span>.<span style="color:#a6e22e">container</span>}&gt;
+</span></span><span style="display:flex;"><span>            &lt;<span style="color:#f92672">View</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{{<span style="color:#a6e22e">flexDirection</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;row&#34;</span>}}&gt;
+</span></span><span style="display:flex;"><span>                &lt;<span style="color:#f92672">TextInput</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">styles</span>.<span style="color:#a6e22e">textInput</span>}
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">onChangeText</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">setTextInput</span>}
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">placeholder</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Entrez la tâche à accomplir&#39;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">placeholderTextColor</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">color3</span>}
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">textInput</span>}
+</span></span><span style="display:flex;"><span>                /&gt;
+</span></span><span style="display:flex;"><span>                &lt;<span style="color:#f92672">TouchableOpacity</span> <span style="color:#a6e22e">onPress</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">handlePressPlus</span>} <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">styles</span>.<span style="color:#a6e22e">btnPlusContainer</span>}&gt;
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#f92672">Text</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">styles</span>.<span style="color:#a6e22e">btnPlus</span>}&gt;<span style="color:#f92672">+</span>&lt;/<span style="color:#f92672">Text</span>&gt;
+</span></span><span style="display:flex;"><span>                &lt;/<span style="color:#f92672">TouchableOpacity</span>&gt;
+</span></span><span style="display:flex;"><span>            &lt;/<span style="color:#f92672">View</span>&gt;
+</span></span><span style="display:flex;"><span>            &lt;<span style="color:#f92672">Animated.FlatList</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">styles</span>.<span style="color:#a6e22e">flatList</span>}
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">data</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">data</span>}
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">renderItem</span><span style="color:#f92672">=</span>{({<span style="color:#a6e22e">item</span>,<span style="color:#a6e22e">index</span>}) =&gt; &lt;<span style="color:#f92672">RenderItem</span> <span style="color:#a6e22e">index</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">index</span>} <span style="color:#a6e22e">item</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">item</span>}/&gt;}
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">keyExtractor</span><span style="color:#f92672">=</span>{(<span style="color:#a6e22e">item</span>, <span style="color:#a6e22e">index</span>) =&gt; <span style="color:#a6e22e">index</span>.<span style="color:#a6e22e">toString</span>()}
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">contentContainerStyle</span><span style="color:#f92672">=</span>{{<span style="color:#a6e22e">alignItems</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;center&#39;</span>}}
+</span></span><span style="display:flex;"><span>            /&gt;
+</span></span><span style="display:flex;"><span>        &lt;/<span style="color:#f92672">SafeAreaView</span>&gt;
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">index</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">styles</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">StyleSheet</span>.<span style="color:#a6e22e">create</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">container</span><span style="color:#f92672">:</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">backgroundColor</span><span style="color:#f92672">:</span><span style="color:#a6e22e">color1</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">flex</span><span style="color:#f92672">:</span><span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">textInput</span><span style="color:#f92672">:</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">backgroundColor</span><span style="color:#f92672">:</span><span style="color:#a6e22e">color2</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">width</span><span style="color:#f92672">:</span><span style="color:#a6e22e">Dimensions</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;window&#39;</span>).<span style="color:#a6e22e">width</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">56</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">height</span><span style="color:#f92672">:</span><span style="color:#ae81ff">56</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">paddingHorizontal</span><span style="color:#f92672">:</span><span style="color:#ae81ff">20</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">textAlign</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;center&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fontSize</span><span style="color:#f92672">:</span><span style="color:#ae81ff">16</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">color</span><span style="color:#f92672">:</span><span style="color:#a6e22e">color4</span>,
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">btnPlus</span><span style="color:#f92672">:</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">color</span><span style="color:#f92672">:</span><span style="color:#a6e22e">color1</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fontSize</span><span style="color:#f92672">:</span><span style="color:#ae81ff">26</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">btnPlusContainer</span><span style="color:#f92672">:</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">backgroundColor</span><span style="color:#f92672">:</span><span style="color:#a6e22e">color4</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">height</span><span style="color:#f92672">:</span><span style="color:#ae81ff">56</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">width</span><span style="color:#f92672">:</span><span style="color:#ae81ff">56</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">justifyContent</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;center&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">alignItems</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;center&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">flatList</span><span style="color:#f92672">:</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">paddingVertical</span><span style="color:#f92672">:</span><span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">task</span><span style="color:#f92672">:</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">paddingVertical</span><span style="color:#f92672">:</span><span style="color:#ae81ff">20</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">paddingHorizontal</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">marginVertical</span><span style="color:#f92672">:</span><span style="color:#ae81ff">5</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">backgroundColor</span><span style="color:#f92672">:</span><span style="color:#a6e22e">color2</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">width</span><span style="color:#f92672">:</span><span style="color:#a6e22e">Dimensions</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;window&#39;</span>).<span style="color:#a6e22e">width</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.9</span>,
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">taskText</span><span style="color:#f92672">:</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">color</span><span style="color:#f92672">:</span><span style="color:#a6e22e">color4</span>,
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">minusBtn</span><span style="color:#f92672">:</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">color</span><span style="color:#f92672">:</span><span style="color:#a6e22e">color1</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fontSize</span><span style="color:#f92672">:</span><span style="color:#ae81ff">26</span>,
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">btnMinusContainer</span><span style="color:#f92672">:</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">justifyContent</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;center&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">alignItems</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;center&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">backgroundColor</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;red&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">width</span><span style="color:#f92672">:</span><span style="color:#ae81ff">56</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">height</span><span style="color:#f92672">:</span><span style="color:#ae81ff">56</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">marginVertical</span><span style="color:#f92672">:</span><span style="color:#ae81ff">5</span>,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>})</span></span></code></pre></div>
+  </div>
+</details>
+  </div>
+</details>
+
+  <footer class="footline">
+  </footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation"><a id="R-logo" href="/420512/">
+  <img src="/420512/images/logo.png" alt="logo" class="custom-logo">
+  <div class="brand-subtitle">Développement d'applications mobiles</div>
+</a>
+        <search><form action="/420512/search/index.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-fw fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-fw fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <div class="R-menu-divider default-animation">
+          <hr class="padding default-animation">
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-homelinks default-animation">
+          <ul class="space collapsible-menu">
+          </ul>
+        </div>
+        <div class="R-menu-divider default-animation">
+          <hr class="padding default-animation">
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-headercontrols default-animation">
+          <ul class="">
+          </ul>
+        </div>
+        <div class="R-menu-divider default-animation">
+          <hr class="padding default-animation">
+        </div>
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div class="R-sidebarmenu R-shortcutmenu-main default-animation">
+          <ul class="enlarge morespace collapsible-menu">
+            <li class="" data-nav-id="/420512/1-preparation/index.html"><a class="padding" href="/420512/1-preparation/index.html">1. Mise en place</a></li>
+            <li class="" data-nav-id="/420512/2-basic-components/index.html"><a class="padding" href="/420512/2-basic-components/index.html">2. Composants de bases</a></li>
+            <li class="" data-nav-id="/420512/3-props/index.html"><a class="padding" href="/420512/3-props/index.html">3. Map &amp; Props</a></li>
+            <li class="" data-nav-id="/420512/4-orientation/index.html"><a class="padding" href="/420512/4-orientation/index.html">4. Orientation</a></li>
+            <li class="" data-nav-id="/420512/5-hooks/index.html"><a class="padding" href="/420512/5-hooks/index.html">5. Hooks</a></li>
+            <li class="active " data-nav-id="/420512/6-animation-copy/index.html"><a class="padding" href="/420512/6-animation-copy/index.html">6. Animations</a></li>
+            <li class="" data-nav-id="/420512/6-animation/index.html"><a class="padding" href="/420512/6-animation/index.html">6. Animations</a></li>
+            <li class="" data-nav-id="/420512/7-context/index.html"><a class="padding" href="/420512/7-context/index.html">7. Context</a></li>
+            <li class="" data-nav-id="/420512/8-api/index.html"><a class="padding" href="/420512/8-api/index.html">8. API</a></li>
+            <li class="" data-nav-id="/420512/9-bd/index.html"><a class="padding" href="/420512/9-bd/index.html">9. Base de données locales</a></li>
+          </ul>
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-shortcuts default-animation">
+          <ul class="space collapsible-menu">
+          </ul>
+        </div>
+        <div id="R-footer-margin" class="default-animation"></div>
+        <div class="R-menu-divider default-animation">
+          <hr class="padding default-animation">
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-footercontrols default-animation">
+          <ul class="">
+            <li class="R-variantswitcher">
+              <div class="padding menu-control">
+                <i class="fa-fw fas fa-paint-brush"></i>
+                <span>&nbsp;</span>
+                <div class="control-style">
+                  <label class="a11y-only" for="R-select-variant">Theme</label>
+                  <select id="R-select-variant">
+                    <option id="R-select-variant-learn" value="learn" selected>Learn</option>
+                    <option id="R-select-variant-relearn-dark" value="relearn-dark">Relearn Dark</option>
+                    <option id="R-select-variant-relearn-light" value="relearn-light">Relearn Light</option>
+                    <option id="R-select-variant-neon" value="neon">Neon</option>
+                  </select>
+                </div>
+                <div class="clear"></div>
+              </div>
+              <script>window.relearn.markVariant();</script>
+            </li>
+          </ul>
+        </div>
+<div id="R-footer" class="default-animation"><p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p></div>
+      </div>
+    </aside>
+    <script src="/420512/js/perfect-scrollbar/perfect-scrollbar.min.js?1784735226" defer></script>
+    <script src="/420512/js/theme.js?1784735226" defer></script>
+    <div id="toast-container" role="status" aria-live="polite" aria-atomic="false"></div>
+  </body>
+</html>

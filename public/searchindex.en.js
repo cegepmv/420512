@@ -81,8 +81,8 @@ var relearn_searchindex = [
   },
   {
     "breadcrumb": "",
-    "content": "",
-    "description": "",
+    "content": "Plans de cours 📋 Maxime Fournier : Plan de cours\nHoraire et disponibilités des enseignants ✔️ Maxime Fournier : Lien vers mon horaire et mes disponibilités\nMaxime Fournier Nom de l’évaluation Pondération Date de l’évaluation Examen 1 30 % Semaine 5 Examen 2 30 % Semaine 10 Projet Final 40 % Semaine 11 à 15",
+    "description": "Plans de cours 📋 Maxime Fournier : Plan de cours\nHoraire et disponibilités des enseignants ✔️ Maxime Fournier : Lien vers mon horaire et mes disponibilités\nMaxime Fournier Nom de l’évaluation Pondération Date de l’évaluation Examen 1 30 % Semaine 5 Examen 2 30 % Semaine 10 Projet Final 40 % Semaine 11 à 15",
     "tags": [],
     "title": "Développement d'applications mobiles",
     "uri": "/420512/index.html"

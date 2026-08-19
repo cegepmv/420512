@@ -2,80 +2,80 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Développement d&#39;applications mobiles</title>
-    <link>http://localhost:1313/420512/index.html</link>
-    <description></description>
+    <link>http://localhost:43919/420512/index.html</link>
+    <description>Plans de cours 📋 Maxime Fournier : Plan de cours&#xA;Horaire et disponibilités des enseignants ✔️ Maxime Fournier : Lien vers mon horaire et mes disponibilités&#xA;Maxime Fournier Nom de l’évaluation Pondération Date de l’évaluation Intra 1 30 % Semaine 4 Intra 2 35 % Semaine 11 Projet Final 35 % Semaine 11 à 15</description>
     <generator>Hugo</generator>
     <language>fr-ca</language>
     <lastBuildDate>Tue, 21 Jul 2026 09:12:28 -0400</lastBuildDate>
-    <atom:link href="http://localhost:1313/420512/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:43919/420512/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Mise en place</title>
-      <link>http://localhost:1313/420512/1-preparation/index.html</link>
+      <link>http://localhost:43919/420512/1-preparation/index.html</link>
       <pubDate>Thu, 25 Jun 2026 10:40:56 -0400</pubDate>
-      <guid>http://localhost:1313/420512/1-preparation/index.html</guid>
+      <guid>http://localhost:43919/420512/1-preparation/index.html</guid>
       <description>À faire à la maison Installation sudo apt install curl curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.5/install.sh | bash source ~/.bashrc nvm install 24 Vérifiez l’installation npm -v node -v À faire à l’école Connectez-vous sur votre container :</description>
     </item>
     <item>
       <title>Composants de bases</title>
-      <link>http://localhost:1313/420512/2-basic-components/index.html</link>
+      <link>http://localhost:43919/420512/2-basic-components/index.html</link>
       <pubDate>Thu, 25 Jun 2026 14:43:31 -0400</pubDate>
-      <guid>http://localhost:1313/420512/2-basic-components/index.html</guid>
+      <guid>http://localhost:43919/420512/2-basic-components/index.html</guid>
       <description>Style Vous pouvez écrire des styles directement comme ceci :&#xA;import { StyleSheet, Text, View } from &#39;react-native&#39; import React from &#39;react&#39; const RootLayout = () =&gt; { return ( &lt;View style={{flex: 1,justifyContent:&#39;center&#39;}}&gt; &lt;Text&gt;RootLayout&lt;/Text&gt; &lt;/View&gt; ) } export default RootLayout const styles = StyleSheet.create({}) import { StyleSheet, Text, View } from &#39;react-native&#39; import React from &#39;react&#39; const RootLayout = () =&gt; { return ( &lt;View style={styles.container}&gt; &lt;Text&gt;RootLayout&lt;/Text&gt; &lt;/View&gt; ) } export default RootLayout const styles = StyleSheet.create({ container:{ display: &#39;flex&#39;, flex: 1, alignItems:&#39;center&#39;, justifyContent: &#39;center&#39; } }) const styles = StyleSheet.create({ ... }) Cette ligne crée un objet de styles à l’aide de la méthode create de StyleSheet. Cela permet de définir des styles que vous pouvez appliquer à vos composants React Native.</description>
     </item>
     <item>
       <title>Map &amp; Props</title>
-      <link>http://localhost:1313/420512/3-props/index.html</link>
+      <link>http://localhost:43919/420512/3-props/index.html</link>
       <pubDate>Thu, 25 Jun 2026 15:15:19 -0400</pubDate>
-      <guid>http://localhost:1313/420512/3-props/index.html</guid>
+      <guid>http://localhost:43919/420512/3-props/index.html</guid>
       <description>import React from &#39;react&#39;; import { Text, View, StyleSheet } from &#39;react-native&#39;; const Index = () =&gt; { const names = [&#39;Alice&#39;, &#39;Bob&#39;, &#39;Charlie&#39;, &#39;Guy&#39;]; return ( &lt;View style={styles.container}&gt; {names.map((name, index) =&gt; ( &lt;Text key={index} style={styles.greeting}&gt; Hello, {name}! &lt;/Text&gt; ))} &lt;/View&gt; ); }; export default Index; // Styles const styles = StyleSheet.create({ container: { flex: 1, justifyContent: &#39;center&#39;, alignItems: &#39;center&#39;, padding: 20, backgroundColor: &#39;#f5f5f5&#39;, }, greeting: { fontSize: 18, margin: 5, }, }); En JSX (la syntaxe utilisée par React et React Native), les accolades {} ont un rôle très précis : elles indiquent au compilateur qu’il faut sortir du monde HTML/JSX pour exécuter du code JavaScript classique.</description>
     </item>
     <item>
       <title>Orientation</title>
-      <link>http://localhost:1313/420512/4-orientation/index.html</link>
+      <link>http://localhost:43919/420512/4-orientation/index.html</link>
       <pubDate>Thu, 25 Jun 2026 15:18:46 -0400</pubDate>
-      <guid>http://localhost:1313/420512/4-orientation/index.html</guid>
+      <guid>http://localhost:43919/420512/4-orientation/index.html</guid>
       <description>1. Gestion de l’orientation de l’écran avec Expo Voir la doc&#xA;Par défaut, les applications mobiles sont souvent bloquées en mode portrait. Pour permettre à une application de pivoter dynamiquement entre le mode portrait et paysage, des configurations et une bibliothèque externe sont requises.&#xA;Étape A : Installation Utilisez toujours l’interface de commande d’Expo (CLI) plutôt que le npm standard pour garantir la compatibilité des versions avec votre SDK Expo actuel.</description>
     </item>
     <item>
       <title>Hooks</title>
-      <link>http://localhost:1313/420512/5-hooks/index.html</link>
+      <link>http://localhost:43919/420512/5-hooks/index.html</link>
       <pubDate>Thu, 25 Jun 2026 15:44:32 -0400</pubDate>
-      <guid>http://localhost:1313/420512/5-hooks/index.html</guid>
+      <guid>http://localhost:43919/420512/5-hooks/index.html</guid>
       <description>Bienvenue dans le monde merveilleux des Hooks ! Les hooks sont de petites fonctions magiques qui permettent à vos composants fonctionnels de faire tout ce que faisaient les anciennes classes, et bien plus encore.&#xA;Les Incontournables Ces deux-là, ce sont vos meilleurs amis pour débuter. Vous allez les croiser partout !&#xA;1. useState Il permet d’ajouter une mémoire locale (un état) à un composant. Il vous donne une variable pour stocker la valeur actuelle et une fonction pour la modifier.</description>
     </item>
     <item>
       <title>Animations</title>
-      <link>http://localhost:1313/420512/6-animation/index.html</link>
+      <link>http://localhost:43919/420512/6-animation/index.html</link>
       <pubDate>Thu, 25 Jun 2026 15:22:35 -0400</pubDate>
-      <guid>http://localhost:1313/420512/6-animation/index.html</guid>
+      <guid>http://localhost:43919/420512/6-animation/index.html</guid>
       <description>Dans cette section, nous verrons comment dynamiser l’interface utilisateur grâce aux animations. En React Native, la gestion des animations repose sur une combinaison entre la gestion des états (state) pour contrôler les données à afficher, et la bibliothèque react-native-reanimated qui permet d’exécuter des transitions fluides et performantes directement sur le thread natif.&#xA;Flatlist&#xA;Animation&#xA;Tableau dans un state en React En React, il ne faut jamais modifier directement un tableau existant dans l’état (comme faire data.push(nouvelleTache)), car React ne détectera pas le changement et ne rafraîchira pas l’écran.</description>
     </item>
     <item>
       <title>Navigation</title>
-      <link>http://localhost:1313/420512/7-navigation/index.html</link>
+      <link>http://localhost:43919/420512/7-navigation/index.html</link>
       <pubDate>Thu, 25 Jun 2026 15:22:35 -0400</pubDate>
-      <guid>http://localhost:1313/420512/7-navigation/index.html</guid>
+      <guid>http://localhost:43919/420512/7-navigation/index.html</guid>
       <description>React Navigation est la bibliothèque standard pour gérer le changement d’écrans et la navigation dans une application React Native.&#xA;1. Les Concepts Clés de React Navigation Avant d’utiliser le Drawer, il faut comprendre les 3 piliers de la navigation :&#xA;Le Navigator (Navigateur) : Le composant parent qui contrôle l’historique et les transitions d’écrans (ex: Drawer, Stack, Tabs). Les Screens (Écrans) : Les composants React représentant chaque page de votre application. Les Options (screenOptions &amp; options) : La configuration visuelle de l’en-tête (Header), des icônes, des titres et des gestes. Dans Expo Router, la structure des dossiers définit automatiquement les routes de l’application (File-based Routing).</description>
     </item>
     <item>
       <title>Context</title>
-      <link>http://localhost:1313/420512/8-context/index.html</link>
+      <link>http://localhost:43919/420512/8-context/index.html</link>
       <pubDate>Thu, 25 Jun 2026 16:02:29 -0400</pubDate>
-      <guid>http://localhost:1313/420512/8-context/index.html</guid>
+      <guid>http://localhost:43919/420512/8-context/index.html</guid>
       <description>Le Context API, c’est comme installer un réseau Wi-Fi dans votre application 📶. Au lieu de faire passer des données manuellement de composant en composant (le props drilling 😵), vous créez une zone de partage où n’importe quel composant peut se connecter instantanément pour récupérer ou modifier des informations !&#xA;🗂️ Problématique : La navigation imbriquée Ajoutez un Drawer (menu latéral).</description>
     </item>
     <item>
       <title>API</title>
-      <link>http://localhost:1313/420512/9-api/index.html</link>
+      <link>http://localhost:43919/420512/9-api/index.html</link>
       <pubDate>Thu, 25 Jun 2026 15:40:06 -0400</pubDate>
-      <guid>http://localhost:1313/420512/9-api/index.html</guid>
+      <guid>http://localhost:43919/420512/9-api/index.html</guid>
       <description>Différence entre Bibliothèques Externes et API Bibliothèque Externe : C’est un package ou un module que vous installez dans votre projet. Il contient des fonctionnalités réutilisables pour réaliser des tâches spécifiques (comme afficher une carte ou utiliser la caméra). Exemples : expo-camera, react-native-maps, axios, redux.&#xA;API (Application Programming Interface) : C’est un ensemble d’outils ou de services que vous consommez dans votre code, souvent via des requêtes HTTP ou WebSocket. Une API peut être utilisée pour communiquer avec des services externes, comme une base de données distante ou un service de cartographie (par exemple, l’API de Mapbox ou Google Maps). Exemples : API de géolocalisation, API de traduction, API météo, API de paiement.</description>
     </item>
     <item>
       <title>Base de données locales</title>
-      <link>http://localhost:1313/420512/10-bd/index.html</link>
+      <link>http://localhost:43919/420512/10-bd/index.html</link>
       <pubDate>Tue, 21 Jul 2026 09:12:28 -0400</pubDate>
-      <guid>http://localhost:1313/420512/10-bd/index.html</guid>
+      <guid>http://localhost:43919/420512/10-bd/index.html</guid>
       <description>1. Introduction à expo-sqlite (API Synchrone) Depuis les versions récentes d’Expo, expo-sqlite intègre des méthodes synchrones (openDatabaseSync, execSync, getAllSync, runSync).&#xA;Avantage principal : Simplifie la gestion du flux de données en évitant les promesses/callbacks (async/await) au moment de l’initialisation et des requêtes simples. 2. Architecture &amp; Séparation des Responsabilités Il est préférable de séparer la logique de persistance des données de la vue (UI).</description>
     </item>
   </channel>

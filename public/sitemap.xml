@@ -1,53 +1,53 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:43919/420512/1-preparation/index.html</loc>
+    <loc>http://localhost:1313/420512/1-preparation/index.html</loc>
     <lastmod>2026-06-25T10:40:56-04:00</lastmod>
   </url>
   <url>
-    <loc>http://localhost:43919/420512/2-basic-components/index.html</loc>
+    <loc>http://localhost:1313/420512/2-basic-components/index.html</loc>
     <lastmod>2026-06-25T14:43:31-04:00</lastmod>
   </url>
   <url>
-    <loc>http://localhost:43919/420512/3-props/index.html</loc>
+    <loc>http://localhost:1313/420512/3-props/index.html</loc>
     <lastmod>2026-06-25T15:15:19-04:00</lastmod>
   </url>
   <url>
-    <loc>http://localhost:43919/420512/4-orientation/index.html</loc>
+    <loc>http://localhost:1313/420512/4-orientation/index.html</loc>
     <lastmod>2026-06-25T15:18:46-04:00</lastmod>
   </url>
   <url>
-    <loc>http://localhost:43919/420512/5-hooks/index.html</loc>
+    <loc>http://localhost:1313/420512/5-hooks/index.html</loc>
     <lastmod>2026-06-25T15:44:32-04:00</lastmod>
   </url>
   <url>
-    <loc>http://localhost:43919/420512/6-animation/index.html</loc>
+    <loc>http://localhost:1313/420512/6-animation/index.html</loc>
     <lastmod>2026-06-25T15:22:35-04:00</lastmod>
   </url>
   <url>
-    <loc>http://localhost:43919/420512/7-navigation/index.html</loc>
+    <loc>http://localhost:1313/420512/7-navigation/index.html</loc>
     <lastmod>2026-06-25T15:22:35-04:00</lastmod>
   </url>
   <url>
-    <loc>http://localhost:43919/420512/8-context/index.html</loc>
+    <loc>http://localhost:1313/420512/8-context/index.html</loc>
     <lastmod>2026-06-25T16:02:29-04:00</lastmod>
   </url>
   <url>
-    <loc>http://localhost:43919/420512/9-api/index.html</loc>
+    <loc>http://localhost:1313/420512/9-api/index.html</loc>
     <lastmod>2026-06-25T15:40:06-04:00</lastmod>
   </url>
   <url>
-    <loc>http://localhost:43919/420512/10-bd/index.html</loc>
+    <loc>http://localhost:1313/420512/10-bd/index.html</loc>
     <lastmod>2026-07-21T09:12:28-04:00</lastmod>
   </url>
   <url>
-    <loc>http://localhost:43919/420512/index.html</loc>
+    <loc>http://localhost:1313/420512/index.html</loc>
     <lastmod>2026-07-21T09:12:28-04:00</lastmod>
   </url>
   <url>
-    <loc>http://localhost:43919/420512/categories/index.html</loc>
+    <loc>http://localhost:1313/420512/categories/index.html</loc>
   </url>
   <url>
-    <loc>http://localhost:43919/420512/tags/index.html</loc>
+    <loc>http://localhost:1313/420512/tags/index.html</loc>
   </url>
 </urlset>

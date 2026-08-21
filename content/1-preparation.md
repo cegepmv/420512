@@ -11,12 +11,23 @@ weight = 1
 
 ## Installation
 
+---
+
+### Linux
 ```bash
 sudo apt install curl
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.5/install.sh | bash
 source ~/.bashrc
 nvm install 24
 ```
+
+---
+
+### Windows
+Installer Node ([lien](https://nodejs.org/en))
+
+---
+
 ## Vérifiez l'installation
 ```bash
 npm -v
@@ -26,16 +37,19 @@ node -v
 {{% /notice %}}
 
 {{% notice note "À faire à l'école" %}}
-Connectez-vous sur votre container :
+Connectez-vous sur votre container avec vos informations :
 
 ```bash
-Ajouter les info de connexion ici
+ssh root@fourniermax-mob.lan
 ```
+mdp : Numéro d'admission
+
 {{% /notice %}}
 
 ## Créez le projet
 ```bash
 # Choisissez blank comme template
+# SDK 54
 npx create-expo-app@latest premierProjet --template
 cd 'premierProjet'
 ```
@@ -65,7 +79,7 @@ npx expo install
 npx expo install --check
 ```
 
-## tout réinstaller les dépendances, "clean reinstall"
+## Tout réinstaller les dépendances, "clean reinstall"
 ```bash
 rm -rf node_modules yarn.lock package-lock.json
 

@@ -76,6 +76,14 @@ Pour plus de style, fiez-vous à la [documentation d'Expo](https://docs.expo.dev
 
 En ce moment, c'est uniquement `_layout.jsx` qui est affiché. Nous voulons incorporer à cette page `index.js`. Nous allons utiliser les `Stack` de `expo-router`.
 
+```bash
+npx expo install expo-router react-native-safe-area-context react-native-screens expo-linking expo-constants expo-status-bar -- --legacy-peer-deps
+```
+
+Dans package.json modifier main pour cette valeur : `"main": "expo-router/entry"`
+
+
+Dans package.json ajouter un scheme. Pour l'instant on va juste copier la propriété name.
 ```jsx
 import { StyleSheet, Text, View } from 'react-native'
 import { Stack } from 'expo-router'
@@ -87,7 +95,7 @@ const RootLayout = () => {
     <>
         <Text>Hello from layout</Text>
         <Stack>
-            <Stack.Screen name="index" options={{headerShown: false}} >
+            <Stack.Screen name="index" options={{headerShown: false}} />
         </Stack>
     </>
   )

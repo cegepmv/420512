@@ -1,8 +1,8 @@
 +++
 date = '2026-06-25T15:22:35-04:00'
 draft = false
-weight = 7
-pre = "7. "
+weight = 8
+pre = "8. "
 title = 'Navigation'
 +++
 

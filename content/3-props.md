@@ -223,8 +223,8 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       padding:10,
     },
-      image: {
-        height:400,
+    image: {
+      height:400,
       width: 300, 
       resizeMode: 'contain'
     },

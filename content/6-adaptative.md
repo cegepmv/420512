@@ -304,6 +304,199 @@ const styles = StyleSheet.create({
 {{% /notice %}}
 
 
+{{% notice style="exo" %}}
+Code pour recommencer le 10 septembre
+
+```jsx
+// Composant boutonCalculatrice
+// 
+import { StyleSheet, Text, View,TouchableOpacity, Dimensions} from 'react-native'
+import React, { useEffect, useState} from 'react'
+
+const BoutonCalculatrice = ({value, resultat, setResultat, width}) => {
+    let isSpecial = false
+
+    if(value in ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "."]){
+
+    }
+    else {
+      isSpecial = true;
+    }
+
+
+    const handleClick = () => {
+        
+        if (value == "<-") {
+            if (resultat.length == 1 || resultat == "Erreur") {
+                setResultat("0")
+            }
+            else{
+                setResultat(resultat.slice(0, -1));
+            }
+        }
+        else if (value =="=") {
+            try {
+                setResultat(`${eval(resultat.replaceAll("x","*"))}`)
+            } catch (error) {
+                setResultat("Erreur")
+            }
+        }
+        else {
+            if (resultat == "0") {
+                setResultat(value)
+            }
+            else {
+                setResultat(resultat + value)
+            }
+        }
+    }
+  return (
+    
+    <TouchableOpacity onPress={handleClick} style={
+                                                  [styles.container,styles.numberButton, 
+                                                  {height:((width - 50) / 4)},
+                                                  isSpecial ?  styles.functionButton : styles.numberButton
+                                                  ]}>
+      <Text style={styles.text}>
+        {value}
+      </Text>
+    </TouchableOpacity>
+    
+  )
+}
+
+export default BoutonCalculatrice
+
+const styles = StyleSheet.create({
+  container: {
+    margin: 10,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex:1
+  },
+  numberButton: {
+    backgroundColor: '#333333',  // Dark gray for numeric buttons
+  },
+  functionButton: {
+    backgroundColor: '#e600b0',  // Neon green for function buttons
+  },
+  text: {
+    color: '#e0e0e0',  // Light gray 
+    fontSize: 20,
+    fontWeight: '500',
+  },
+  textFonction: {
+    color: '#C60709',  // Dark orange
+    fontSize: 20,
+    fontWeight: '500',
+  },
+})
+```
+```jsx
+//calculatrice.jsx
+
+import { StyleSheet, Text, View, Dimensions, useWindowDimensions } from 'react-native'
+import React, { useState } from 'react'
+import BoutonCalculatrice from '../components/boutonCalculatrice'
+import { SafeAreaView } from 'react-native-safe-area-context';
+const Calculatrice = () => {
+  const { width, height } = useWindowDimensions();
+  const [resultat, setResultat] = useState("0")
+
+  const isHorizontal = width > height;
+
+  const touches = isHorizontal ?
+    [
+      ["1", "2", "3", "4", "+", ")"],
+      ["5", "6", "7", "8", "-", "("],
+      ["9", "0", ".", "c", "<-", "="],
+
+    ]
+    :
+    [
+      ["1", "2", "3", "+"],
+      ["4", "5", "6", "-"],
+      ["7", "8", "9", "x"],
+      ["0", ".", "<-", "="]
+    ]
+  // const hauteurBouton = 
+  return (
+
+    <SafeAreaView style={styles.container}>
+      <View style={styles.containerLabel}>
+        <Text style={styles.label}>{resultat}</Text>
+      </View>
+
+      <View style={{flex: isHorizontal ? 2 : 1 }}>
+
+        {touches.map((row, indexRow) => (
+
+          <View key={indexRow} style={styles.row}>
+
+            {row.map((value, indexCol) => (
+
+              <View key={indexCol} style={styles.column}>
+                <BoutonCalculatrice value={value} width={width} resultat={resultat} setResultat={setResultat} />
+              </View>
+            )
+            )}
+          </View>
+        ))}
+      </View>
+    </SafeAreaView>
+
+  );
+};
+
+
+
+export default Calculatrice
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "grey",
+    padding: 10,
+
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 0,
+    flex: 1,
+  },
+  column: {
+    flex: 1,
+    marginHorizontal: 0,
+
+  },
+  label: {
+    textAlign: "right",
+    fontSize: 30,
+    paddingHorizontal: 12,
+    width: "90%"
+  },
+  containerLabel: {
+    flex:1,
+    flexDirection: 'row',
+    marginBottom: 10,
+    justifyContent: 'flex-end',
+    alignItems: "center"
+  }
+});
+```
+
+{{% /notice %}}
+
+
+
+
+
+
+
+
+
 {{% notice style="exo"%}}
 Reproduire l'app de cette capture d'écran avec les indications du prof et ces arrays :
 

@@ -815,7 +815,7 @@ export default TypeCalculator
   - Mettre une SafeAreaView et une ScrollView pour rendre le tout plus adaptatif aux différents écrans
   - Entourer le Text de combat d'une TouchableOpacity, car on doit la transformer en bouton
   - Entourer la couronne d'une View qui servira de boite pour la section des résultats
-  - Mettre des styles pour chaque composant et créez ce style dans la StyleSheet
+  - Mettre des styles pour chaque composant et créer ce style dans la StyleSheet
 {{% expand title="Solution 2" %}}
 ```jsx
 import React, { useState } from 'react';
@@ -926,8 +926,8 @@ const styles = StyleSheet.create({
   - Centrer le titre
   - Ajouter "Type(s) Attaquant(s) [Max 2]" et "Type(s) Defenseur(s) [Max 2]" plus leur style.
     - couleur plus poids.
-  - Mettre le bouton Combat en vert et sur la largeur de la page avec les bords arrondi. En plus d'ajuster le texte.
-  - Faire une boite avec un fond plus pale pour les résulats et ajuster la fonte de la couronne.
+  - Mettre le bouton `Combat` en vert et sur la largeur de la page avec les bords arrondis.
+  - Faire une boite avec un fond plus pâle pour les résulats et ajuster la fonte de la couronne.
 
 {{% expand title="Solution 3" %}}
 ```jsx
@@ -1777,6 +1777,32 @@ const styles = StyleSheet.create({
 8. Formatter la boite de résultat
 
 {{% expand title="Solution 8"%}}
+```jsx
+import { StyleSheet, Text, View, Platform } from 'react-native'
+import { Stack } from "expo-router"
+import "../global.css"
+import { StatusBar } from 'expo-status-bar';
+
+const RootLayout = () => {
+
+    return (
+        <>
+            <StatusBar style="light"  />
+            <Stack>
+
+                <Stack.Screen name="pokemon-end" options={{ headerShown: false }}
+                
+                />
+                <Stack.Screen name="calculatrice" options={{ headerShown: false }}/>
+            </Stack>
+        </>
+    )
+}
+
+export default RootLayout
+
+const styles = StyleSheet.create({})
+```
 ```jsx
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';

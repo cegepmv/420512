@@ -51,7 +51,6 @@ Recréez l'affichage suivant :
 
 ![Exo_anim](/420512/images/animation.png)
 
-*(Indice : J'utilise `Dimensions.get('window').width` pour déterminer la largeur des rectangles.)*
 
 1. Faites en sorte que le bouton **+** ajoute une tâche. *Indice : utiliser le spread operator `...` et une mise à jour fonctionnelle d'état (Ex : `setCount((prev) => prev + 1)`)*.
 1. Faites en sorte qu'un swipe à droite sur une tâche entraîne sa suppression. **Indice : `Swipeable`**.
@@ -83,9 +82,20 @@ export default RootLayout
 ```
 
 ### Index
-
+To be added
 ```jsx
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Dimensions, FlatList, Keyboard} from 'react-native'
+
+
+```
+
+{{% /expand %}}
+
+
+
+{{% /notice %}}
+
+
+<!-- import { StyleSheet, Text, View, TextInput, TouchableOpacity, Dimensions, FlatList, Keyboard} from 'react-native'
 import React, {useState} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import  { Swipeable } from 'react-native-gesture-handler'
@@ -200,12 +210,4 @@ const styles = StyleSheet.create({
         height:56,
         marginVertical:5,
     }
-})
-
-```
-
-{{% /expand %}}
-
-
-
-{{% /notice %}}
+}) -->

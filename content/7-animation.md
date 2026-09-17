@@ -12,7 +12,7 @@ Dans cette section, nous verrons comment dynamiser l'interface utilisateur grâc
 
 [Flatlist](https://reactnative.dev/docs/flatlist)  
 [Animation](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/glossary/#shared-value)
-
+[Gesture handler](https://docs.swmansion.com/react-native-gesture-handler/docs/2.x/gestures/long-press-gesture/)
 {{% notice tip "Tableau dans un state en React" %}}
 En React, il ne faut jamais modifier directement un tableau existant dans l'état (comme faire data.push(nouvelleTache)), car React ne détectera pas le changement et ne rafraîchira pas l'écran.
 

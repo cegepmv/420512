@@ -6,7 +6,7 @@
     <description>Plans de cours 📋 Maxime Fournier : Plan de cours&#xA;Horaire et disponibilités des enseignants ✔️ Maxime Fournier : Lien vers mon horaire et mes disponibilités&#xA;Maxime Fournier Nom de l’évaluation Pondération Date de l’évaluation Intra 1 30 % Semaine 4 Intra 2 35 % Semaine 11 Projet Final 35 % Semaine 11 à 15</description>
     <generator>Hugo</generator>
     <language>fr-ca</language>
-    <lastBuildDate>Tue, 08 Sep 2026 14:53:03 -0400</lastBuildDate>
+    <lastBuildDate>Tue, 15 Sep 2026 17:02:53 -0400</lastBuildDate>
     <atom:link href="http://localhost:1313/420512/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Mise en place</title>
@@ -51,11 +51,18 @@
       <description>Notes de cours : Design Réactif en React Native useWindowDimensions Le Hook useWindowDimensions de React Native est l’outil indispensable pour rendre vos composants réactifs aux changements de dimensions de l’écran (rotation de l’appareil, mode fenêtré sur tablette, pliables, etc.).&#xA;Fonctionnement : Il retourne un objet contenant la width et la height actuelles de la fenêtre, ainsi que la scale et la fontScale. Avantage clé : Contrairement à l’objet Dimensions (qui nécessite des écouteurs d’événements complexes pour se mettre à jour), useWindowDimensions se met à jour automatiquement et instantanément lors d’une modification de l’orientation ou de la taille de la fenêtre. Exemple d’utilisation : import { useWindowDimensions, StyleSheet, Text, View } from &#39;react-native&#39;; export default function App() { const { width, height } = useWindowDimensions(); const isLandscape = width &gt; height; return ( &lt;View style={[styles.container, { flexDirection: isLandscape ? &#39;row&#39; : &#39;column&#39; }]}&gt; &lt;Text&gt;Largeur actuelle : {width}px&lt;/Text&gt; &lt;/View&gt; ); } const styles = StyleSheet.create({ container: { flex:1 } }) FlexBox et width en % En React Native, le système de mise en page repose entièrement sur Flexbox. Contrairement au CSS web où la propriété flex peut être complexe (flex-grow, flex-shrink, flex-basis), React Native simplifie grandement son utilisation en se basant principalement sur des ratios proportionnels.</description>
     </item>
     <item>
+      <title>Intra Formatif</title>
+      <link>http://localhost:1313/420512/6.5-intra-formatif/index.html</link>
+      <pubDate>Tue, 15 Sep 2026 17:02:53 -0400</pubDate>
+      <guid>http://localhost:1313/420512/6.5-intra-formatif/index.html</guid>
+      <description>Sujet d’Examen Formatif : “VinylVault - Gestion de Discothèque” À partir de la capture d’écran du produit fini ci-dessus, tu dois développer l’application mobile correspondante en React Native. L’objectif est de recréer fidèlement l’interface et la logique permettant de gérer une collection personnelle de vinyles, incluant l’ajout, la modification et la suppression d’albums selon des règles précises.</description>
+    </item>
+    <item>
       <title>Animations</title>
       <link>http://localhost:1313/420512/7-animation/index.html</link>
       <pubDate>Thu, 25 Jun 2026 15:22:35 -0400</pubDate>
       <guid>http://localhost:1313/420512/7-animation/index.html</guid>
-      <description>Dans cette section, nous verrons comment dynamiser l’interface utilisateur grâce aux animations. En React Native, la gestion des animations repose sur une combinaison entre la gestion des états (state) pour contrôler les données à afficher, et la bibliothèque react-native-reanimated qui permet d’exécuter des transitions fluides et performantes directement sur le thread natif.&#xA;Flatlist&#xA;Animation&#xA;Tableau dans un state en React En React, il ne faut jamais modifier directement un tableau existant dans l’état (comme faire data.push(nouvelleTache)), car React ne détectera pas le changement et ne rafraîchira pas l’écran.</description>
+      <description>Dans cette section, nous verrons comment dynamiser l’interface utilisateur grâce aux animations. En React Native, la gestion des animations repose sur une combinaison entre la gestion des états (state) pour contrôler les données à afficher, et la bibliothèque react-native-reanimated qui permet d’exécuter des transitions fluides et performantes directement sur le thread natif.&#xA;Flatlist&#xA;Animation Gesture handler Tableau dans un state en React En React, il ne faut jamais modifier directement un tableau existant dans l’état (comme faire data.push(nouvelleTache)), car React ne détectera pas le changement et ne rafraîchira pas l’écran.</description>
     </item>
     <item>
       <title>Navigation</title>

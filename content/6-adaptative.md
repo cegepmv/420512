@@ -927,7 +927,7 @@ const styles = StyleSheet.create({
   - Ajouter "Type(s) Attaquant(s) [Max 2]" et "Type(s) Defenseur(s) [Max 2]" plus leur style.
     - couleur plus poids.
   - Mettre le bouton `Combat` en vert et sur la largeur de la page avec les bords arrondis.
-  - Faire une boite avec un fond plus pâle pour les résulats et ajuster la fonte de la couronne.
+  - Faire une boite avec un fond plus pâle pour les résulats et ajuster la font de la couronne.
 
 {{% expand title="Solution 3" %}}
 ```jsx

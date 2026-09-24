@@ -8,11 +8,205 @@ title = 'Animations'
 
 Dans cette section, nous verrons comment dynamiser l'interface utilisateur grâce aux animations. En React Native, la gestion des animations repose sur une combinaison entre la **gestion des états (`state`)** pour contrôler les données à afficher, et la bibliothèque **`react-native-reanimated`** qui permet d'exécuter des transitions fluides et performantes directement sur le thread natif.
 
+
+### Installation 
+
+[Animation](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started)
+[Gesture handler](https://docs.swmansion.com/react-native-gesture-handler/docs/2.x/fundamentals/installation)
+
+### Exemple avec longpress
+
+```jsx
+import { View, StyleSheet } from 'react-native';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+
+export default function App() {
+  const longPressGesture = Gesture.LongPress().onEnd((e, success) => {
+    if (success) {
+      console.log(`Long pressed for ${e.duration} ms!`);
+    }
+  });
+
+  return (
+    <GestureDetector gesture={longPressGesture}>
+      <View style={styles.box} />
+    </GestureDetector>
+  );
+}
+
+const styles = StyleSheet.create({
+  box: {
+    height: 120,
+    width: 120,
+    backgroundColor: '#b58df1',
+    borderRadius: 20,
+    marginBottom: 30,
+  },
+});
+```
+
+```jsx
+import { View, StyleSheet } from 'react-native';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+
+export default function App() {
+  const longPressGesture = Gesture.LongPress().onEnd((e, success) => {
+    if (success) {
+      console.log(`Long pressed for ${JSON.stringify(e)} ms!`);
+    }
+  });
+
+  return (
+    <GestureDetector gesture={longPressGesture}>
+      <View style={styles.box} />
+    </GestureDetector>
+  );
+}
+
+const styles = StyleSheet.create({
+  box: {
+    height: 120,
+    width: 120,
+    backgroundColor: '#b58df1',
+    borderRadius: 20,
+    marginBottom: 30,
+  },
+});
+```
+
+### withTiming
+
+[Doc transforms](https://reactnative.dev/docs/transforms)
+
+```jsx
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+  withRepeat,
+} from 'react-native-reanimated';
+
+export default function App({ width }) {
+  const offset = useSharedValue(width / 2 - 160);
+
+  const animatedStyles = useAnimatedStyle(() => ({
+    transform: [{ translateX: offset.value }],
+  }));
+
+  React.useEffect(() => {
+    offset.value = withRepeat(
+      // highlight-next-line
+      withTiming(-offset.value, { duration: 1750 }),
+      -1,
+      true
+    );
+  }, []);
+
+  return (
+    <View style={styles.container}>
+      <Animated.View style={[styles.box, animatedStyles]} />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100%',
+  },
+  box: {
+    height: 120,
+    width: 120,
+    backgroundColor: '#b58df1',
+    borderRadius: 20,
+  },
+});
+
+```
+
+{{% expand title="Solution 1"%}}
+```jsx
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+import Animated, { 
+  useSharedValue, 
+  useAnimatedStyle, 
+  withTiming 
+} from 'react-native-reanimated';
+
+export default function LongPressButton() {
+  // Shared value to track press state on the UI thread
+  const isPressed = useSharedValue(false);
+
+  // Define the long press gesture
+  const longPressGesture = Gesture.LongPress()
+    .minDuration(500) // Duration in milliseconds (0.5 seconds)
+    .onStart(() => {
+      isPressed.value = true;
+    })
+    .onEnd(() => {
+      isPressed.value = false;
+    })
+    .onFinalize(() => {
+      isPressed.value = false;
+    });
+
+  // Create smooth animated styles for color change
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      backgroundColor: withTiming(isPressed.value ? '#FF5252' : '#6200EE', {
+        duration: 200,
+      }),
+    };
+  });
+
+  return (
+    <View style={styles.container}>
+      <GestureDetector gesture={longPressGesture}>
+        <Animated.View style={[styles.button, animatedStyle]}>
+          <Text style={styles.text}>Hold to Change Color</Text>
+        </Animated.View>
+      </GestureDetector>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f5f5f5',
+  },
+  button: {
+    paddingVertical: 16,
+    paddingHorizontal: 32,
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 3, // Android shadow
+    shadowColor: '#000', // iOS shadow
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: { ios: 0.25 },
+    shadowRadius: 3.84,
+  },
+  text: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+});
+```
+{{% /expand %}}
+
 ---
 
 [Flatlist](https://reactnative.dev/docs/flatlist)  
-[Animation](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/glossary/#shared-value)
-[Gesture handler](https://docs.swmansion.com/react-native-gesture-handler/docs/2.x/gestures/long-press-gesture/)
 {{% notice tip "Tableau dans un state en React" %}}
 En React, il ne faut jamais modifier directement un tableau existant dans l'état (comme faire data.push(nouvelleTache)), car React ne détectera pas le changement et ne rafraîchira pas l'écran.
 

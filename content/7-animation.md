@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
 
 ```jsx
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, useWindowDimensions } from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -88,21 +88,25 @@ import Animated, {
   withRepeat,
 } from 'react-native-reanimated';
 
-export default function App({ width }) {
-  const offset = useSharedValue(width / 2 - 160);
+export default function App() {
+  const { width } = useWindowDimensions();
+  
+  // Calculate a safe range for the box to move back and forth
+  const initialOffset = width / 4;
+  const offset = useSharedValue(initialOffset);
 
   const animatedStyles = useAnimatedStyle(() => ({
     transform: [{ translateX: offset.value }],
   }));
 
   React.useEffect(() => {
+    // Animate to the negative counterpart and repeat infinitely with reverse (true)
     offset.value = withRepeat(
-      // highlight-next-line
-      withTiming(-offset.value, { duration: 1750 }),
+      withTiming(-initialOffset, { duration: 1750 }),
       -1,
       true
     );
-  }, []);
+  }, [initialOffset]);
 
   return (
     <View style={styles.container}>
@@ -116,7 +120,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    height: '100%',
   },
   box: {
     height: 120,

@@ -151,7 +151,7 @@ const longPressGesture = Gesture.LongPress().onEnd((e, success) => {
 * **`Gesture.LongPress()`** : C'est un *builder*. Il crée une configuration de geste. Contrairement aux événements React classiques (`onResponderGrant`, etc.), celui-ci gère le cycle de vie complet du geste en natif.
 * **`.onEnd((e, success) => ...)`** : C'est un callback déclenché lorsque l'utilisateur relève son doigt.
 * `success` : Un booléen qui indique si le long press a bien atteint sa durée requise (pour éviter les faux positifs si l'utilisateur glisse son doigt trop vite).
-* `e` (Event) : Contient les métadonnées (durée, coordonnées X/Y, etc.). Dans ton deuxième snippet, `JSON.stringify(e)` te permet de logger l'objet brut pour explorer toutes les propriétés disponibles.
+* `e` (Event) : Contient les métadonnées (durée, coordonnées X/Y, etc.). Dans le deuxième snippet, `JSON.stringify(e)` permet de logger l'objet brut pour explorer toutes les propriétés disponibles.
 
 
 * **`<GestureDetector gesture="{longPressGesture}">`** : C'est le composant conteneur (le "wrapper"). Il écoute les touches sur l'élément enfant (`View`) et attache le geste de manière déclarative, un peu comme un `onClick`, mais géré nativement.
@@ -215,7 +215,6 @@ Faites un programme qui consiste en un bouton qui change de couleur après un lo
 
 
 {{% expand title="Solution 1"%}}
-## Minimum
 
 ```jsx
 import React from 'react';
@@ -267,82 +266,6 @@ const styles = StyleSheet.create({
     width: 120,
     backgroundColor: '#b58df1',
     borderRadius: 20,
-  },
-});
-```
-
-## Plus sophistiqué
-
-```jsx
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Gesture, GestureDetector } from 'react-native-gesture-handler';
-import Animated, { 
-  useSharedValue, 
-  useAnimatedStyle, 
-  withTiming 
-} from 'react-native-reanimated';
-
-export default function LongPressButton() {
-  // Shared value to track press state on the UI thread
-  const isPressed = useSharedValue(false);
-
-  // Define the long press gesture
-  const longPressGesture = Gesture.LongPress()
-    .minDuration(500) // Duration in milliseconds (0.5 seconds)
-    .onStart(() => {
-      isPressed.value = true;
-    })
-    .onEnd(() => {
-      isPressed.value = false;
-    })
-    .onFinalize(() => {
-      isPressed.value = false;
-    });
-
-  // Create smooth animated styles for color change
-  const animatedStyle = useAnimatedStyle(() => {
-    return {
-      backgroundColor: withTiming(isPressed.value ? '#FF5252' : '#6200EE', {
-        duration: 200,
-      }),
-    };
-  });
-
-  return (
-    <View style={styles.container}>
-      <GestureDetector gesture={longPressGesture}>
-        <Animated.View style={[styles.button, animatedStyle]}>
-          <Text style={styles.text}>Hold to Change Color</Text>
-        </Animated.View>
-      </GestureDetector>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f5f5f5',
-  },
-  button: {
-    paddingVertical: 16,
-    paddingHorizontal: 32,
-    borderRadius: 12,
-    alignItems: 'center',
-    justifyContent: 'center',
-    elevation: 3, // Android shadow
-    shadowColor: '#000', // iOS shadow
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: { ios: 0.25 },
-    shadowRadius: 3.84,
-  },
-  text: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: '600',
   },
 });
 ```
@@ -491,121 +414,3 @@ To be added
 
 
 {{% /notice %}}
-
-
-<!-- import { StyleSheet, Text, View, TextInput, TouchableOpacity, Dimensions, FlatList, Keyboard} from 'react-native'
-import React, {useState} from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context';
-import  { Swipeable } from 'react-native-gesture-handler'
-import Animated, {LinearTransition , Easing} from 'react-native-reanimated';
-
-const color1 = "#000000";
-const color2 = "#282A3A";
-const color3 = '#735F32';
-const color4 = '#C69749';
-
-const index = () => {
-    const [textInput,setTextInput] = useState('')
-    const [data,setData] = useState(["Pratiquer mon lancer de frisbee", "Me questionner sur la vie", "Corriger les examens"])
-
-    const handlePressPlus = () => {
-        setData((prev) => [...prev,textInput])
-        setTextInput('')
-        Keyboard.dismiss()
-    }
-    
-    const handleDelete = (index) => {
-        setData((prev) => prev.filter((_,id) => id !== index))
-    }
-    const RenderItem = ({index, item}) => {
-        const afficheText = () =>(
-                <View style={{width:150,height:10}}></View>
-            );
-        
-        return(
-            <Swipeable renderLeftActions={afficheText} onSwipeableWillOpen={() => handleDelete(index)}>
-                <View style={[styles.task, { width: Dimensions.get('window').width }]}>
-                    <Text style={styles.taskText}>{item}</Text>
-                </View>
-            </Swipeable>
-        );
-    }
-
-    return (
-        <SafeAreaView style={styles.container}>
-            <View style={{flexDirection:"row"}}>
-                <TextInput
-                    style={styles.textInput}
-                    onChangeText={setTextInput}
-                    placeholder='Entrez la tâche à accomplir'
-                    placeholderTextColor={color3}
-                    value={textInput}
-                />
-                <TouchableOpacity onPress={handlePressPlus} style={styles.btnPlusContainer}>
-                    <Text style={styles.btnPlus}>+</Text>
-                </TouchableOpacity>
-            </View>
-            <Animated.FlatList
-                style={styles.flatList}
-                data={data}
-                renderItem={({item,index}) => <RenderItem index={index} item={item}/>}
-                keyExtractor={(item, index) => index.toString()}
-                contentContainerStyle={{alignItems:'center'}}
-            />
-        </SafeAreaView>
-    )
-}
-
-export default index
-
-const styles = StyleSheet.create({
-    container:{
-        backgroundColor:color1,
-        flex:1,
-    },
-    textInput:{
-        backgroundColor:color2,
-        width:Dimensions.get('window').width - 56,
-        height:56,
-        paddingHorizontal:20,
-        textAlign:'center',
-        fontSize:16,
-        color:color4,
-    },
-    btnPlus:{
-        color:color1,
-        fontSize:26
-    },
-    btnPlusContainer:{
-        backgroundColor:color4,
-        height:56,
-        width:56,
-        justifyContent:"center",
-        alignItems:"center"
-    },
-    flatList:{
-        paddingVertical:30
-    },
-    task:{
-        paddingVertical:20,
-        paddingHorizontal:10,
-        marginVertical:5,
-        backgroundColor:color2,
-        width:Dimensions.get('window').width * 0.9,
-    },
-    taskText:{
-        color:color4,
-    },
-    minusBtn:{
-        color:color1,
-        fontSize:26,
-    },
-    btnMinusContainer:{
-        justifyContent:'center',
-        alignItems:'center',
-        backgroundColor:'red',
-        width:56,
-        height:56,
-        marginVertical:5,
-    }
-}) -->

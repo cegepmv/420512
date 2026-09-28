@@ -12,9 +12,13 @@ Dans cette section, nous verrons comment dynamiser l'interface utilisateur grâc
 ### Installation 
 
 [Animation](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started)
+
 [Gesture handler](https://docs.swmansion.com/react-native-gesture-handler/docs/2.x/fundamentals/installation)
 
+
+
 ### Exemple avec longpress
+
 
 ```jsx
 import { View, StyleSheet } from 'react-native';
@@ -128,10 +132,147 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
 });
+```
+---
+
+### 1. Gestion des Gestes (`Gesture.LongPress`)
+
+Dans ces deux exemples, tu définis un comportement de appui long (`LongPress`).
+
+```javascript
+const longPressGesture = Gesture.LongPress().onEnd((e, success) => {
+  if (success) {
+    console.log(`Long pressed for ${e.duration} ms!`);
+  }
+});
 
 ```
 
+* **`Gesture.LongPress()`** : C'est un *builder*. Il crée une configuration de geste. Contrairement aux événements React classiques (`onResponderGrant`, etc.), celui-ci gère le cycle de vie complet du geste en natif.
+* **`.onEnd((e, success) => ...)`** : C'est un callback déclenché lorsque l'utilisateur relève son doigt.
+* `success` : Un booléen qui indique si le long press a bien atteint sa durée requise (pour éviter les faux positifs si l'utilisateur glisse son doigt trop vite).
+* `e` (Event) : Contient les métadonnées (durée, coordonnées X/Y, etc.). Dans ton deuxième snippet, `JSON.stringify(e)` te permet de logger l'objet brut pour explorer toutes les propriétés disponibles.
+
+
+* **`<GestureDetector gesture="{longPressGesture}">`** : C'est le composant conteneur (le "wrapper"). Il écoute les touches sur l'élément enfant (`View`) et attache le geste de manière déclarative, un peu comme un `onClick`, mais géré nativement.
+
+---
+
+### 2. Le coeur de Reanimated : `useSharedValue`
+
+Passons à l'animation avec `withTiming`. C'est ici que la différence avec React se fait sentir.
+
+```javascript
+const offset = useSharedValue(initialOffset);
+
+```
+
+* **`useSharedValue` vs `useState`** : En React, si tu modifies un state pour animer une valeur, tu déclenches un re-render complet du composant à chaque frame (ex: 60 fois par seconde), ce qui fait ramer l'application.
+* `useSharedValue` ressemble plutôt à un **`useRef`** : modifier sa valeur (`offset.value = ...`) **ne déclenche aucun re-render React**. La valeur vit entièrement sur le thread natif UI, ce qui garantit une fluidité totale.
+
+---
+
+### 3. Lier la logique au style : `useAnimatedStyle`
+
+```javascript
+const animatedStyles = useAnimatedStyle(() => ({
+  transform: [{ translateX: offset.value }],
+}));
+
+```
+
+* **`useAnimatedStyle`** : C'est le pont entre ta `sharedValue` et le style de ton composant.
+* La fonction que tu passes à l'intérieur est un **worklet** (du code JavaScript qui s'exécute directement sur le thread UI natif). Elle s'abonne aux changements de `offset.value` et met à jour la propriété `transform` à chaque frame de manière ultra-rapide, sans repasser par le bridge React Native.
+* Pour l'utiliser dans le JSX, tu l'passes simplement dans le tableau de styles de ton `Animated.View` : `style={[styles.box, animatedStyles]}`.
+
+---
+
+### 4. Piloter l'animation : `withTiming` et `withRepeat`
+
+```javascript
+React.useEffect(() => {
+  offset.value = withRepeat(
+    withTiming(-initialOffset, { duration: 1750 }),
+    -1,
+    true
+  );
+}, [initialOffset]);
+
+```
+
+* **`React.useEffect`** : Utilisé ici uniquement pour lancer l'animation au montage (ou lorsque `initialOffset` change). Tu modifies directement `offset.value`, ce qui déclenche l'animation.
+* **`withTiming(targetValue, options)`** : Indique à Reanimated comment passer de la valeur actuelle à `targetValue` de manière fluide (avec une transition progressive sur une durée de 1750 ms).
+* **`withRepeat(animation, numberOfReps, reverse)`** :
+* Il enveloppe ton `withTiming`.
+* Le premier argument est l'animation à répéter.
+* `-1` signifie **répétition infinie** (comme une boucle).
+* `true` signifie **reverse (ping-pong)** : l'élément va vers `-initialOffset`, puis revient vers sa position initiale en sens inverse, en boucle infinie.
+
+{{% notice style="exo"%}}
+# Exercice 1
+
+Faites un programme qui consiste en un bouton qui change de couleur après un longpress. Le changement de couleur doit être progressif sur 2 secondes.
+
+
 {{% expand title="Solution 1"%}}
+## Minimum
+
+```jsx
+import React from 'react';
+import { StyleSheet, View, useWindowDimensions } from 'react-native';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+} from 'react-native-reanimated';
+
+export default function App() {
+  const { width } = useWindowDimensions();
+  
+  // // Calculate a safe range for the box to move back and forth
+  // const initialOffset = width / 4;
+  // const offset = useSharedValue(initialOffset);
+  const isPressed = useSharedValue(false)
+
+  const longPressGesture = Gesture.LongPress().onEnd((e, success) => {
+    isPressed.value = !isPressed.value
+  });
+
+  const animatedStyles = useAnimatedStyle(() => ({
+      backgroundColor: withTiming(isPressed.value ? '#FF5252' : '#6200EE', {
+        duration: 200,
+      }),
+    }
+  )
+  )
+
+
+
+  return (
+    <GestureDetector gesture={longPressGesture}>
+      <Animated.View style={[styles.box, animatedStyles]} />
+    </GestureDetector>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  box: {
+    height: 120,
+    width: 120,
+    backgroundColor: '#b58df1',
+    borderRadius: 20,
+  },
+});
+```
+
+## Plus sophistiqué
+
 ```jsx
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
@@ -206,10 +347,70 @@ const styles = StyleSheet.create({
 });
 ```
 {{% /expand %}}
+{{% /notice %}}
 
 ---
 
+
 [Flatlist](https://reactnative.dev/docs/flatlist)  
+
+---
+
+### 1. Le rendu des éléments (La stratégie de chargement)
+
+* **`ScrollView` (Le bourrin) :**
+Il rend **tous** ses enfants d'un seul coup, dès le montage du composant, qu'ils soient affichés à l'écran ou non.
+* *Conséquence :* Si tu as 500 éléments dans une liste, React Native va instancier 500 composants d'un coup. Résultat : gros pic de CPU, saccades (*dropped frames*) au montage, et consommation excessive de mémoire.
+
+
+* **`FlatList` (L'intelligent) :**
+Il utilise une stratégie de **virtualisation**. Il ne rend à l'écran que les éléments qui sont actuellement visibles (plus une petite marge de sécurité appelée *windowing*). Au fur et à mesure que l'utilisateur scroll, les éléments qui sortent de l'écran sont détruits ou recyclés pour afficher les nouveaux.
+* *Conséquence :* Performances constantes, peu importe que ta liste contienne 10 ou 100 000 éléments.
+
+
+
+---
+
+### 2. Comment on les utilise (L'API)
+
+* **`ScrollView` :**
+Tu lui passes des enfants de manière classique, comme une `View` :
+```jsx
+<ScrollView>
+  {items.map(item => <Item key={item.id} data={item} />)}
+</ScrollView>
+
+```
+
+
+* **`FlatList` :**
+Il est conçu spécifiquement pour des listes de données. Tu lui passes un tableau via la prop `data` et une fonction de rendu via `renderItem` :
+```jsx
+<FlatList
+  data={items}
+  keyExtractor={item => item.id}
+  renderItem={({ item }) => <Item data={item} />}
+/>
+
+```
+
+
+
+---
+
+### 3. Tableau comparatif synthétique
+
+| Critère | `ScrollView` | `FlatList` |
+| --- | --- | --- |
+| **Cas d'usage idéal** | Petits contenus statiques (ex: un formulaire avec quelques inputs, une page de paramètres). | Listes dynamiques, grandes ou infinies (ex: feed de réseaux sociaux, catalogue de produits). |
+| **Performance sur grande liste** | Très mauvaise (risque de crash / lag sévère). | Excellente (grâce au recyclage des composants). |
+| **Props principales** | `contentContainerStyle`, `onScroll` | `data`, `renderItem`, `keyExtractor`, `onEndReached` (pour la pagination). |
+
+---
+
+
+
+
 {{% notice tip "Tableau dans un state en React" %}}
 En React, il ne faut jamais modifier directement un tableau existant dans l'état (comme faire data.push(nouvelleTache)), car React ne détectera pas le changement et ne rafraîchira pas l'écran.
 

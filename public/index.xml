@@ -62,7 +62,7 @@
       <link>http://localhost:1313/420512/7-animation/index.html</link>
       <pubDate>Thu, 25 Jun 2026 15:22:35 -0400</pubDate>
       <guid>http://localhost:1313/420512/7-animation/index.html</guid>
-      <description>Dans cette section, nous verrons comment dynamiser l’interface utilisateur grâce aux animations. En React Native, la gestion des animations repose sur une combinaison entre la gestion des états (state) pour contrôler les données à afficher, et la bibliothèque react-native-reanimated qui permet d’exécuter des transitions fluides et performantes directement sur le thread natif.&#xA;Flatlist&#xA;Animation Gesture handler Tableau dans un state en React En React, il ne faut jamais modifier directement un tableau existant dans l’état (comme faire data.push(nouvelleTache)), car React ne détectera pas le changement et ne rafraîchira pas l’écran.</description>
+      <description>Dans cette section, nous verrons comment dynamiser l’interface utilisateur grâce aux animations. En React Native, la gestion des animations repose sur une combinaison entre la gestion des états (state) pour contrôler les données à afficher, et la bibliothèque react-native-reanimated qui permet d’exécuter des transitions fluides et performantes directement sur le thread natif.&#xA;Installation Animation&#xA;Gesture handler</description>
     </item>
     <item>
       <title>Navigation</title>

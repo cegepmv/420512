@@ -154,6 +154,9 @@ export default function HomeScreen() {
 {{% notice style="exo" %}}
 
 Avec l'aide de la <a href="https://docs.expo.dev/router/advanced/native-tabs/">documentation</a>. Créez un drawer contenant la calculatrice et le gestionnaire de tâche. Le rendu final doit ressembler à ceci :
+![alt text](/420512/images/navig1.png)
+
+Avec l'aide de la <a href="https://docs.expo.dev/router/advanced/native-tabs/">documentation</a>. Créez un tabs avec ces même code. Le rendu final doit ressembler à ceci :
 
 
 {{% /notice %}}

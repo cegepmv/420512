@@ -192,7 +192,7 @@ Voici comment lier la fonction d'appel API créée ci-dessus à votre composant 
 ```jsx
 import { StyleSheet, Text, View, TextInput, Dimensions, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
-import { useTheme } from '../../components/contexts/ThemeContext';
+import { useTheme } from '../../components/contexts/themeContext';
 import { colorsPalette } from '../../assets/colorsPalette';
 import { useRouter } from 'expo-router';
 import { signIn } from '../../lib/axios';

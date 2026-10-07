@@ -76,7 +76,7 @@
       <link>http://localhost:1313/420512/9-context/index.html</link>
       <pubDate>Thu, 25 Jun 2026 16:02:29 -0400</pubDate>
       <guid>http://localhost:1313/420512/9-context/index.html</guid>
-      <description>Le Context API, c’est comme installer un réseau Wi-Fi dans votre application 📶. Au lieu de faire passer des données manuellement de composant en composant (le props drilling 😵), vous créez une zone de partage où n’importe quel composant peut se connecter instantanément pour récupérer ou modifier des informations !&#xA;🗂️ Problématique : La navigation imbriquée Ajoutez un Drawer (menu latéral).</description>
+      <description>Le Context API, c’est comme installer un réseau Wi-Fi dans votre application. Au lieu de faire passer des données manuellement de composant en composant (le props drilling 😵), vous créez une zone de partage où n’importe quel composant peut se connecter instantanément pour récupérer ou modifier des informations !&#xA;🗂️ Problématique : La navigation imbriquée Copier ce code dans votre projet :</description>
     </item>
     <item>
       <title>API</title>

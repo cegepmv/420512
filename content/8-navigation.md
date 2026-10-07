@@ -140,6 +140,32 @@ export default function HomeScreen() {
   );
 }
 ```
+## 6. Se déplacer avec useNavigation
+
+```jsx
+
+import { StyleSheet, Text, TouchableOpacity } from 'react-native'
+import React from 'react'
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from 'expo-router';
+
+const Index = () => {
+  
+  const navigation = useNavigation();
+  return (
+
+    <SafeAreaView className="flex-1 justify-center items-center">
+      <TouchableOpacity onPress={() => navigation.navigate("tasks-end")}>
+        <Text>Allez à la page suivante</Text>
+      </TouchableOpacity>
+    </SafeAreaView>
+
+  );
+};
+
+export default Index
+
+```
 
 ---
 
@@ -156,7 +182,97 @@ export default function HomeScreen() {
 Avec l'aide de la <a href="https://docs.expo.dev/router/advanced/native-tabs/">documentation</a>. Créez un drawer contenant la calculatrice et le gestionnaire de tâche. Le rendu final doit ressembler à ceci :
 ![alt text](/420512/images/navig1.png)
 
-Avec l'aide de la <a href="https://docs.expo.dev/router/advanced/native-tabs/">documentation</a>. Créez un tabs avec ces même code. Le rendu final doit ressembler à ceci :
+{{% expand title="Solution" %}}
+```jsx
+import { Drawer } from 'expo-router/drawer';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import "../global.css"
+import { StatusBar } from 'expo-status-bar';
+export default function RootLayout() {
+  return (
+    // 1. Envelopper l'application pour gérer les gestes
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <StatusBar style="light" />
+      {/* 2. Initialiser le Drawer avec des options globales */}
+      <Drawer
+        screenOptions={{
+          headerStyle: { backgroundColor: '#6200ee' },
+          headerTintColor: '#fff',
+          drawerActiveTintColor: '#6200ee',
+          drawerType: 'front', // 'front', 'back', ou 'slide'
+          headerShown: false
+        }}
+      >
+        {/* 3. Déclarer chaque écran */}
+        <Drawer.Screen
+          name="index"
+          options={{
+            drawerLabel: 'Accueil',
+            title: 'Bienvenue',
+          }}
+        />
+        <Drawer.Screen
+            name="tasks-end"
+            options={{
+              drawerLabel: 'Gestionnaire de tâches',
+            }}
+          />
+        <Drawer.Screen
+          name="longPress"
+          options={{
+            drawerItemStyle: { display: 'none'}
+          }}
+        />
 
+        <Drawer.Screen
+          name="tasks-start"
+          options={{
+            drawerItemStyle: { display: 'none'}
+          }}
+        />
+        <Drawer.Screen
+          name="calculatrice"
+          options={{
+            drawerItemStyle: { display: 'none'}
+          }}
+        />
+        <Drawer.Screen
+          name="(pokemon)"
+          options={{
+            drawerLabel: 'Pokemon',
+          }}
+        />
+      </Drawer>
+
+    </GestureHandlerRootView>
+  );
+}
+```
+{{% /expand %}}
+
+Avec l'aide de la <a href="https://docs.expo.dev/router/advanced/native-tabs/">documentation</a>. Créez un tabs avec ces même codes. Le rendu final doit ressembler à ceci :
+![alt text](/420512/images/navigation2.png)
+
+{{% expand title="Solution" %}}
+```jsx
+import { NativeTabs } from 'expo-router/unstable-native-tabs';
+
+export default function TabLayout() {
+  return (
+    <NativeTabs>
+      <NativeTabs.Trigger name="pokemon-start">
+        <NativeTabs.Trigger.Label>Start</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf="house.fill" md="home" />
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="pokemon-end">
+        <NativeTabs.Trigger.Icon sf="gear" md="settings" />
+        <NativeTabs.Trigger.Label>End</NativeTabs.Trigger.Label>
+      </NativeTabs.Trigger>
+    </NativeTabs>
+  );
+}
+
+```
+{{% /expand %}}
 
 {{% /notice %}}

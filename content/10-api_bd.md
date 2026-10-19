@@ -32,9 +32,9 @@ npx expo install expo-sqlite expo-file-system expo-image-picker
 
 ```
 
-* **`expo-image-picker`** : Permet d'ouvrir la caméra ou la galerie pour sélectionner ou prendre une photo.
-* **`expo-file-system`** : Permet de manipuler le système de fichiers pour copier l'image dans un répertoire persistant.
-* **`expo-sqlite`** : Fournit une base de données SQL locale performante.
+* **`expo-image-picker`** [(doc)](https://docs.expo.dev/versions/latest/sdk/imagepicker/): Permet d'ouvrir la caméra ou la galerie pour sélectionner ou prendre une photo.
+* **`expo-file-system`** [(doc)](https://docs.expo.dev/versions/latest/sdk/filesystem/): Permet de manipuler le système de fichiers pour copier l'image dans un répertoire persistant.
+* **`expo-sqlite`** [(doc)](https://docs.expo.dev/versions/latest/sdk/sqlite/): Fournit une base de données SQL locale performante.
 
 ---
 

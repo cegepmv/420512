@@ -72,18 +72,18 @@
       <description>React Navigation est la bibliothèque standard pour gérer le changement d’écrans et la navigation dans une application React Native.&#xA;1. Les Concepts Clés de React Navigation Avant d’utiliser le Drawer, il faut comprendre les 3 piliers de la navigation :&#xA;Le Navigator (Navigateur) : Le composant parent qui contrôle l’historique et les transitions d’écrans (ex: Drawer, Stack, Tabs). Les Screens (Écrans) : Les composants React représentant chaque page de votre application. Les Options (screenOptions &amp; options) : La configuration visuelle de l’en-tête (Header), des icônes, des titres et des gestes. Dans Expo Router, la structure des dossiers définit automatiquement les routes de l’application (File-based Routing).</description>
     </item>
     <item>
+      <title>API &amp; BD</title>
+      <link>http://localhost:1313/420512/10-api_bd/index.html</link>
+      <pubDate>Thu, 25 Jun 2026 16:02:29 -0400</pubDate>
+      <guid>http://localhost:1313/420512/10-api_bd/index.html</guid>
+      <description>Dans ce cours, nous allons voir comment capturer une photo à l’aide de l’appareil photo, la stocker de manière permanente dans le système de fichiers de l’appareil, et enregistrer ses références dans une base de données relationnelle locale (SQLite).&#xA;Cette architecture est idéale pour les applications mobiles fonctionnant en mode offline-first avec Expo (compatible Expo Go).&#xA;1. Pourquoi séparer le fichier et la base de données ? Lorsqu’on développe une application mobile, une erreur fréquente consiste à vouloir stocker l’image directement dans la base de données (sous forme de texte brut ou de BLOB).</description>
+    </item>
+    <item>
       <title>Context</title>
       <link>http://localhost:1313/420512/9-context/index.html</link>
       <pubDate>Thu, 25 Jun 2026 16:02:29 -0400</pubDate>
       <guid>http://localhost:1313/420512/9-context/index.html</guid>
       <description>Le Context API, c’est comme installer un réseau Wi-Fi dans votre application. Au lieu de faire passer des données manuellement de composant en composant (le props drilling 😵), vous créez une zone de partage où n’importe quel composant peut se connecter instantanément pour récupérer ou modifier des informations !&#xA;🗂️ Problématique : La navigation imbriquée Copier ce code dans votre projet :</description>
-    </item>
-    <item>
-      <title>API</title>
-      <link>http://localhost:1313/420512/10-api/index.html</link>
-      <pubDate>Thu, 25 Jun 2026 15:40:06 -0400</pubDate>
-      <guid>http://localhost:1313/420512/10-api/index.html</guid>
-      <description>Différence entre Bibliothèques Externes et API Bibliothèque Externe : C’est un package ou un module que vous installez dans votre projet. Il contient des fonctionnalités réutilisables pour réaliser des tâches spécifiques (comme afficher une carte ou utiliser la caméra). Exemples : expo-camera, react-native-maps, axios, redux.&#xA;API (Application Programming Interface) : C’est un ensemble d’outils ou de services que vous consommez dans votre code, souvent via des requêtes HTTP ou WebSocket. Une API peut être utilisée pour communiquer avec des services externes, comme une base de données distante ou un service de cartographie (par exemple, l’API de Mapbox ou Google Maps). Exemples : API de géolocalisation, API de traduction, API météo, API de paiement.</description>
     </item>
     <item>
       <title>Base de données locales</title>

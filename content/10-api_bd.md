@@ -491,6 +491,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-native';
 import { Accelerometer } from 'expo-sensors';
 import * as SQLite from 'expo-sqlite';
+import * as ScreenOrientation from 'expo-screen-orientation';
 
 const { width } = Dimensions.get('window');
 const CONTAINER_SIZE = width * 0.75;
@@ -501,6 +502,10 @@ const MAX_OFFSET = (CONTAINER_SIZE - BUBBLE_SIZE) / 2;
 // x et y, générées aléatoirement dans l'intervalle ]-0.6, 0.6[ multiplié par MAX_OFFSET.
 const getRandomTarget = null
 
+const startGame = () => {
+  // Mettez à jour les états nécessaires au démarrage d'une nouvelle partie.
+
+};
 export default function App() {
   const [data, setData] = useState({ x: 0, y: 0, z: 0 });
   const [isAvailable, setIsAvailable] = useState(false);
@@ -513,6 +518,21 @@ export default function App() {
 
   const [highScores, setHighScores] = useState([]);
 
+
+  useEffect(() => {
+    // Lock orientation to landscape when the screen loads
+    async function lockOrientation() {
+      await ScreenOrientation.lockAsync(
+        ScreenOrientation.OrientationLock.PORTRAIT
+      );
+    }
+    lockOrientation();
+  
+    // Unlock or reset orientation when leaving the screen
+    return () => {
+      ScreenOrientation.unlockAsync();
+    };
+  }, []);
   useEffect(() => {
     // Créez un écouteur qui récupère les données de l'accéléromètre
     // et met à jour l'état data en conséquence.
@@ -551,9 +571,6 @@ export default function App() {
     return () => clearInterval(timer);
   }, [gameState, startTime]);
 
-  const startGame = () => {
-    // Mettez à jour les états nécessaires au démarrage d'une nouvelle partie.
-  };
 
   if (!isAvailable) {
     return (

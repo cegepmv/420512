@@ -72,13 +72,6 @@
       <description>React Navigation est la bibliothèque standard pour gérer le changement d’écrans et la navigation dans une application React Native.&#xA;1. Les Concepts Clés de React Navigation Avant d’utiliser le Drawer, il faut comprendre les 3 piliers de la navigation :&#xA;Le Navigator (Navigateur) : Le composant parent qui contrôle l’historique et les transitions d’écrans (ex: Drawer, Stack, Tabs). Les Screens (Écrans) : Les composants React représentant chaque page de votre application. Les Options (screenOptions &amp; options) : La configuration visuelle de l’en-tête (Header), des icônes, des titres et des gestes. Dans Expo Router, la structure des dossiers définit automatiquement les routes de l’application (File-based Routing).</description>
     </item>
     <item>
-      <title>API &amp; BD</title>
-      <link>http://localhost:1313/420512/10-api_bd/index.html</link>
-      <pubDate>Thu, 25 Jun 2026 16:02:29 -0400</pubDate>
-      <guid>http://localhost:1313/420512/10-api_bd/index.html</guid>
-      <description>Dans ce cours, nous allons voir comment capturer une photo à l’aide de l’appareil photo, la stocker de manière permanente dans le système de fichiers de l’appareil, et enregistrer ses références dans une base de données relationnelle locale (SQLite).&#xA;Cette architecture est idéale pour les applications mobiles fonctionnant en mode offline-first avec Expo (compatible Expo Go).&#xA;1. Pourquoi séparer le fichier et la base de données ? Lorsqu’on développe une application mobile, une erreur fréquente consiste à vouloir stocker l’image directement dans la base de données (sous forme de texte brut ou de BLOB).</description>
-    </item>
-    <item>
       <title>Context</title>
       <link>http://localhost:1313/420512/9-context/index.html</link>
       <pubDate>Thu, 25 Jun 2026 16:02:29 -0400</pubDate>
@@ -86,11 +79,11 @@
       <description>Le Context API, c’est comme installer un réseau Wi-Fi dans votre application. Au lieu de faire passer des données manuellement de composant en composant (le props drilling 😵), vous créez une zone de partage où n’importe quel composant peut se connecter instantanément pour récupérer ou modifier des informations !&#xA;🗂️ Problématique : La navigation imbriquée Copier ce code dans votre projet :</description>
     </item>
     <item>
-      <title>Base de données locales</title>
-      <link>http://localhost:1313/420512/11-bd/index.html</link>
-      <pubDate>Tue, 21 Jul 2026 09:12:28 -0400</pubDate>
-      <guid>http://localhost:1313/420512/11-bd/index.html</guid>
-      <description>1. Introduction à expo-sqlite (API Synchrone) Depuis les versions récentes d’Expo, expo-sqlite intègre des méthodes synchrones (openDatabaseSync, execSync, getAllSync, runSync).&#xA;Avantage principal : Simplifie la gestion du flux de données en évitant les promesses/callbacks (async/await) au moment de l’initialisation et des requêtes simples. 2. Architecture &amp; Séparation des Responsabilités Il est préférable de séparer la logique de persistance des données de la vue (UI).</description>
+      <title>API &amp; BD</title>
+      <link>http://localhost:1313/420512/10-api_bd/index.html</link>
+      <pubDate>Thu, 25 Jun 2026 16:02:29 -0400</pubDate>
+      <guid>http://localhost:1313/420512/10-api_bd/index.html</guid>
+      <description>Dans ce cours, nous allons voir comment capturer une photo à l’aide de l’appareil photo, la stocker de manière permanente dans le système de fichiers de l’appareil, et enregistrer ses références dans une base de données relationnelle locale (SQLite).&#xA;Cette architecture est idéale pour les applications mobiles fonctionnant en mode offline-first avec Expo (compatible Expo Go).&#xA;1. Pourquoi séparer le fichier et la base de données ? Lorsqu’on développe une application mobile, une erreur fréquente consiste à vouloir stocker l’image directement dans la base de données (sous forme de texte brut ou de BLOB).</description>
     </item>
   </channel>
 </rss>

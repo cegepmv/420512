@@ -1,2 +1,0 @@
-ToucheableOpacity
-onPress, etc

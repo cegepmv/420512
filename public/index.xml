@@ -85,5 +85,19 @@
       <guid>http://localhost:1313/420512/10-api_bd/index.html</guid>
       <description>Dans ce cours, nous allons voir comment capturer une photo à l’aide de l’appareil photo, la stocker de manière permanente dans le système de fichiers de l’appareil, et enregistrer ses références dans une base de données relationnelle locale (SQLite).&#xA;Cette architecture est idéale pour les applications mobiles fonctionnant en mode offline-first avec Expo (compatible Expo Go).&#xA;1. Pourquoi séparer le fichier et la base de données ? Lorsqu’on développe une application mobile, une erreur fréquente consiste à vouloir stocker l’image directement dans la base de données (sous forme de texte brut ou de BLOB).</description>
     </item>
+    <item>
+      <title>MySQL</title>
+      <link>http://localhost:1313/420512/11-mysql/index.html</link>
+      <pubDate>Thu, 25 Jun 2026 16:02:29 -0400</pubDate>
+      <guid>http://localhost:1313/420512/11-mysql/index.html</guid>
+      <description>À faire à la maison si vous utilisez windows :( 🛠️ Téléchargement de MySQL Rendez-vous sur le lien de téléchargement pour Windows. Cliquez sur le premier bouton Download. Cliquez sur No thanks, just start my download. Exécutez le fichier que vous venez de télécharger. Choisissez l’option d’installation Custom. Dans la section Products to be installed, assurez-vous de sélectionner : La version la plus récente de MySQL Servers (MySQL Servers -&gt; MySQL Server 8.0 -&gt; Sélectionnez le premier). La version la plus récente de MySQL Workbench (Applications -&gt; MySQL Workbench -&gt; MySQL Workbench 8.0 -&gt; Sélectionnez le premier). La version la plus récente de MySQL Shell (Applications -&gt; MySQL Shell -&gt; MySQL Shell 8.0 -&gt; Sélectionnez le premier). Faites Next ou Execute jusqu’à ce que vous croisiez Account and Roles. Dans cette fenêtre, choisissez un mot de passe pour votre base de données (pour le cours, il est conseillé de mettre abc-123). Faites Next ou Execute jusqu’à ce qu’il vous propose Finish. Ouvrez l’application MySQL Workbench. Vous devriez voir qu’il existe déjà une connexion Local instance MySQL. Cliquez dessus. 🥳 Félicitations ! Vous êtes prêt à créer votre première table !</description>
+    </item>
+    <item>
+      <title>Backend</title>
+      <link>http://localhost:1313/420512/12-backend/index.html</link>
+      <pubDate>Thu, 25 Jun 2026 16:02:29 -0400</pubDate>
+      <guid>http://localhost:1313/420512/12-backend/index.html</guid>
+      <description>1. Mise en place de Node.js Pour débuter avec Node.js, nous utilisons fnm (Fast Node Manager) :&#xA;Installez curl et unzip : apt update &amp;&amp; apt install -y curl unzip Installez et configurez fnm et Node.js (version 22 LTS) : curl -fsSL https://fnm.vercel.app/install | bash source ~/.bashrc fnm use --install-if-missing 22 node -v npm -v Créez un dossier CRUD et ouvrez-le dans VS Code. Initialisez le projet : npm init -y Configurez package.json pour les modules ES et nodemon : { &#34;type&#34;: &#34;module&#34;, &#34;scripts&#34;: { &#34;dev&#34;: &#34;npx nodemon app.js&#34; } } Installez les dépendances : npm install --save-dev nodemon npm i mysql2 dotenv express Variables d’environnement Les variables d’environnement sont utilisées pour sécuriser et paramétrer les applications sans stocker directement ces informations dans le code source. Elles permettent de séparer la configuration des applications (comme les clés d’API, les identifiants de base de données, etc.) de leur logique métier, facilitant ainsi la gestion et le déploiement dans différents environnements (développement, test, production). En outre, l’utilisation de variables d’environnement améliore la sécurité en évitant l’exposition de données sensibles dans le code source et en permettant des ajustements rapides et sûrs de la configuration sans nécessiter de modifications de code.</description>
+    </item>
   </channel>
 </rss>

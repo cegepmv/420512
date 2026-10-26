@@ -19,6 +19,7 @@ enableEmoji = true
   # Hide Next and Previous page buttons normally displayed full height beside content
   disableNextPrev = true
   hideAuthorDate = true
+  math = true
   [params.imageEffects]
     border = false
     lazy = true

@@ -10,14 +10,14 @@ title = 'Backend'
 
 Pour débuter avec Node.js, nous utilisons **fnm** (Fast Node Manager) :
 
-1. Installez `curl` et `unzip` :
+1. Installez `curl`:
 ```bash
-apt update && apt install -y curl unzip
+apt update && apt install -y curl
 
 ```
 
 
-2. Installez et configurez `fnm` et Node.js (version 22 LTS) :
+2. Installez et configurez `fnm` et Node.js (version 22 LTS ou plus récente, mais toujours LTS ) :
 ```bash
 curl -fsSL https://fnm.vercel.app/install | bash
 source ~/.bashrc
@@ -85,55 +85,6 @@ dotenv.config()
 
 
 5. Ensuite vous n'aurez qu'à préfixer les variables par `process.env` pour y avoir accès (Ex : `process.env.MYSQL_HOST`)
-
----
-
-
-## Connexion à la DB
-
-Créez un fichier `database.js` :
-```javascript
-import mysql from 'mysql2';
-import dotenv from 'dotenv';
-
-dotenv.config();
-
-const pool = mysql.createPool({
-    host: process.env.MYSQL_HOST,
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASSWORD,
-    database: process.env.MYSQL_DATABASE
-}).promise();
-
-export default pool;
-
-```
-
-Exemple d'utilisation : 
-
-```js
-
-const [resultat] = await pool.query("SELECT * FROM etudiant")
-console.log(resultat)
-                
-```
-
-{{% notice style="exo"%}}
-
-1. Créez la table `parc_attraction` :
-```sql
-CREATE TABLE parc_attraction ( 
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nom VARCHAR(100), 
-    ville VARCHAR(500), 
-    cout_billet DECIMAL(6,2) 
-);
-
-```
-
-
-2. Écrivez un script Node.js permettant de récupérer tous les parcs, d'en insérer deux nouveaux, de réafficher la liste, puis de les supprimer proprement.
-{{% /notice %}}
 
 ---
 
@@ -427,8 +378,36 @@ calculMasseAsync();
 
 ## 4. Requêtes backend
 
+Créez un fichier `database.js` :
+```javascript
+import mysql from 'mysql2';
+import dotenv from 'dotenv';
 
+dotenv.config();
 
+const pool = mysql.createPool({
+    host: process.env.MYSQL_HOST,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.MYSQL_DATABASE
+}).promise();
+
+export default pool;
+
+```
+
+Exemple d'utilisation : 
+
+```js
+
+const [resultat] = await pool.query("SELECT * FROM etudiant")
+console.log(resultat)
+                
+```
+
+{{% notice style="exo"%}}
+
+1. Créez la table `parc_attraction` :
 ```sql
 CREATE TABLE parc_attraction ( 
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -443,6 +422,10 @@ CREATE TABLE parc_attraction (
 INSERT INTO parc_attraction (nom, ville, cout_billet) VALUES ('La Ronde','Montréal','55.99'),('Disney','Orlando','99.49');"
 
 ```
+
+
+
+
 
 ---
 
@@ -483,7 +466,7 @@ async function getParcAttraction(id) {
 
 Vous devez utiliser ce code pour afficher `"Disney La Ronde"` en utilisant seulement leur identifiant (`id`), cette fonction, et ce en moins de 5 secondes. *(Indice : vous avez droit à `Promise.all`)*
 
-### Solution
+{{% expand title="Solution" %}}
 
 #### 1. Manipulation des parcs (Affichage, Ajout, Suppression)
 
@@ -551,7 +534,8 @@ const [parc1Data, parc2Data] = await Promise.all([parc1, parc2]);
 console.log(parc2Data.nom + " " + parc1Data.nom);
 
 ```
-
+{{% /expand %}}
+{{% /notice %}}
 ## Requête préparée
 
 1. **Sécurité contre les injections SQL** : Les requêtes préparées aident à prévenir les attaques par injection SQL en séparant les données des instructions SQL. Avec les requêtes préparées, les valeurs des paramètres sont transmises séparément de la requête SQL elle-même, ce qui empêche les attaquants d'injecter du code SQL malveillant via les données utilisateur. Cela garantit une meilleure sécurité des données et protège contre les vulnérabilités courantes comme les attaques par injection SQL.
@@ -772,259 +756,3 @@ Les API REST utilisent des codes de statut HTTP pour indiquer le résultat d'une
 * **404 Not Found** : La ressource demandée n'existe pas.
 * **500 Internal Server Error** : Erreur côté serveur.
 
-
-# FE
-
-### 1. Installation d'Axios dans votre projet Expo
-
-Avant de lancer le code, assurez-vous d'avoir installé Axios :
-
-```bash
-npm i axios
-
-```
-
----
-
-### 2. Code complet pour `index.jsx` avec Axios
-
-```javascript
-import React, { useState, useEffect } from 'react';
-import { 
-  StyleSheet, 
-  Text, 
-  View, 
-  FlatList, 
-  TextInput, 
-  TouchableOpacity, 
-  ActivityIndicator, 
-  Alert, 
-  KeyboardAvoidingView, 
-  Platform 
-} from 'react-native';
-import axios from 'axios';
-
-// ⚠️ N'oubliez pas de remplacer par l'IP de votre ordinateur 
-const API_URL = 'http://192.168.1.X:3000/parcs';
-
-export default function App() {
-  const [parcs, setParcs] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  // États pour le formulaire d'ajout
-  const [nom, setNom] = useState('');
-  const [ville, setVille] = useState('');
-  const [coutBillet, setCoutBillet] = useState('');
-
-  // 1. READ - Récupérer tous les parcs (GET)
-  const fetchParcs = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get(API_URL);
-      // Avec Axios, les données sont directement dans response.data
-      setParcs(response.data);
-    } catch (error) {
-      Alert.alert("Erreur", error.message || "Erreur lors du chargement des parcs.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchParcs();
-  }, []);
-
-  // 2. CREATE - Ajouter un nouveau parc (POST)
-  const ajouterParc = async () => {
-    if (!nom || !ville || !coutBillet) {
-      Alert.alert("Attention", "Veuillez remplir tous les champs.");
-      return;
-    }
-
-    try {
-      // Axios transforme automatiquement l'objet JavaScript en JSON dans le body
-      await axios.post(API_URL, {
-        nom,
-        ville,
-        cout_billet: parseFloat(coutBillet)
-      });
-
-      // Vider le formulaire et rafraîchir la liste
-      setNom('');
-      setVille('');
-      setCoutBillet('');
-      fetchParcs();
-    } catch (error) {
-      Alert.alert("Erreur", error.response?.data?.erreur || "Erreur lors de l'ajout du parc.");
-    }
-  };
-
-  // 3. DELETE - Supprimer un parc (DELETE)
-  const supprimerParc = async (id) => {
-    Alert.alert(
-      "Confirmation",
-      "Voulez-vous vraiment supprimer ce parc ?",
-      [
-        { text: "Annuler", style: "cancel" },
-        { 
-          text: "Supprimer", 
-          style: "destructive",
-          onPress: async () => {
-            try {
-              await axios.delete(`${API_URL}/${id}`);
-
-              // Mise à jour locale immédiate de l'interface
-              setParcs(parcs.filter(parc => parc.id !== id));
-            } catch (error) {
-              Alert.alert("Erreur", "Erreur lors de la suppression.");
-            }
-          }
-        }
-      ]
-    );
-  };
-
-  return (
-    <KeyboardAvoidingView 
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'} 
-      style={styles.container}
-    >
-      <Text style={styles.headerTitle}>🎢 Gestion des Parcs (Axios)</Text>
-
-      {/* Formulaire d'ajout */}
-      <View style={styles.formContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="Nom du parc"
-          value={nom}
-          onChangeText={setNom}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Ville"
-          value={ville}
-          onChangeText={setVille}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Coût du billet ($)"
-          keyboardType="numeric"
-          value={coutBillet}
-          onChangeText={setCoutBillet}
-        />
-        <TouchableOpacity style={styles.addButton} onPress={ajouterParc}>
-          <Text style={styles.addButtonText}>Ajouter le parc</Text>
-        </TouchableOpacity>
-      </View>
-
-      {/* Liste des parcs */}
-      {loading ? (
-        <View style={styles.center}>
-          <ActivityIndicator size="large" color="#007AFF" />
-        </View>
-      ) : (
-        <FlatList
-          data={parcs}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
-            <View style={styles.card}>
-              <View style={styles.cardInfo}>
-                <Text style={styles.parcName}>{item.nom}</Text>
-                <Text style={styles.parcDetails}>📍 {item.ville}</Text>
-                <Text style={styles.parcDetails}>💰 {item.cout_billet} $</Text>
-              </View>
-              
-              <TouchableOpacity 
-                style={styles.deleteButton} 
-                onPress={() => supprimerParc(item.id)}
-              >
-                <Text style={styles.deleteButtonText}>❌</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-          ListEmptyComponent={
-            <Text style={styles.emptyText}>Aucun parc trouvé.</Text>
-          }
-        />
-      )}
-    </KeyboardAvoidingView>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: { 
-    flex: 1, 
-    backgroundColor: '#f8f9fa', 
-    paddingTop: 60, 
-    paddingHorizontal: 20 },
-  headerTitle: { 
-    fontSize: 22, 
-    fontWeight: 'bold', 
-    marginBottom: 20, 
-    textAlign: 'center', 
-    color: '#333' },
-  formContainer: { 
-    backgroundColor: '#fff', 
-    padding: 15, 
-    borderRadius: 10, 
-    marginBottom: 20, 
-    shadowColor: '#000', 
-    shadowOpacity: 0.05, 
-    elevation: 2 },
-  input: { 
-    borderWidth: 1, 
-    borderColor: '#ddd', 
-    padding: 10, 
-    borderRadius: 6, 
-    marginBottom: 10, 
-    backgroundColor: '#fdfdfd' },
-  addButton: { 
-    backgroundColor: '#007AFF', 
-    padding: 12, 
-    borderRadius: 6, 
-    alignItems: 'center' },
-  addButtonText: { 
-    color: '#fff', 
-    fontWeight: 'bold', 
-    fontSize: 16 },
-  center: { 
-    flex: 1, 
-    justifyContent: 'center', 
-    alignItems: 'center' },
-  card: { 
-    flexDirection: 'row', 
-    backgroundColor: '#fff', 
-    padding: 15, 
-    borderRadius: 8, 
-    marginBottom: 10, 
-    alignItems: 'center', 
-    shadowColor: '#000', 
-    shadowOpacity: 0.05, 
-    elevation: 2 },
-  cardInfo: { 
-    flex: 1 },
-  parcName: { 
-    fontSize: 16, 
-    fontWeight: 'bold', 
-    color: '#333', 
-    marginBottom: 4 },
-  parcDetails: { 
-    fontSize: 14, 
-    color: '#666' },
-  deleteButton: { 
-    padding: 10 },
-  deleteButtonText: { 
-    fontSize: 18 },
-  emptyText: { 
-    textAlign: 'center', 
-    color: '#888', 
-    marginTop: 20 }
-});
-
-```
-
-
-
-{{% notice style="exo" %}}
-Reprenez la solution de l'exercice du Gestionnaire de tâche. Remplacer l'enregistrement local par de l'enregistrement sur bd distante.
-{{% /notice %}}

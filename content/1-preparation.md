@@ -91,6 +91,13 @@ npx expo install --check
 ```
 --legacy-peer-deps
 ```
+
+## Mettre à jour la version de expo et les dépendances
+
+```bash
+npx expo install expo@latest --fix -- --legacy-peer-deps
+
+```
 {{% /notice %}}
 
 Nous allons éventuellement avoir besoin de `expo-router` pour du "routing" :

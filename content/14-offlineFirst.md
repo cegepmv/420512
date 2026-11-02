@@ -568,6 +568,8 @@ initializeDatabase().then(() => {
 {{% expand title="FE" %}}
 ```jsx
 import { SafeAreaView } from 'react-native-safe-area-context';
+import ReanimatedSwipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
+import Animated, { FadeIn, FadeOut, LinearTransition } from 'react-native-reanimated';
 import React, { useState } from 'react';
 import {
     StyleSheet,
@@ -692,13 +694,13 @@ useEffect(() => {
     async function setupDatabase() {
         const database = await SQLite.openDatabaseAsync('tasks.db');
         setDb(database);
-
+        
         await database.execAsync(`
             CREATE TABLE IF NOT EXISTS local_tasks (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 server_id INTEGER,
                 title TEXT NOT NULL,
-                completed INTEGER DEFAULT 0,
+                updated_at TEXT NOT NULL,
                 synced INTEGER DEFAULT 0,
                 is_deleted INTEGER DEFAULT 0
             );
@@ -706,7 +708,6 @@ useEffect(() => {
 
         const allTasks = await database.getAllAsync('SELECT * FROM local_tasks WHERE is_deleted = 0');
         setTasks(allTasks);
-        setLoading(false);
     }
     setupDatabase();
 }, []);
@@ -721,7 +722,7 @@ useEffect(() => {
 
 #### Objectif de l'étape :
 
-Modifier la fonction `ajouterTask` pour insérer la tâche dans SQLite avec `synced = 0`, mettre à jour l'état React immédiatement, et afficher un label textuel si la tâche n'est pas encore synchronisée.
+Modifier les fonction `ajouterTask` et `supprimerTask` pour intégrer la bd locale. 
 
 ---
 
@@ -739,479 +740,18 @@ Intégrer la fonction `syncWithServer` à l'aide d'`axios` et planifier une vér
 
 ---
 
-Prêt à passer à l'implémentation de **l'Étape 2 (SQLite et Local-First)** dans votre code de base ? Dis-moi quand tu veux qu'on détaille le code de cette étape !
 
+### Étape 4 : Implémenter le soft Delete (`Soft Delete`)
 
-
-C'est parti ! Reprenons notre code de base (celui sans SQLite ni réseau) et faisons évoluer l'application pas à pas vers une architecture **Offline-First**.
-
+ 💡 **Rappel Théorique :**
+ Dans une architecture *Offline-First*, dès que le réseau revient (ou de façon périodique), l'application synchronise ses données :
+ 1. **Le Push :** Elle envoie les créations et les suppressions en attente (`synced = 0` ou `is_deleted = 1`) au serveur.
+ 2. **Le Pull :** Elle récupère les nouveautés du serveur pour mettre à jour la base locale.
+ 3. **Le Soft Delete :** En cas de suppression hors-ligne, on marque la ligne avec `is_deleted = 1` pour que le serveur sache qu'il doit lui aussi la supprimer lors de la reconnexion.
+ 
 ---
 
-### Étape 2 : Ajouter la persistance locale avec SQLite (`Local-First`)
-
-> 💡 **Rappel Théorique :**
-> Dans une architecture *Offline-First*, l'application ne dépend pas d'un serveur distant pour stocker ses données. Elle utilise une base de données embarquée sur l'appareil (ici **SQLite** via `expo-sqlite`).
-> * Le serveur distant n'est plus qu'une copie de sauvegarde ou un point de synchronisation.
-> * L'utilisateur lit et écrit **toujours** d'abord dans sa base locale.
-> 
-> 
-
-#### Ce qu'on va modifier :
-
-1. Importer `expo-sqlite`.
-2. Initialiser la base de données au chargement du composant (`useEffect`).
-3. Créer une table `local_tasks` avec des champs spécifiques à l'offline (`server_id`, `synced`, `is_deleted`).
-4. Charger les tâches depuis SQLite au démarrage au lieu d'un tableau vide.
-
-#### Le code mis à jour pour cette étape :
-
-Remplacez votre code de base par celui-ci :
-
-```jsx
-import { SafeAreaView } from 'react-native-safe-area-context';
-import React, { useState, useEffect } from 'react';
-import {
-    StyleSheet,
-    Text,
-    View,
-    FlatList,
-    TextInput,
-    TouchableOpacity,
-    ActivityIndicator,
-} from 'react-native';
-import * as SQLite from 'expo-sqlite';
-
-const COLOR_1 = "#000000";
-const COLOR_2 = "#282A3A";
-const COLOR_3 = '#735F32';
-const COLOR_4 = '#C69749';
-
-export default function Index() {
-    const [tasks, setTasks] = useState([]);
-    const [curInput, setCurInput] = useState("");
-    const [loading, setLoading] = useState(true);
-    const [db, setDb] = useState(null);
-
-    // 1. Initialisation de SQLite au démarrage
-    useEffect(() => {
-        async function setupDatabase() {
-            try {
-                const database = await SQLite.openDatabaseAsync('tasks.db');
-                setDb(database);
-
-                // Création de la table avec les métadonnées offline
-                await database.execAsync(`
-                    CREATE TABLE IF NOT EXISTS local_tasks (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        server_id INTEGER,
-                        title TEXT NOT NULL,
-                        completed INTEGER DEFAULT 0,
-                        synced INTEGER DEFAULT 0,
-                        is_deleted INTEGER DEFAULT 0
-                    );
-                `);
-
-                // Charger les tâches locales non supprimées
-                const allTasks = await database.getAllAsync('SELECT * FROM local_tasks WHERE is_deleted = 0');
-                setTasks(allTasks);
-                setLoading(false);
-            } catch (error) {
-                console.error("Erreur init SQLite:", error);
-                setLoading(false);
-            }
-        }
-        setupDatabase();
-    }, []);
-
-    const ajouterTask = async () => {
-        if (curInput.trim() === "" || !db) return;
-
-        try {
-            // Insertion en base locale d'abord (synced = 0 car pas encore envoyé au serveur)
-            const result = await db.runAsync(
-                'INSERT INTO local_tasks (title, completed, synced, is_deleted) VALUES (?, ?, 0, 0)',
-                [curInput, 0]
-            );
-
-            const newTask = {
-                id: result.lastInsertRowId,
-                title: curInput,
-                completed: 0,
-                synced: 0,
-                is_deleted: 0
-            };
-
-            setTasks((prevTasks) => [...prevTasks, newTask]);
-            setCurInput("");
-        } catch (error) {
-            console.error("Erreur ajout local:", error);
-        }
-    };
-
-    const supprimerTask = async (id) => {
-        // Suppression locale immédiate (UI optimiste)
-        setTasks((prevTasks) => prevTasks.filter(t => t.id !== id));
-        if (db) {
-            await db.runAsync('DELETE FROM local_tasks WHERE id = ?', [id]);
-        }
-    };
-
-    if (loading) {
-        return (
-            <View style={styles.center}>
-                <ActivityIndicator size="large" color={COLOR_4} />
-            </View>
-        );
-    }
-
-    return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.inputsContainer}>
-                <TextInput
-                    style={styles.input}
-                    placeholder='Entrez une tâche à accomplir'
-                    placeholderTextColor={COLOR_3}
-                    value={curInput}
-                    onChangeText={setCurInput}
-                />
-                <TouchableOpacity onPress={ajouterTask} style={styles.addBtnContainer}>
-                    <Text style={styles.addBtnText}>+</Text>
-                </TouchableOpacity>
-            </View>
-            <FlatList
-                data={tasks}
-                renderItem={({ item }) => (
-                    <TouchableOpacity onPress={() => supprimerTask(item.id)} style={styles.cardContainer}>
-                        <Text style={{ color: COLOR_4 }}>
-                            {item.title} {item.synced === 0 && " (En attente...)"}
-                        </Text>
-                    </TouchableOpacity>
-                )}
-                keyExtractor={(item) => item.id.toString()}
-                style={{ flex: 1, marginVertical: 20 }}
-            />
-        </SafeAreaView>
-    );
-}
-
-const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: COLOR_1, padding: 20 },
-    center: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: COLOR_1 },
-    inputsContainer: { flexDirection: "row", marginTop: 10 },
-    input: { backgroundColor: COLOR_2, flex: 1, textAlign: "center", color: COLOR_4, paddingHorizontal: 10, height: 50 },
-    addBtnContainer: { justifyContent: "center", alignItems: "center", backgroundColor: COLOR_4 },
-    addBtnText: { fontSize: 30, fontWeight: "600", paddingVertical: 5, paddingHorizontal: 20 },
-    cardContainer: { backgroundColor: COLOR_2, marginVertical: 8, padding: 20 }
-});
-
-```
-
----
-
-### Qu'est-ce qu'on a accompli à cette étape ?
-
-1. Vos données survivent désormais au redémarrage de l'application grâce à **SQLite**.
-2. Les champs `synced = 0` et `is_deleted = 0` préparent le terrain pour la synchronisation future.
-3. Si vous lancez l'application sans connexion Internet, elle fonctionne déjà parfaitement en local.
-
-Dis-moi quand tu as testé cette étape, et on passe à **l'Étape 3 : Intégrer la synchronisation avec le serveur (`Push / Pull`)** !
-
-
-C'est parti pour la dernière étape décisive ! Nous allons donner vie à la synchronisation avec le serveur.
-
----
-
-### Étape 3 : Implémenter la synchronisation (`Push`, `Pull` et `Soft Delete`)
-
-> 💡 **Rappel Théorique :**
-> Dans une architecture *Offline-First*, dès que le réseau revient (ou de façon périodique), l'application synchronise ses données :
-> 1. **Le Push :** Elle envoie les créations et les suppressions en attente (`synced = 0` ou `is_deleted = 1`) au serveur.
-> 2. **Le Pull :** Elle récupère les nouveautés du serveur pour mettre à jour la base locale.
-> 3. **Le Soft Delete :** En cas de suppression hors-ligne, on marque la ligne avec `is_deleted = 1` pour que le serveur sache qu'il doit lui aussi la supprimer lors de la reconnexion.
-> 
-> 
-
-#### Le code complet final :
-
-Remplacez votre code par celui-ci, qui intègre SQLite, l'UI optimiste, les gestes de balayage (`Swipeable`) et la synchronisation automatique en arrière-plan :
-
-```jsx
-import { SafeAreaView } from 'react-native-safe-area-context';
-import ReanimatedSwipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
-import { Gesture, GestureDetector } from 'react-native-gesture-handler';
-import Animated, { FadeIn, FadeOut, LinearTransition } from 'react-native-reanimated';
-import React, { useState, useEffect } from 'react';
-import {
-    StyleSheet,
-    Text,
-    View,
-    FlatList,
-    TextInput,
-    TouchableOpacity,
-    ActivityIndicator,
-    Alert,
-} from 'react-native';
-import * as SQLite from 'expo-sqlite';
-import axios from 'axios';
-
-const API_URL = `http://${process.env.EXPO_PUBLIC_BACKEND_IP}:3000/tasks`;
-
-const COLOR_1 = "#000000";
-const COLOR_2 = "#282A3A";
-const COLOR_3 = '#735F32';
-const COLOR_4 = '#C69749';
-
-const panGesture = Gesture.Pan();
-
-const Card = ({ data, supprimerTask }) => {
-    return (
-        <Animated.View
-            entering={FadeIn.duration(300)}
-            exiting={FadeOut.duration(300)}
-            layout={LinearTransition.duration(200)}
-        >
-            <GestureDetector gesture={panGesture}>
-                <ReanimatedSwipeable
-                    simultaneousWithExternalGesture={panGesture}
-                    friction={2}
-                    onSwipeableWillOpen={(direction) => {
-                        if (direction === "left") {
-                            supprimerTask(data.id);
-                        }
-                    }}
-                >
-                    <View style={styles.cardContainer}>
-                        <Text style={{ color: COLOR_4 }}>
-                            {data.title} {data.synced === 0 && " (En attente...)"}
-                        </Text>
-                    </View>
-                </ReanimatedSwipeable>
-            </GestureDetector>
-        </Animated.View>
-    );
-};
-
-export default function Index() {
-    const [tasks, setTasks] = useState([]);
-    const [curInput, setCurInput] = useState("");
-    const [loading, setLoading] = useState(true);
-    const [db, setDb] = useState(null);
-
-    useEffect(() => {
-        async function setupDatabase() {
-            try {
-                const database = await SQLite.openDatabaseAsync('tasks.db');
-                setDb(database);
-
-                // Création de la table avec les métadonnées offline
-                await database.execAsync(`
-                    CREATE TABLE IF NOT EXISTS local_tasks (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        server_id INTEGER,
-                        title TEXT NOT NULL,
-                        completed INTEGER DEFAULT 0,
-                        synced INTEGER DEFAULT 0,
-                        is_deleted INTEGER DEFAULT 0
-                    );
-                `);
-
-                // Charger uniquement les tâches non supprimées
-                const allTasks = await database.getAllAsync('SELECT * FROM local_tasks WHERE is_deleted = 0');
-                setTasks(allTasks);
-                setLoading(false);
-
-                // Lancer une première synco au démarrage
-                syncWithServer(database);
-
-                // Synco périodique toutes les 30 secondes
-                const intervalId = setInterval(() => {
-                    syncWithServer(database);
-                }, 30000);
-
-                return () => clearInterval(intervalId);
-            } catch (error) {
-                console.error("Erreur init SQLite:", error);
-                setLoading(false);
-            }
-        }
-        setupDatabase();
-    }, []);
-
-    const syncWithServer = async (database) => {
-        if (!database) return;
-        try {
-            let hasChanges = false;
-
-            // 1. PUSH : Envoyer les suppressions en attente (Soft Delete)
-            const pendingDeletions = await database.getAllAsync('SELECT * FROM local_tasks WHERE is_deleted = 1 AND server_id IS NOT NULL');
-            for (let task of pendingDeletions) {
-                try {
-                    await axios.delete(`${API_URL}/${task.server_id}`);
-                    await database.runAsync('DELETE FROM local_tasks WHERE id = ?', [task.id]);
-                    hasChanges = true;
-                } catch (err) {
-                    // Serveur injoignable, on garde is_deleted = 1 pour plus tard
-                }
-            }
-
-            // 2. PUSH : Envoyer les créations en attente (synced = 0)
-            const unsyncedTasks = await database.getAllAsync('SELECT * FROM local_tasks WHERE synced = 0 AND is_deleted = 0');
-            for (let task of unsyncedTasks) {
-                try {
-                    const response = await axios.post(API_URL, {
-                        title: task.title,
-                        completed: task.completed
-                    });
-
-                    await database.runAsync(
-                        'UPDATE local_tasks SET server_id = ?, synced = 1 WHERE id = ?',
-                        [response.data.id, task.id]
-                    );
-                    hasChanges = true;
-                } catch (err) {
-                    // Hors ligne
-                }
-            }
-
-            // 3. PULL : Récupérer les données du serveur pour les intégrer en local
-            const response = await axios.get(API_URL);
-            const serverTasks = response.data;
-
-            for (let sTask of serverTasks) {
-                const existing = await database.getFirstAsync('SELECT * FROM local_tasks WHERE server_id = ?', [sTask.id]);
-                if (!existing) {
-                    await database.runAsync(
-                        'INSERT INTO local_tasks (server_id, title, completed, synced, is_deleted) VALUES (?, ?, ?, 1, 0)',
-                        [sTask.id, sTask.title, sTask.completed]
-                    );
-                    hasChanges = true;
-                }
-            }
-
-            // Rafraîchir l'UI si des changements ont eu lieu
-            if (hasChanges) {
-                const updatedTasks = await database.getAllAsync('SELECT * FROM local_tasks WHERE is_deleted = 0');
-                setTasks(updatedTasks);
-            }
-        } catch (error) {
-            console.log("Mode hors-ligne actif (synchronisation ignorée)");
-        }
-    };
-
-    const ajouterTask = async () => {
-        if (curInput.trim() === "" || !db) {
-            Alert.alert("Attention", "Veuillez remplir le champ.");
-            return;
-        }
-
-        try {
-            // Insertion locale (synced = 0)
-            const result = await db.runAsync(
-                'INSERT INTO local_tasks (title, completed, synced, is_deleted) VALUES (?, ?, 0, 0)',
-                [curInput, 0]
-            );
-
-            const newTask = {
-                id: result.lastInsertRowId,
-                title: curInput,
-                completed: 0,
-                synced: 0,
-                is_deleted: 0
-            };
-
-            setTasks((prevTasks) => [...prevTasks, newTask]);
-            setCurInput("");
-            
-            // Tenter une synco immédiate si le réseau est là
-            syncWithServer(db);
-        } catch (error) {
-            Alert.alert("Erreur", "Erreur lors de l'ajout local.");
-        }
-    };
-
-    const supprimerTask = async (id) => {
-        const taskToDelete = tasks.find(t => t.id === id);
-
-        // Suppression optimiste immédiate de l'UI
-        setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
-
-        try {
-            if (!db) return;
-
-            if (!taskToDelete.server_id) {
-                // Si jamais envoyée au serveur, suppression physique directe
-                await db.runAsync('DELETE FROM local_tasks WHERE id = ?', [id]);
-            } else {
-                // Sinon, Soft Delete local (is_deleted = 1) et tentative de suppression serveur
-                await db.runAsync('UPDATE local_tasks SET is_deleted = 1 WHERE id = ?', [id]);
-                await axios.delete(`${API_URL}/${taskToDelete.server_id}`);
-                await db.runAsync('DELETE FROM local_tasks WHERE id = ?', [id]);
-            }
-        } catch (error) {
-            console.log("Hors-ligne : la suppression sur le serveur est reportée.");
-        }
-    };
-
-    return (
-        <SafeAreaView style={styles.container}>
-            {loading ? (
-                <View style={styles.center}>
-                    <ActivityIndicator size="large" color={COLOR_4} />
-                </View>
-            ) : (
-                <>
-                    <View style={styles.inputsContainer}>
-                        <TextInput
-                            style={styles.input}
-                            placeholder='Entrez une tâche à accomplir'
-                            placeholderTextColor={COLOR_3}
-                            value={curInput}
-                            onChangeText={setCurInput}
-                        />
-                        <TouchableOpacity onPress={ajouterTask} style={styles.addBtnContainer}>
-                            <Text style={styles.addBtnText}>+</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <FlatList
-                        data={tasks}
-                        renderItem={({ item }) => <Card data={item} supprimerTask={supprimerTask} />}
-                        keyExtractor={(item) => item.id.toString()}
-                        style={{ flex: 1, marginVertical: 20 }}
-                    />
-                </>
-            )}
-        </SafeAreaView>
-    );
-}
-
-const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: COLOR_1, padding: 20 },
-    center: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: COLOR_1 },
-    inputsContainer: { flexDirection: "row", marginTop: 10 },
-    input: { backgroundColor: COLOR_2, flex: 1, textAlign: "center", color: COLOR_4, paddingHorizontal: 10, height: 50 },
-    addBtnContainer: { justifyContent: "center", alignItems: "center", backgroundColor: COLOR_4 },
-    addBtnText: { fontSize: 30, fontWeight: "600", paddingVertical: 5, paddingHorizontal: 20 },
-    cardContainer: { backgroundColor: COLOR_2, marginVertical: 8, padding: 20 }
-});
-
-```
-
----
-
-### Félicitations ! 🎉
-
-Vous avez désormais une application entièrement fonctionnelle en **Offline-First** :
-
-1. **Persistante** (SQLite)
-2. **Réactive** (UI Optimiste avec balayage et feedback visuel *"En attente..."*)
-3. **Résiliente** (Capable de stocker les actions hors-ligne et de les synchroniser intelligemment en Push/Pull dès le retour du réseau).
-
-
-Voici comment intégrer cette superbe optimisation (**le Pull incrémentiel par `updated_at**`) en tant qu' **Étape 4** dans notre exercice !
-
----
-
-### Étape 4 : Optimiser le Pull avec un horodatage (`updated_at`)
+### Étape 5 : Optimiser le Pull avec un horodatage (`updated_at`)
 
 > 💡 **Théorie :**
 > Dans une application standard, télécharger *toutes* les données du serveur à chaque synchronisation finit par saturer la bande passante et ralentir l'application.
@@ -1227,7 +767,6 @@ await database.execAsync(`
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         server_id INTEGER,
         title TEXT NOT NULL,
-        completed INTEGER DEFAULT 0,
         synced INTEGER DEFAULT 0,
         is_deleted INTEGER DEFAULT 0,
         updated_at TEXT
@@ -1268,7 +807,3 @@ for (let sTask of serverTasks) {
 
 ---
 
-### 🎯 Ce que ça apporte à l'exercice :
-
-1. **Performance maximale :** L'application ne télécharge plus que les deltas (les modifications), ce qui rend l'app ultra-rapide même avec des milliers de tâches.
-2. **Gestion fine des conflits :** Le champ `updated_at` (fourni par le serveur ou généré en local) sert de base mathématique infaillible pour appliquer notre règle du **`Last-write-wins`** si une même tâche a bougé des deux côtés.

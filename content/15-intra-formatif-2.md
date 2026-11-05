@@ -5,8 +5,72 @@ weight = 15
 title = 'Formatif 2'
 +++
 
-Utiliser les code fournier ci-dessous pour créer 
+Voici une version mise à jour et structurée de votre cahier des charges, intégrant l'ensemble de vos nouvelles exigences (thèmes, animation de la voiture et anticipation de l'API d'examen) :
 
+---
+
+# Cahier des Charges : Application Mobile "Click Speed Test"
+
+## 1. Contexte et Objectif du Projet
+
+Développer une application mobile (iOS/Android) de test de vitesse de clic (*Click Speed Test*). L'utilisateur doit effectuer 20 clics le plus rapidement possible. L'application mesure le temps total écoulé et gère un classement local et distant.
+
+---
+
+## 2. Fonctionnalités Principales & Logique de Jeu
+
+* **Le Test de Clic :**
+* L'utilisateur effectue 20 clics successifs.
+* L'application mesure le temps écoulé du premier au vingtième clic.
+
+
+* **Animation de la Voiture (Progression) :**
+* Une barre de progression représente l'avancement des clics à l'aide d'une **voiture animée de manière fluide** (pas de téléportation).
+* **0 clic :** La voiture est tout à **gauche** (0 %).
+* **10 clics :** La voiture est au **centre** (50 %).
+* **20 clics :** La voiture est à **droite** (100 %).
+
+
+* **Saisie et Enregistrement du Score :**
+* À la fin du test, si le score entre dans le **Top 5 local**, l'utilisateur peut saisir son nom pour enregistrer son temps, sinon le bouton est désactivé.
+
+
+
+---
+
+## 3. Architecture Offline-First & Synchronisation
+
+* **Base de Données Locale (SQLite) :**
+* Stockage local des scores et du leaderboard pour garantir un fonctionnement hors-ligne (*offline-first*).
+
+
+* **Base de Données Distante (Backend Express) :**
+* Un serveur Express gère la synchronisation globale et le classement partagé (*leaderboard*).
+
+
+* **Stratégie de Synchronisation :**
+* Mise à jour automatique des données **toutes les minutes** et **à la fin de chaque partie**.
+* **Gestion des conflits :** Aucune logique complexe (*last-write-wins* ou *last-delete*) n'est nécessaire, les collisions étant impossibles.
+* **Rôle du Front-End :** Enregistrer les nouveaux scores localement, puis les transmettre au backend Express. Le Front-End envoie uniquement les modifications lorsqu'elles se produisent. Le backend se charge entièrement de la gestion du leaderboard global.
+
+
+
+---
+
+## 4. Expérience Utilisateur & Design
+
+* **Gestion des Thèmes :**
+* Prise en charge complète des **thèmes Light et Dark** disponibles dynamiquement et uniformément dans toute l'application.
+
+
+
+---
+
+## 5. Note Contextuelle (Préparation Examen)
+
+* *Bien qu'aucune API native ne soit requise pour le cœur du projet actuel, le code doit être conçu de manière modulaire pour pouvoir intégrer facilement **une API native lors de l'examen** (ex: Caméra, Capteurs/Sensors).*
+
+---
 
 {{% notice style="warning" %}}
 Attention, le code ci-dessous comporte des erreurs. Il est une très bonne base pour commencer par contre.

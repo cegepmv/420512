@@ -714,6 +714,10 @@ useEffect(() => {
 
 ```
 
+{{% notice style="info" title="Solution" %}}
+Simplement tester, ça marche? Si oui, passe à la prochaine question.
+{{% /notice %}}
+
 ---
 
 ### Étape 2 : Implémenter l'UI Optimiste (`Optimistic UI`)
@@ -724,6 +728,61 @@ useEffect(() => {
 
 Modifier les fonction `ajouterTask` et `supprimerTask` pour intégrer la bd locale. 
 
+{{% expand title="Solution" %}}
+```jsx
+    const ajouterTask = async () => {
+        if (curInput.trim() === "") return;
+        try {
+            const resp = await db.runAsync(
+                        'INSERT INTO local_tasks (server_id, title, updated_at) VALUES (?, ?, ?);',
+                        [null, curInput, Date.now()]
+                    );
+            const newTask = {
+                id: resp.lastInsertRowId,
+                title: curInput,
+                updated_at: updatedAt,
+                synced: 0,
+                is_deleted: 0
+            };
+
+            setTasks([...tasks, newTask]);
+            setCurInput("");
+
+        }
+        catch {
+            console.log("Something went wrong in ajouterTask")
+        }
+    };
+
+    const supprimerTask = async (id) => {
+        try {
+            await db.runAsync(`DELETE FROM local_tasks WHERE id=?`, [id])
+            setTasks(tasks.filter(t => t.id !== id));
+        } catch {
+            Alert("Local Error")
+        }
+    };
+```
+{{% /expand %}}
+
+---
+
+### Étape 2.5 : Soft Delete local
+
+Règle : effectuez toujours un soft delete des tâches en local préalablement à la synchronisation.
+
+{{% expand title="Solution" %}}
+```jsx
+    const supprimerTask = async (id) => {
+        try {
+            await db.runAsync(`UPDATE local_tasks SET is_deleted = 1 WHERE id=?`, [id])
+            setTasks(tasks.filter(t => t.id !== id));
+        } catch {
+            Alert("Local Error")
+        }
+    };
+```
+{{% /expand %}} 
 ---
 
 ### Étape 3 : Mettre en place la synchronisation en arrière-plan (`Push / Pull`)

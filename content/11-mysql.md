@@ -46,6 +46,16 @@ sudo apt install mysql-server
 
 ---
 
+```sql
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'your_new_password';
+
+FLUSH PRIVILEGES;
+
+EXIT;
+```
+
+---
+
 ## ⚡ SQL - En un clin d'œil
 
 ### `CREATE DATABASE`

@@ -783,6 +783,7 @@ Règle : effectuez toujours un soft delete des tâches en local préalablement �
     };
 ```
 {{% /expand %}} 
+
 ---
 
 ### Étape 3 : Mettre en place la synchronisation en arrière-plan (`Push / Pull`)
@@ -808,6 +809,7 @@ Intégrer la fonction `syncWithServer` à l'aide d'`axios` et planifier une vér
  2. **Le Pull :** Elle récupère les nouveautés du serveur pour mettre à jour la base locale.
  3. **Le Soft Delete :** En cas de suppression hors-ligne, on marque la ligne avec `is_deleted = 1` pour que le serveur sache qu'il doit lui aussi la supprimer lors de la reconnexion.
  
+
 ---
 
 ### Étape 5 : Optimiser le Pull avec un horodatage (`updated_at`)
@@ -866,3 +868,430 @@ for (let sTask of serverTasks) {
 
 ---
 
+
+{{% expand title="Solution" %}}
+```jsx
+import express from 'express';
+import dotenv from 'dotenv';
+import pool from './database.js';
+
+dotenv.config();
+
+const app = express();
+const port = process.env.PORT || 3000;
+
+app.use(express.json());
+
+// Fonction pour initialiser la base de données (Création de la table si elle n'existe pas)
+async function initializeDatabase() {
+    try {
+        const query = `
+            CREATE TABLE IF NOT EXISTS tasks (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                title VARCHAR(255) NOT NULL,
+                updated_at DATETIME NOT NULL
+            );
+        `;
+        await pool.query(query);
+        console.log("✅ Table 'tasks' vérifiée / créée avec succès.");
+    } catch (error) {
+        console.error("❌ Erreur lors de la création de la table :", error);
+    }
+}
+
+app.post('/tasks', async (req, res) => {
+    try {
+        const { title, updated_at } = req.body;
+        
+        // Convertit la date au format string compatible MySQL
+        const dateToSave = updated_at 
+            ? new Date(updated_at).toISOString().slice(0, 19).replace('T', ' ')
+            : new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+        const [result] = await pool.query(
+            "INSERT INTO tasks (title, updated_at) VALUES (?, ?)",
+            [title, dateToSave]
+        );
+        
+        res.status(201).json({ id: result.insertId, title, updated_at: dateToSave });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ erreur: "Erreur serveur" });
+    }
+});
+
+// READ (Tous - avec filtrage intelligent via lastSync optionnel)
+app.get('/tasks', async (req, res) => {
+    try {
+        const { lastSync } = req.query;
+        let query = "SELECT * FROM tasks";
+        let params = [];
+
+        // Si le client fournit une date de dernière synchro, on ne renvoie que ce qui a changé depuis
+        if (lastSync) {
+            query += " WHERE updated_at >= ?";
+            params.push(lastSync);
+        }
+
+        const [tasks] = await pool.query(query, params);
+        res.json(tasks);
+    } catch (error) {
+        res.status(500).json({ erreur: "Erreur serveur" });
+    }
+});
+
+// READ (Un seul)
+app.get('/tasks/:id', async (req, res) => {
+    try {
+        const [tasks] = await pool.query("SELECT * FROM tasks WHERE id = ?", [req.params.id]);
+        if (tasks.length === 0) return res.status(404).json({ erreur: "Non trouvé" });
+        res.json(tasks[0]);
+    } catch (error) {
+        res.status(500).json({ erreur: "Erreur serveur" });
+    }
+});
+
+// UPDATE
+app.put('/tasks/:id', async (req, res) => {
+    try {
+        const { title, updated_at } = req.body;
+        const [result] = await pool.query(
+            "UPDATE tasks SET title = ?, updated_at = ? WHERE id = ?",
+            [title, updated_at || new Date(), req.params.id]
+        );
+        if (result.affectedRows === 0) return res.status(404).json({ erreur: "Non trouvé" });
+        res.json({ message: "Mis à jour avec succès !" });
+    } catch (error) {
+        res.status(500).json({ erreur: "Erreur serveur" });
+    }
+});
+
+// DELETE
+app.delete('/tasks/:id', async (req, res) => {
+    try {
+        const [result] = await pool.query("DELETE FROM tasks WHERE id = ?", [req.params.id]);
+        if (result.affectedRows === 0) return res.status(404).json({ erreur: "Non trouvé" });
+        res.json({ message: "Supprimé avec succès !" });
+    } catch (error) {
+        res.status(500).json({ erreur: "Erreur serveur" });
+    }
+});
+
+// Middleware d'erreur centralisé
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+});
+
+// Lancement de l'initialisation de la DB puis démarrage du serveur
+initializeDatabase().then(() => {
+    app.listen(port, () => {
+        console.log(`🚀 Serveur démarré sur http://localhost:${port}`);
+    });
+});
+```
+```jsx
+import { SafeAreaView } from 'react-native-safe-area-context';
+import ReanimatedSwipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
+import { GestureDetector, usePanGesture } from 'react-native-gesture-handler';
+import Animated, { FadeIn, FadeOut, LinearTransition } from 'react-native-reanimated';
+import React, { useState, useEffect } from 'react';
+import {
+    StyleSheet,
+    Text,
+    View,
+    FlatList,
+    TextInput,
+    TouchableOpacity,
+    ActivityIndicator,
+    Alert,
+} from 'react-native';
+import * as SQLite from 'expo-sqlite';
+import axios from 'axios';
+
+const API_URL = `http://${process.env.EXPO_PUBLIC_BACKEND_IP_SCHOOL}:3000/tasks`;
+
+const COLOR_1 = "#000000";
+const COLOR_2 = "#282A3A";
+const COLOR_3 = '#735F32';
+const COLOR_4 = '#C69749';
+
+
+const Card = ({ data, supprimerTask }) => {
+    const renderRightActions = (progress, dragX) => {
+        return (
+            <View>
+                <Text>Supprimer</Text>
+            </View>
+        );
+    };
+    return (
+        <Animated.View
+            entering={FadeIn.duration(300)}
+            exiting={FadeOut.duration(300)}
+            layout={LinearTransition.duration(200)}
+        >
+                <ReanimatedSwipeable
+                    friction={2}
+                    leftThreshold={40}
+                    renderRightActions={renderRightActions}
+                    onSwipeableWillOpen={(direction) => {
+                        if (direction === "left") {
+                            supprimerTask(data.id);
+                        }
+                    }}
+                >
+                    <View style={styles.cardContainer}>
+                        <Text style={{ color: COLOR_4 }}>
+                            {data.title} {data.synced === 0 && " (En attente...)"}
+                        </Text>
+                    </View>
+                </ReanimatedSwipeable>
+        </Animated.View>
+    );
+};
+
+const Index = () => {
+    const [tasks, setTasks] = useState([]);
+    const [curInput, setCurInput] = useState("");
+    const [loading, setLoading] = useState(true);
+    const [db, setDb] = useState(null);
+    const [lastSync, setLastSync] = useState(null); // useState pour la dernière synchronisation
+
+    useEffect(() => {
+        async function setupDatabase() {
+            try {
+                const database = await SQLite.openDatabaseAsync('tasks.db');
+                setDb(database);
+
+                // Table SQLite sans 'completed' et avec 'updated_at'
+                await database.execAsync(`
+                    CREATE TABLE IF NOT EXISTS local_tasks (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        server_id INTEGER,
+                        title TEXT NOT NULL,
+                        updated_at TEXT NOT NULL,
+                        synced INTEGER DEFAULT 0,
+                        is_deleted INTEGER DEFAULT 0
+                    );
+                `);
+
+                const allTasks = await database.getAllAsync('SELECT * FROM local_tasks WHERE is_deleted = 0');
+                setTasks(allTasks);
+                setLoading(false);
+
+                syncWithServer(database, null);
+
+                const intervalId = setInterval(() => {
+                    console.log("Vérification périodique de la synchronisation...");
+                    syncWithServer(database, lastSync);
+                }, 30000);
+
+                return () => clearInterval(intervalId);
+            } catch (error) {
+                console.error("Erreur init SQLite:", error);
+                setLoading(false);
+            }
+        }
+        setupDatabase();
+    }, []);
+
+    const syncWithServer = async (database, currentLastSync) => {
+        if (!database) return;
+        try {
+            let hasChanges = false;
+            const now = new Date().toISOString();
+
+            // 1. Envoyer les suppressions en attente
+            const pendingDeletions = await database.getAllAsync('SELECT * FROM local_tasks WHERE is_deleted = 1 AND server_id IS NOT NULL');
+            for (let task of pendingDeletions) {
+                try {
+                    await axios.delete(`${API_URL}/${task.server_id}`);
+                    await database.runAsync('DELETE FROM local_tasks WHERE id = ?', [task.id]);
+                    hasChanges = true;
+                } catch (err) {
+                    // Serveur injoignable
+                }
+            }
+
+            // 2. Envoyer les créations en attente (synced = 0)
+            const unsyncedTasks = await database.getAllAsync('SELECT * FROM local_tasks WHERE synced = 0 AND is_deleted = 0');
+            for (let task of unsyncedTasks) {
+                try {
+                    const response = await axios.post(API_URL, {
+                        title: task.title,
+                        updated_at: task.updated_at
+                    });
+
+                    await database.runAsync(
+                        'UPDATE local_tasks SET server_id = ?, synced = 1 WHERE id = ?',
+                        [response.data.id, task.id]
+                    );
+                    hasChanges = true;
+                } catch (err) {
+                    // Hors ligne
+                }
+            }
+
+            // 3. Récupérer intelligemment du serveur (envoi de lastSync si disponible)
+            const params = currentLastSync ? { lastSync: currentLastSync } : {};
+            const response = await axios.get(API_URL, { params });
+            const serverTasks = response.data;
+
+            for (let sTask of serverTasks) {
+                const existing = await database.getFirstAsync('SELECT * FROM local_tasks WHERE server_id = ?', [sTask.id]);
+                if (!existing) {
+                    await database.runAsync(
+                        'INSERT INTO local_tasks (server_id, title, updated_at, synced, is_deleted) VALUES (?, ?, ?, 1, 0)',
+                        [sTask.id, sTask.title, sTask.updated_at]
+                    );
+                    hasChanges = true;
+                } else {
+                    // Si la tâche existe déjà et est plus récente sur le serveur
+                    if (new Date(sTask.updated_at) > new Date(existing.updated_at)) {
+                        await database.runAsync(
+                            'UPDATE local_tasks SET title = ?, updated_at = ? WHERE server_id = ?',
+                            [sTask.title, sTask.updated_at, sTask.id]
+                        );
+                        hasChanges = true;
+                    }
+                }
+            }
+
+            // Mise à jour de la dernière synchronisation réussie
+            setLastSync(now);
+
+            if (hasChanges) {
+                const updatedTasks = await database.getAllAsync('SELECT * FROM local_tasks WHERE is_deleted = 0');
+                setTasks(updatedTasks);
+            }
+        } catch (error) {
+            console.log("Mode hors-ligne actif (synchronisation ignorée)");
+        }
+    };
+
+    const ajouterTask = async () => {
+        if (curInput.trim() == "") {
+            Alert.alert("Attention", "Veuillez remplir tous les champs.");
+            return;
+        }
+
+        try {
+            const updatedAt = new Date().toISOString();
+            const result = await db.runAsync(
+                'INSERT INTO local_tasks (title, updated_at, synced, is_deleted) VALUES (?, ?, 0, 0)',
+                [curInput, updatedAt]
+            );
+
+            const newTask = {
+                id: result.lastInsertRowId,
+                title: curInput,
+                updated_at: updatedAt,
+                synced: 0,
+                is_deleted: 0
+            };
+
+            setTasks((prevTasks) => [...prevTasks, newTask]);
+            setCurInput("");
+            syncWithServer(db, lastSync);
+        } catch (error) {
+            Alert.alert("Erreur", "Erreur lors de l'ajout local.");
+        }
+    };
+
+    const supprimerTask = async (id) => {
+        const taskToDelete = tasks.find(t => t.id === id);
+
+        setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+
+        try {
+            if (!db) return;
+
+            if (!taskToDelete.server_id) {
+                await db.runAsync('DELETE FROM local_tasks WHERE id = ?', [id]);
+            } else {
+                await db.runAsync('UPDATE local_tasks SET is_deleted = 1 WHERE id = ?', [id]);
+                await axios.delete(`${API_URL}/${taskToDelete.server_id}`);
+                await db.runAsync('DELETE FROM local_tasks WHERE id = ?', [id]);
+            }
+        } catch (error) {
+            console.log("Hors-ligne : la suppression sur le serveur est mise en attente.");
+        }
+    };
+
+    return (
+        <SafeAreaView style={styles.container}>
+            {loading ? (
+                <View style={styles.center}>
+                    <ActivityIndicator size="large" color="#007AFF" />
+                </View>
+            ) : (
+                <>
+                    <View style={styles.inputsContainer}>
+                        <TextInput
+                            style={styles.input}
+                            placeholder='Entrez une tâche à accomplir'
+                            placeholderTextColor={COLOR_3}
+                            value={curInput}
+                            onChangeText={setCurInput}
+                        />
+                        <TouchableOpacity onPress={ajouterTask} style={styles.addBtnContainer}>
+                            <Text style={styles.addBtnText}>+</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <FlatList
+                        data={tasks}
+                        renderItem={({ item }) => <Card data={item} supprimerTask={supprimerTask} />}
+                        keyExtractor={(item) => item.id.toString()}
+                        style={{ flex: 1, marginVertical: 20 }}
+                    />
+                </>
+            )}
+        </SafeAreaView>
+    );
+};
+
+export default Index;
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: COLOR_1,
+        padding: 20
+    },
+    center: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    inputsContainer: {
+        flexDirection: "row",
+        marginTop: 10
+    },
+    input: {
+        backgroundColor: COLOR_2,
+        flex: 1,
+        textAlign: "center",
+        color: COLOR_4,
+        paddingHorizontal: 10,
+        height: 50
+    },
+    addBtnContainer: {
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: COLOR_4,
+    },
+    addBtnText: {
+        fontSize: 30,
+        fontWeight: "600",
+        paddingVertical: 5,
+        paddingHorizontal: 20
+    },
+    cardContainer: {
+        backgroundColor: COLOR_2,
+        marginVertical: 8,
+        padding: 20,
+    }
+});
+```
+{{% /expand %}}
